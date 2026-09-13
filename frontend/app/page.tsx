@@ -51,7 +51,6 @@ export default function Home() {
       setOptimizing(false);
     }
   };
-  const [optimizeResult, setOptimizeResult] = useState<OptimizeResult | null>(null);
 
   const load = useCallback(async () => {
     if (!teamId.trim()) {
@@ -268,29 +267,54 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Squad table */}
+          {/* Squad table with integrated optimizer */}
           <section className="card p-5 mb-8">
-            <h2 className="text-lg font-bold mb-4">Squad — Gameweek {gameweek}</h2>
+            <div className="flex items-center justify-between mb-4 gap-4 flex-wrap">
+              <div>
+                <h2 className="text-lg font-bold">Squad — Gameweek {gameweek}</h2>
+                <p className="text-xs text-[var(--muted)]">
+                  {optResult
+                    ? <>⚡ Optimal XI highlighted in green · Formation <strong>{optResult.formation}</strong> · Optimal pred <strong className="text-[var(--accent)]">{optResult.totalPred.toFixed(3)}</strong> vs current {optResult.currentTotal.toFixed(3)} · Gain <strong className="text-emerald-400">+{optResult.gain.toFixed(3)}</strong> · C: <strong>{optResult.captain ?? "—"}</strong> · VC: <strong>{optResult.viceCaptain ?? "—"}</strong>{optResult.gain <= 0 && <> · Current XI already optimal ✅</>}</>
+                    : "Run the optimizer to highlight the best starting XI by model prediction (1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD)."}
+                </p>
+              </div>
+              <button
+                onClick={optimize}
+                disabled={optimizing || squad.length !== 15}
+                className="bg-[var(--accent)] text-[#04140b] font-bold px-5 py-2 rounded-lg hover:brightness-110 disabled:opacity-50 whitespace-nowrap"
+              >
+                {optimizing ? "Optimizing…" : optResult ? "Re-optimize" : "⚡ Optimize Team"}
+              </button>
+            </div>
             <div className="overflow-x-auto">
               <table className="data">
                 <thead>
                   <tr>
                     <th>#</th><th>Player</th><th>Pos</th><th>Club</th><th>Price</th>
-                    <th>Starter</th><th>C</th><th>VC</th><th>GW Pts</th><th>xMult</th>
+                    <th>Starter</th><th>Opt XI</th><th>C</th><th>VC</th><th>GW Pts</th><th>xMult</th>
                     <th>Total</th><th>Form</th><th>Own %</th><th>Pred</th>
                   </tr>
                 </thead>
                 <tbody>
                   {teamRows.map((r) => {
                     const sp = squad.find((s) => s.name === r.player_name);
+                    const optPlayer = optResult?.xi.find((p) => p.name === r.player_name);
+                    const optBench = optResult?.bench.find((p) => p.name === r.player_name);
+                    const optMark = optPlayer ? "🟢 XI" : optBench ? "🪑 Bench" : "";
+                    const rowClass = optPlayer
+                      ? "bg-emerald-500/10 border-l-2 border-emerald-400"
+                      : optBench
+                      ? "opacity-70 border-l-2 border-transparent"
+                      : "";
                     return (
-                      <tr key={r.player_id}>
+                      <tr key={r.player_id} className={rowClass}>
                         <td className="text-[var(--muted)]">{r.squad_position}</td>
                         <td className="font-semibold">{r.player_name}</td>
                         <td><PosBadge pos={r.position} /></td>
                         <td className="text-[var(--muted)]">{r.club}</td>
                         <td>£{r.price.toFixed(1)}m</td>
                         <td>{r.is_starter ? "✅" : "🪑"}</td>
+                        <td className="whitespace-nowrap">{optMark}</td>
                         <td>{r.is_captain ? "⭐" : ""}</td>
                         <td>{r.is_vice_captain ? "🅥" : ""}</td>
                         <td>{r.gameweek_points}</td>
@@ -309,64 +333,6 @@ export default function Home() {
               <p className="mt-3 text-xs text-[var(--muted)]">
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
               </p>
-            )}
-          </section>
-
-          {/* Starting XI optimizer */}
-          <section className="card p-5 mb-8">
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <h2 className="text-lg font-bold">⚡ Optimize Starting XI</h2>
-                <p className="text-xs text-[var(--muted)]">
-                  Picks the best 11 by model prediction — 1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD.
-                </p>
-              </div>
-              <button
-                onClick={optimize}
-                disabled={optimizing || squad.length !== 15}
-                className="bg-[var(--accent)] text-[#04140b] font-bold px-5 py-2 rounded-lg hover:brightness-110 disabled:opacity-50 whitespace-nowrap"
-              >
-                {optimizing ? "Optimizing…" : "Optimize Team"}
-              </button>
-            </div>
-            {optResult && (
-              <div>
-                <div className="flex flex-wrap gap-4 mb-3 text-sm">
-                  <span>Formation: <strong>{optResult.formation}</strong></span>
-                  <span>Optimal XI pred: <strong className="text-[var(--accent)]">{optResult.totalPred.toFixed(3)}</strong></span>
-                  <span>Current XI pred: {optResult.currentTotal.toFixed(3)}</span>
-                  <span>Gain: <strong className="text-emerald-400">+{optResult.gain.toFixed(3)}</strong></span>
-                  <span>C: <strong>{optResult.captain ?? "—"}</strong></span>
-                  <span>VC: <strong>{optResult.viceCaptain ?? "—"}</strong></span>
-                </div>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-xl p-4">
-                    <div className="text-xs uppercase text-emerald-300 font-bold mb-2">Optimal Starting XI</div>
-                    <ul className="space-y-1 text-sm">
-                      {optResult.xi.map((p) => (
-                        <li key={p.name} className="flex items-center justify-between">
-                          <span>{p.name} <PosBadge pos={p.pos} /> <span className="text-[var(--muted)]">{p.club}</span></span>
-                          <span className="text-[var(--muted)]">{p.pred != null ? p.pred.toFixed(3) : "N/A"}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="border border-[var(--border)] bg-[#0d1526] rounded-xl p-4">
-                    <div className="text-xs uppercase text-[var(--muted)] font-bold mb-2">Bench</div>
-                    <ul className="space-y-1 text-sm">
-                      {optResult.bench.map((p) => (
-                        <li key={p.name} className="flex items-center justify-between">
-                          <span>{p.name} <PosBadge pos={p.pos} /> <span className="text-[var(--muted)]">{p.club}</span></span>
-                          <span className="text-[var(--muted)]">{p.pred != null ? p.pred.toFixed(3) : "N/A"}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                {optResult.gain <= 0 && (
-                  <p className="mt-3 text-sm text-[var(--muted)]">Current starting XI is already optimal. ✅</p>
-                )}
-              </div>
             )}
           </section>
 
