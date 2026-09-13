@@ -171,8 +171,6 @@ export default function Home() {
   const totalGwPoints = teamRows
     .filter((r) => r.is_starter)
     .reduce((s, r) => s + r.gameweek_points * r.multiplier, 0);
-  const starters = teamRows.filter((r) => r.is_starter);
-  const bench = teamRows.filter((r) => !r.is_starter);
   const totalCost = suggestions.reduce((s, x) => s + x.in.costDiff, 0);
   const totalGain = suggestions.reduce((s, x) => s + x.improvement, 0);
   const finalBank = bank - totalCost;
@@ -294,42 +292,6 @@ export default function Home() {
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
               </p>
             )}
-          </section>
-
-          {/* Starters vs bench */}
-          <section className="grid md:grid-cols-2 gap-4 mb-8">
-            <div className="card p-5">
-              <h2 className="text-lg font-bold mb-3">Starting XI</h2>
-              <ul className="space-y-2 text-sm">
-                {starters.map((r) => (
-                  <li key={r.player_id} className="flex items-center justify-between border-b border-[var(--border)] pb-2">
-                    <span>
-                      <span className="font-semibold">{r.player_name}</span>{" "}
-                      <PosBadge pos={r.position} /> <span className="text-[var(--muted)]">{r.club}</span>
-                    </span>
-                    <span>
-                      {r.is_captain && <span className="badge bg-[var(--accent)]/20 text-[var(--accent)] mr-1">C</span>}
-                      {r.is_vice_captain && <span className="badge bg-sky-500/20 text-sky-300 mr-1">VC</span>}
-                      <strong>{r.gameweek_points * r.multiplier}</strong> pts
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="card p-5">
-              <h2 className="text-lg font-bold mb-3">Bench</h2>
-              <ul className="space-y-2 text-sm">
-                {bench.map((r) => (
-                  <li key={r.player_id} className="flex items-center justify-between border-b border-[var(--border)] pb-2">
-                    <span>
-                      <span className="font-semibold">{r.player_name}</span>{" "}
-                      <PosBadge pos={r.position} /> <span className="text-[var(--muted)]">{r.club}</span>
-                    </span>
-                    <span className="text-[var(--muted)]">{r.gameweek_points} pts</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </section>
 
           {/* Transfer suggestions */}
