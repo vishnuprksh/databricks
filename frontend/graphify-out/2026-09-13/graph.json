@@ -43,19 +43,6 @@
       "source_location": "L48"
     },
     {
-      "id": "lib_suggestions_optimizeresult",
-      "label": "OptimizeResult",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "suggestions.ts",
-      "file_type": "code",
-      "norm_label": "optimizeresult",
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L222"
-    },
-    {
       "id": "lib_suggestions_replacement",
       "label": "Replacement",
       "_callable": true,
@@ -193,7 +180,7 @@
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/page.tsx",
-      "source_location": "L439"
+      "source_location": "L363"
     },
     {
       "id": "lib_suggestions_buildsquadwithpred",
@@ -242,18 +229,6 @@
       "norm_label": "generatesuggestions()",
       "source_file": "lib/suggestions.ts",
       "source_location": "L148"
-    },
-    {
-      "id": "lib_suggestions_optimizestartingeleven",
-      "label": "optimizeStartingEleven()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "suggestions.ts",
-      "file_type": "code",
-      "norm_label": "optimizestartingeleven()",
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L244"
     },
     {
       "id": "lib_suggestions_statsbyplayername",
@@ -442,17 +417,6 @@
       "norm_label": "pos_by_element",
       "source_file": "lib/suggestions.ts",
       "source_location": "L46"
-    },
-    {
-      "id": "lib_suggestions_valid_formations",
-      "label": "VALID_FORMATIONS",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "suggestions.ts",
-      "file_type": "code",
-      "norm_label": "valid_formations",
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L233"
     },
     {
       "id": "ref_react",
@@ -684,78 +648,6 @@
       "norm_label": "postcss.config.js",
       "source_file": "postcss.config.js",
       "source_location": "L1"
-    },
-    {
-      "id": "readme",
-      "label": "README.md",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "readme.md",
-      "source_file": "README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "readme_api_routes",
-      "label": "API routes",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "api routes",
-      "source_file": "README.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "readme_deploy_to_vercel",
-      "label": "Deploy to Vercel",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "deploy to vercel",
-      "source_file": "README.md",
-      "source_location": "L22"
-    },
-    {
-      "id": "readme_env_vars",
-      "label": "Env vars",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "env vars",
-      "source_file": "README.md",
-      "source_location": "L34"
-    },
-    {
-      "id": "readme_fpl_team_manager_vercel_frontend",
-      "label": "FPL Team Manager \u2014 Vercel Frontend",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fpl team manager \u2014 vercel frontend",
-      "source_file": "README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "readme_setup_local_dev",
-      "label": "Setup (local dev)",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "setup (local dev)",
-      "source_file": "README.md",
-      "source_location": "L9"
     },
     {
       "id": "tsconfig",
@@ -1401,19 +1293,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L170",
-      "weight": 1.0
-    },
-    {
-      "source": "app_page_home",
-      "target": "lib_suggestions_optimizestartingeleven",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app/page.tsx",
-      "source_location": "L49",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -1462,7 +1342,7 @@
       "context": "import",
       "deferred": true,
       "source_file": "app/page.tsx",
-      "source_location": "L48",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -1547,18 +1427,6 @@
       "context": "import",
       "source_file": "app/page.tsx",
       "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "app_page",
-      "target": "lib_suggestions_optimizeresult",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "app/page.tsx",
-      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -2009,7 +1877,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L439",
+      "source_location": "L363",
       "weight": 1.0
     },
     {
@@ -2219,39 +2087,6 @@
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
       "source_location": "L17",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_suggestions",
-      "target": "lib_suggestions_optimizeresult",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L222",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_suggestions",
-      "target": "lib_suggestions_valid_formations",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L233",
-      "weight": 1.0
-    },
-    {
-      "source": "lib_suggestions",
-      "target": "lib_suggestions_optimizestartingeleven",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -2574,61 +2409,6 @@
       "weight": 1.0
     },
     {
-      "source": "readme",
-      "target": "readme_fpl_team_manager_vercel_frontend",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_fpl_team_manager_vercel_frontend",
-      "target": "readme_deploy_to_vercel",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L22",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_fpl_team_manager_vercel_frontend",
-      "target": "readme_env_vars",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L34",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_fpl_team_manager_vercel_frontend",
-      "target": "readme_api_routes",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "readme_fpl_team_manager_vercel_frontend",
-      "target": "readme_setup_local_dev",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
       "source": "tsconfig",
       "target": "tsconfig_compileroptions",
       "relation": "contains",
@@ -2857,5 +2637,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "46c204c7e42dcc1cf0658eed33faad079dae2fb1"
+  "built_at_commit": "0a15a5190a0e72fbe2abb4470f52e5632cb2a93e"
 }

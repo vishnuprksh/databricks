@@ -218,3 +218,102 @@ export function generateSuggestions(
 
   return { suggestions, remainingBank, clubCount };
 }
+
+export type OptimizeResult = {
+  xi: SquadPlayer[];
+  bench: SquadPlayer[];
+  captain: string | null;
+  viceCaptain: string | null;
+  formation: string;
+  totalPred: number;
+  currentTotal: number;
+  gain: number;
+};
+
+const VALID_FORMATIONS: [number, number, number][] = [];
+for (let d = 3; d <= 5; d++)
+  for (let m = 3; m <= 5; m++)
+    for (let f = 1; f <= 3; f++) if (d + m + f === 10) VALID_FORMATIONS.push([d, m, f]);
+
+/**
+ * Exact optimization of the starting XI from the current 15-man squad.
+ * Rules: 1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD (sum 10 + GKP = 11).
+ * Max 3 players per club is automatically respected — the squad already
+ * satisfies it and we never add external players.
+ */
+export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | null {
+  if (squad.length !== 15) return null;
+  const byPos = (pos: string) =>
+    squad
+      .filter((p) => p.pos === pos)
+      .sort((a, b) => (b.pred ?? 0) - (a.pred ?? 0));
+  const gkps = byPos("GKP");
+  const defs = byPos("DEF");
+  const mids = byPos("MID");
+  const fwds = byPos("FWD");
+  if (!gkps.length) return null;
+
+  const pred = (p: SquadPlayer) => p.pred ?? 0;
+  const clubCount: Record<string, number> = {};
+  for (const p of squad) clubCount[p.club] = (clubCount[p.club] ?? 0) + 1;
+  for (const c of Object.values(clubCount)) if (c > 3) return null; // invalid squad
+
+  let best: { xi: SquadPlayer[]; total: number; formation: [number, number, number] } | null = null;
+
+  for (const [d, m, f] of VALID_FORMATIONS) {
+    // Combinations via best-first: since we maximize sum, top-k picks per combo.
+    const comboSums = (pool: SquadPlayer[], k: number): { picks: SquadPlayer[]; total: number }[] => {
+      const results: { picks: SquadPlayer[]; total: number }[] = [];
+      const rec = (start: number, picks: SquadPlayer[], total: number) => {
+        if (picks.length === k) {
+          results.push({ picks: [...picks], total });
+          return;
+        }
+        for (let i = start; i < pool.length; i++) rec(i + 1, [...picks, pool[i]], total + pred(pool[i]));
+      };
+      rec(0, [], 0);
+      return results;
+    };
+
+    for (const gk of gkps) {
+      // cheap prune: club constraint checked after combo
+      for (const D of comboSums(defs, d)) {
+        for (const M of comboSums(mids, m)) {
+          for (const F of comboSums(fwds, f)) {
+            const counts: Record<string, number> = {};
+            let ok = true;
+            for (const p of [gk, ...D.picks, ...M.picks, ...F.picks]) {
+              counts[p.club] = (counts[p.club] ?? 0) + 1;
+              if (counts[p.club] > 3) { ok = false; break; }
+            }
+            if (!ok) continue;
+            const total = pred(gk) + D.total + M.total + F.total;
+            if (!best || total > best.total) {
+              best = { xi: [gk, ...D.picks, ...M.picks, ...F.picks], total, formation: [d, m, f] };
+            }
+          }
+        }
+      }
+    }
+  }
+
+  if (!best) return null;
+  const xiNames = new Set(best.xi.map((p) => p.name));
+  const bench = squad.filter((p) => !xiNames.has(p.name));
+  const captain = best.xi.reduce((a, b) => (pred(b) > pred(a) ? b : a), best.xi[0]).name;
+  const vice = [...best.xi].sort((a, b) => pred(b) - pred(a))[1]?.name ?? null;
+
+  const currentStarters = squad.filter((p) => p.starter);
+  const currentTotal = currentStarters.reduce((s, p) => s + pred(p), 0);
+
+  return {
+    xi: [...best.xi].sort((a, b) => pred(b) - pred(a)),
+    bench,
+    captain,
+    viceCaptain: vice,
+    formation: `${best.formation[0]}-${best.formation[1]}-${best.formation[2]}`,
+    totalPred: best.total,
+    currentTotal,
+    gain: best.total - currentTotal,
+  };
+}

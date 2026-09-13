@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { TeamRow } from "@/lib/fpl";
-import type { SquadPlayer, Suggestion, StatsRow } from "@/lib/suggestions";
+import type { SquadPlayer, Suggestion, StatsRow, OptimizeResult } from "@/lib/suggestions";
 
 type Manager = any;
 type Bootstrap = any;
@@ -35,6 +35,23 @@ export default function Home() {
   const [clubCount, setClubCount] = useState<Record<string, number>>({});
   const [stats, setStats] = useState<Record<string, StatsRow>>({});
   const [noPred, setNoPred] = useState<string[]>([]);
+  const [optimizing, setOptimizing] = useState(false);
+  const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
+
+  const optimize = async () => {
+    if (squad.length !== 15) {
+      setError("Need a full 15-man squad to optimize.");
+      return;
+    }
+    setOptimizing(true);
+    try {
+      const { optimizeStartingEleven } = await import("@/lib/suggestions");
+      setOptResult(optimizeStartingEleven(squad));
+    } finally {
+      setOptimizing(false);
+    }
+  };
+  const [optimizeResult, setOptimizeResult] = useState<OptimizeResult | null>(null);
 
   const load = useCallback(async () => {
     if (!teamId.trim()) {
@@ -159,6 +176,7 @@ export default function Home() {
       );
       setSuggestions(result.suggestions);
       setClubCount(result.clubCount);
+      setOptResult(null);
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -291,6 +309,64 @@ export default function Home() {
               <p className="mt-3 text-xs text-[var(--muted)]">
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
               </p>
+            )}
+          </section>
+
+          {/* Starting XI optimizer */}
+          <section className="card p-5 mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <h2 className="text-lg font-bold">⚡ Optimize Starting XI</h2>
+                <p className="text-xs text-[var(--muted)]">
+                  Picks the best 11 by model prediction — 1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD.
+                </p>
+              </div>
+              <button
+                onClick={optimize}
+                disabled={optimizing || squad.length !== 15}
+                className="bg-[var(--accent)] text-[#04140b] font-bold px-5 py-2 rounded-lg hover:brightness-110 disabled:opacity-50 whitespace-nowrap"
+              >
+                {optimizing ? "Optimizing…" : "Optimize Team"}
+              </button>
+            </div>
+            {optResult && (
+              <div>
+                <div className="flex flex-wrap gap-4 mb-3 text-sm">
+                  <span>Formation: <strong>{optResult.formation}</strong></span>
+                  <span>Optimal XI pred: <strong className="text-[var(--accent)]">{optResult.totalPred.toFixed(3)}</strong></span>
+                  <span>Current XI pred: {optResult.currentTotal.toFixed(3)}</span>
+                  <span>Gain: <strong className="text-emerald-400">+{optResult.gain.toFixed(3)}</strong></span>
+                  <span>C: <strong>{optResult.captain ?? "—"}</strong></span>
+                  <span>VC: <strong>{optResult.viceCaptain ?? "—"}</strong></span>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-xl p-4">
+                    <div className="text-xs uppercase text-emerald-300 font-bold mb-2">Optimal Starting XI</div>
+                    <ul className="space-y-1 text-sm">
+                      {optResult.xi.map((p) => (
+                        <li key={p.name} className="flex items-center justify-between">
+                          <span>{p.name} <PosBadge pos={p.pos} /> <span className="text-[var(--muted)]">{p.club}</span></span>
+                          <span className="text-[var(--muted)]">{p.pred != null ? p.pred.toFixed(3) : "N/A"}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="border border-[var(--border)] bg-[#0d1526] rounded-xl p-4">
+                    <div className="text-xs uppercase text-[var(--muted)] font-bold mb-2">Bench</div>
+                    <ul className="space-y-1 text-sm">
+                      {optResult.bench.map((p) => (
+                        <li key={p.name} className="flex items-center justify-between">
+                          <span>{p.name} <PosBadge pos={p.pos} /> <span className="text-[var(--muted)]">{p.club}</span></span>
+                          <span className="text-[var(--muted)]">{p.pred != null ? p.pred.toFixed(3) : "N/A"}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                {optResult.gain <= 0 && (
+                  <p className="mt-3 text-sm text-[var(--muted)]">Current starting XI is already optimal. ✅</p>
+                )}
+              </div>
             )}
           </section>
 
