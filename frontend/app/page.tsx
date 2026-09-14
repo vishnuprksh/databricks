@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { TeamRow } from "@/lib/fpl";
-import type { SquadPlayer, Suggestion, StatsRow } from "@/lib/suggestions";
+import type { SquadPlayer, Suggestion, StatsRow, OptimizeResult } from "@/lib/suggestions";
 
 type Manager = any;
 type Bootstrap = any;
@@ -35,6 +35,22 @@ export default function Home() {
   const [clubCount, setClubCount] = useState<Record<string, number>>({});
   const [stats, setStats] = useState<Record<string, StatsRow>>({});
   const [noPred, setNoPred] = useState<string[]>([]);
+  const [optimizing, setOptimizing] = useState(false);
+  const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
+
+  const optimize = async () => {
+    if (squad.length !== 15) {
+      setError("Need a full 15-man squad to optimize.");
+      return;
+    }
+    setOptimizing(true);
+    try {
+      const { optimizeStartingEleven } = await import("@/lib/suggestions");
+      setOptResult(optimizeStartingEleven(squad));
+    } finally {
+      setOptimizing(false);
+    }
+  };
 
   const load = useCallback(async () => {
     if (!teamId.trim()) {
@@ -159,6 +175,7 @@ export default function Home() {
       );
       setSuggestions(result.suggestions);
       setClubCount(result.clubCount);
+      setOptResult(null);
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -171,8 +188,6 @@ export default function Home() {
   const totalGwPoints = teamRows
     .filter((r) => r.is_starter)
     .reduce((s, r) => s + r.gameweek_points * r.multiplier, 0);
-  const starters = teamRows.filter((r) => r.is_starter);
-  const bench = teamRows.filter((r) => !r.is_starter);
   const totalCost = suggestions.reduce((s, x) => s + x.in.costDiff, 0);
   const totalGain = suggestions.reduce((s, x) => s + x.improvement, 0);
   const finalBank = bank - totalCost;
@@ -252,29 +267,54 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Squad table */}
+          {/* Squad table with integrated optimizer */}
           <section className="card p-5 mb-8">
-            <h2 className="text-lg font-bold mb-4">Squad — Gameweek {gameweek}</h2>
+            <div className="flex items-center justify-between mb-4 gap-4 flex-wrap">
+              <div>
+                <h2 className="text-lg font-bold">Squad — Gameweek {gameweek}</h2>
+                <p className="text-xs text-[var(--muted)]">
+                  {optResult
+                    ? <>⚡ Optimal XI highlighted in green · Formation <strong>{optResult.formation}</strong> · Optimal pred <strong className="text-[var(--accent)]">{optResult.totalPred.toFixed(3)}</strong> vs current {optResult.currentTotal.toFixed(3)} · Gain <strong className="text-emerald-400">+{optResult.gain.toFixed(3)}</strong> · C: <strong>{optResult.captain ?? "—"}</strong> · VC: <strong>{optResult.viceCaptain ?? "—"}</strong>{optResult.gain <= 0 && <> · Current XI already optimal ✅</>}</>
+                    : "Run the optimizer to highlight the best starting XI by model prediction (1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD)."}
+                </p>
+              </div>
+              <button
+                onClick={optimize}
+                disabled={optimizing || squad.length !== 15}
+                className="bg-[var(--accent)] text-[#04140b] font-bold px-5 py-2 rounded-lg hover:brightness-110 disabled:opacity-50 whitespace-nowrap"
+              >
+                {optimizing ? "Optimizing…" : optResult ? "Re-optimize" : "⚡ Optimize Team"}
+              </button>
+            </div>
             <div className="overflow-x-auto">
               <table className="data">
                 <thead>
                   <tr>
                     <th>#</th><th>Player</th><th>Pos</th><th>Club</th><th>Price</th>
-                    <th>Starter</th><th>C</th><th>VC</th><th>GW Pts</th><th>xMult</th>
+                    <th>Starter</th><th>Opt XI</th><th>C</th><th>VC</th><th>GW Pts</th><th>xMult</th>
                     <th>Total</th><th>Form</th><th>Own %</th><th>Pred</th>
                   </tr>
                 </thead>
                 <tbody>
                   {teamRows.map((r) => {
                     const sp = squad.find((s) => s.name === r.player_name);
+                    const optPlayer = optResult?.xi.find((p) => p.name === r.player_name);
+                    const optBench = optResult?.bench.find((p) => p.name === r.player_name);
+                    const optMark = optPlayer ? "🟢 XI" : optBench ? "🪑 Bench" : "";
+                    const rowClass = optPlayer
+                      ? "bg-emerald-500/10 border-l-2 border-emerald-400"
+                      : optBench
+                      ? "opacity-70 border-l-2 border-transparent"
+                      : "";
                     return (
-                      <tr key={r.player_id}>
+                      <tr key={r.player_id} className={rowClass}>
                         <td className="text-[var(--muted)]">{r.squad_position}</td>
                         <td className="font-semibold">{r.player_name}</td>
                         <td><PosBadge pos={r.position} /></td>
                         <td className="text-[var(--muted)]">{r.club}</td>
                         <td>£{r.price.toFixed(1)}m</td>
                         <td>{r.is_starter ? "✅" : "🪑"}</td>
+                        <td className="whitespace-nowrap">{optMark}</td>
                         <td>{r.is_captain ? "⭐" : ""}</td>
                         <td>{r.is_vice_captain ? "🅥" : ""}</td>
                         <td>{r.gameweek_points}</td>
@@ -294,42 +334,6 @@ export default function Home() {
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
               </p>
             )}
-          </section>
-
-          {/* Starters vs bench */}
-          <section className="grid md:grid-cols-2 gap-4 mb-8">
-            <div className="card p-5">
-              <h2 className="text-lg font-bold mb-3">Starting XI</h2>
-              <ul className="space-y-2 text-sm">
-                {starters.map((r) => (
-                  <li key={r.player_id} className="flex items-center justify-between border-b border-[var(--border)] pb-2">
-                    <span>
-                      <span className="font-semibold">{r.player_name}</span>{" "}
-                      <PosBadge pos={r.position} /> <span className="text-[var(--muted)]">{r.club}</span>
-                    </span>
-                    <span>
-                      {r.is_captain && <span className="badge bg-[var(--accent)]/20 text-[var(--accent)] mr-1">C</span>}
-                      {r.is_vice_captain && <span className="badge bg-sky-500/20 text-sky-300 mr-1">VC</span>}
-                      <strong>{r.gameweek_points * r.multiplier}</strong> pts
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="card p-5">
-              <h2 className="text-lg font-bold mb-3">Bench</h2>
-              <ul className="space-y-2 text-sm">
-                {bench.map((r) => (
-                  <li key={r.player_id} className="flex items-center justify-between border-b border-[var(--border)] pb-2">
-                    <span>
-                      <span className="font-semibold">{r.player_name}</span>{" "}
-                      <PosBadge pos={r.position} /> <span className="text-[var(--muted)]">{r.club}</span>
-                    </span>
-                    <span className="text-[var(--muted)]">{r.gameweek_points} pts</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </section>
 
           {/* Transfer suggestions */}

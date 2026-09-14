@@ -1,17 +1,12 @@
 # Graph Report - databricks  (2026-09-13)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- Corpus is ~5,983 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 122 nodes · 139 edges · 15 communities (8 shown, 4 thin omitted)
+- 121 nodes · 136 edges · 15 communities (8 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `a1d552aa`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Squad Suggestions UI
@@ -25,18 +20,18 @@
 - Next.js Config
 - DB Table Creation
 - Next Env Types
-- Tailwind Config
+- Credential Tests
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 16 edges
 2. `fetchFplJson()` - 7 edges
-3. `Home()` - 4 edges
+3. `fetchPredictions()` - 4 edges
 4. `fetchPlayers()` - 4 edges
-5. `fetchPredictions()` - 4 edges
-6. `scripts` - 4 edges
-7. `TeamRow` - 3 edges
-8. `generateSuggestions()` - 3 edges
-9. `GET()` - 3 edges
+5. `scripts` - 4 edges
+6. `GET()` - 3 edges
+7. `GET()` - 3 edges
+8. `Home()` - 3 edges
+9. `getPool()` - 3 edges
 10. `chooseGameweek()` - 3 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -44,12 +39,12 @@
   frontend/app/api/manager/route.ts → frontend/lib/fpl.ts
 - `GET()` --calls--> `fetchFplJson()`  [EXTRACTED]
   frontend/app/api/picks/route.ts → frontend/lib/fpl.ts
-- `Home()` --calls--> `generateSuggestions()`  [EXTRACTED]
-  frontend/app/page.tsx → frontend/lib/suggestions.ts
-- `Home()` --calls--> `optimizeStartingEleven()`  [EXTRACTED]
-  frontend/app/page.tsx → frontend/lib/suggestions.ts
 - `GET()` --calls--> `chooseGameweek()`  [EXTRACTED]
   frontend/app/api/bootstrap/route.ts → frontend/lib/fpl.ts
+- `GET()` --calls--> `fetchFplJson()`  [EXTRACTED]
+  frontend/app/api/bootstrap/route.ts → frontend/lib/fpl.ts
+- `GET()` --calls--> `fetchPlayers()`  [EXTRACTED]
+  frontend/app/api/data/route.ts → frontend/lib/db.ts
 
 ## Import Cycles
 - None detected.
@@ -57,8 +52,8 @@
 ## Communities (15 total, 4 thin omitted)
 
 ### Community 0 - "Squad Suggestions UI"
-Cohesion: 0.11
-Nodes (17): Bootstrap, Home(), Manager, POS_COLORS, PredictionRow, findReplacements(), generateSuggestions(), OptimizeResult (+9 more)
+Cohesion: 0.12
+Nodes (14): Bootstrap, Home(), Manager, POS_COLORS, PredictionRow, findReplacements(), generateSuggestions(), POS_BY_ELEMENT (+6 more)
 
 ### Community 1 - "App Layout & Package"
 Cohesion: 0.10
@@ -89,7 +84,7 @@ Cohesion: 0.40
 Nodes (5): dependencies, next, pg, react, react-dom
 
 ## Knowledge Gaps
-- **57 isolated node(s):** `Bootstrap`, `Manager`, `Replacement`, `TransferRecord`, `GwPrediction` (+52 more)
+- **56 isolated node(s):** `fs`, `{ Pool }`, `metadata`, `Manager`, `Bootstrap` (+51 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 78 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -97,15 +92,15 @@ Nodes (5): dependencies, next, pg, react, react-dom
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `Squad Suggestions UI` to `App Layout & Package`?**
-  _High betweenness centrality (0.137) - this node is a cross-community bridge._
+  _High betweenness centrality (0.130) - this node is a cross-community bridge._
 - **Why does `pg` connect `Database Layer` to `App Layout & Package`?**
-  _High betweenness centrality (0.097) - this node is a cross-community bridge._
+  _High betweenness centrality (0.094) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `Dev Dependencies` to `App Layout & Package`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
-- **What connects `Bootstrap`, `Manager`, `Replacement` to the rest of the system?**
-  _57 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.073) - this node is a cross-community bridge._
+- **What connects `fs`, `{ Pool }`, `metadata` to the rest of the system?**
+  _56 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Squad Suggestions UI` be split into smaller, more focused modules?**
-  _Cohesion score 0.11231884057971014 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12380952380952381 - nodes in this community are weakly interconnected._
 - **Should `App Layout & Package` be split into smaller, more focused modules?**
   _Cohesion score 0.1 - nodes in this community are weakly interconnected._
 - **Should `TypeScript Config` be split into smaller, more focused modules?**
