@@ -392,31 +392,36 @@ export default function Home() {
                       <span className="badge bg-[var(--accent)]/15 text-[var(--accent)]">{s.transferLabel}</span>
                       <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
-                    <div className="grid md:grid-cols-[1fr_auto_1fr] gap-3 items-center">
-                      <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3">
-                        <div className="text-xs uppercase text-rose-300 font-bold mb-1">OUT</div>
+                    <div className="grid md:grid-cols-[minmax(0,2fr)_auto_minmax(0,3fr)] gap-3 items-stretch">
+                      <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3 flex flex-col justify-center">
+                        <div className="text-xs uppercase text-rose-300 font-bold mb-1">Out</div>
                         <div className="font-semibold">{s.out.name} <PosBadge pos={s.out.pos} /></div>
-                        <div className="text-xs text-[var(--muted)]">
+                        <div className="text-xs text-[var(--muted)] mt-1">
                           £{s.out.nowPrice.toFixed(1)}m{s.out.sellPrice !== s.out.nowPrice ? ` (sell £${s.out.sellPrice.toFixed(1)}m)` : ""} · pred {s.out.pred != null ? s.out.pred.toFixed(3) : "N/A"}
                         </div>
                       </div>
-                      <div className="text-2xl text-center">➜</div>
+                      <div className="flex items-center text-2xl text-[var(--muted)]">➜</div>
                       <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-lg p-3">
-                        <div className="text-xs uppercase text-emerald-300 font-bold mb-1">IN</div>
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <div className="text-xs uppercase text-emerald-300 font-bold">In</div>
+                          <div className="text-xs text-[var(--muted)]">{s.in.club} · cost {s.in.costDiff >= 0 ? "+" : ""}£{s.in.costDiff.toFixed(1)}m</div>
+                        </div>
                         <div className="font-semibold">{s.in.name} <PosBadge pos={s.out.pos} /></div>
-                        <div className="text-xs text-[var(--muted)]">
-                          £{s.in.price.toFixed(1)}m · pred {s.in.pred.toFixed(3)} · form {s.in.form.toFixed(1)} · ppg {s.in.ppg.toFixed(1)} · {s.in.club} · cost {s.in.costDiff >= 0 ? "+" : ""}£{s.in.costDiff.toFixed(1)}m
+                        <div className="text-xs text-[var(--muted)] mt-1">
+                          £{s.in.price.toFixed(1)}m · pred {s.in.pred.toFixed(3)} · form {s.in.form.toFixed(1)} · ppg {s.in.ppg.toFixed(1)}
                         </div>
-                        <div className="text-xs mt-1 text-[var(--muted)]">
-                          GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6.toFixed(2)}`).join("  ")}
-                        </div>
-                        <button
-                          onClick={() => approveTransfer(s)}
-                          className="mt-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/30"
-                        >
-                          Approve Transfer
-                        </button>
                       </div>
+                    </div>
+                    <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+                      <div className="text-xs text-[var(--muted)]">
+                        GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6.toFixed(2)}`).join("  ")}
+                      </div>
+                      <button
+                        onClick={() => approveTransfer(s)}
+                        className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/30"
+                      >
+                        Approve Transfer
+                      </button>
                     </div>
                     {s.improvement <= 0 && (
                       <p className="mt-3 text-xs text-rose-300">No affordable transfer improves the optimized XI; this is the best available alternative.</p>
