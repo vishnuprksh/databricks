@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { TeamRow } from "@/lib/fpl";
+import { findBestTransfer, generateSuggestions, optimizeStartingEleven } from "@/lib/suggestions";
 import type { SquadPlayer, Suggestion, StatsRow, OptimizeResult } from "@/lib/suggestions";
+import type { PredictionRow } from "@/lib/db";
 
 type Manager = any;
 type Bootstrap = any;
@@ -34,8 +36,10 @@ export default function Home() {
   const [bank, setBank] = useState(0);
   const [clubCount, setClubCount] = useState<Record<string, number>>({});
   const [stats, setStats] = useState<Record<string, StatsRow>>({});
+  const [predictions, setPredictions] = useState<PredictionRow[]>([]);
   const [noPred, setNoPred] = useState<string[]>([]);
   const [optimizing, setOptimizing] = useState(false);
+  const [suggestingTransfer, setSuggestingTransfer] = useState(false);
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
 
   const optimize = async () => {
@@ -45,11 +49,69 @@ export default function Home() {
     }
     setOptimizing(true);
     try {
-      const { optimizeStartingEleven } = await import("@/lib/suggestions");
       setOptResult(optimizeStartingEleven(squad));
     } finally {
       setOptimizing(false);
     }
+  };
+
+  const suggestBestTransfer = async () => {
+    setSuggestingTransfer(true);
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    try {
+      const best = findBestTransfer(squad, predictions, stats, bank, teamRows.map((r) => r.player_name));
+      setSuggestions(best ? [best] : []);
+      const nextClubCount: Record<string, number> = {};
+      for (const player of squad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
+      setClubCount(nextClubCount);
+    } finally {
+      setSuggestingTransfer(false);
+    }
+  };
+
+  const approveTransfer = (suggestion: Suggestion) => {
+    const outgoing = teamRows.find((r) => r.player_name === suggestion.out.name);
+    const incomingPrediction = predictions.find((p) => p.player_name === suggestion.in.name);
+    if (!outgoing || !incomingPrediction) return;
+
+    const incomingStats = stats[suggestion.in.name];
+    if (!incomingStats) return;
+
+    const incomingRow: TeamRow = {
+      ...outgoing,
+      player_id: incomingPrediction.player_id,
+      player_name: suggestion.in.name,
+      full_name: suggestion.in.name,
+      club: suggestion.in.club,
+      price: suggestion.in.price,
+      selected_by_percent: incomingStats.selected_by_percent,
+      total_points: incomingStats.total_points,
+      form: incomingStats.form,
+    };
+    const incomingSquadPlayer: SquadPlayer = {
+      name: suggestion.in.name,
+      pos: suggestion.out.pos,
+      nowPrice: suggestion.in.price,
+      sellPrice: suggestion.in.price,
+      pred: suggestion.in.pred,
+      starter: suggestion.out.starter,
+      club: suggestion.in.club,
+    };
+    const nextRows = teamRows.map((r) => (r.player_name === suggestion.out.name ? incomingRow : r));
+    const nextSquad = squad.map((p) => (p.name === suggestion.out.name ? incomingSquadPlayer : p));
+    const nextBank = bank - suggestion.in.costDiff;
+    const bestNextTransfer = findBestTransfer(nextSquad, predictions, stats, nextBank, nextRows.map((r) => r.player_name));
+    const nextSuggestions = bestNextTransfer ? [bestNextTransfer] : [];
+
+    setTeamRows(nextRows);
+    setSquad(nextSquad);
+    setBank(nextBank);
+    setSuggestions(nextSuggestions);
+    const nextClubCount: Record<string, number> = {};
+    for (const player of nextSquad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
+    setClubCount(nextClubCount);
+    setNoPred(nextSquad.filter((p) => p.pred === null).map((p) => p.name));
+    setOptResult(optimizeStartingEleven(nextSquad));
   };
 
   const load = useCallback(async () => {
@@ -135,6 +197,7 @@ export default function Home() {
 
       const predById: Record<number, any> = {};
       for (const p of data.predictions) predById[p.player_id] = p;
+      setPredictions(data.predictions);
 
       // Sell prices from transfer history
       const purchasePrices: Record<number, number> = {};
@@ -338,12 +401,23 @@ export default function Home() {
 
           {/* Transfer suggestions */}
           <section className="card p-5 mb-8">
-            <h2 className="text-lg font-bold mb-1">🔮 Transfer Suggestions (ML-Powered)</h2>
+            <div className="flex items-center justify-between gap-4 flex-wrap mb-1">
+              <h2 className="text-lg font-bold">🔮 Transfer Suggestions (ML-Powered)</h2>
+              <button
+                onClick={suggestBestTransfer}
+                disabled={!predictions.length || suggestingTransfer}
+                className="bg-[var(--accent)] text-[#04140b] font-bold px-4 py-2 rounded-lg hover:brightness-110 disabled:opacity-50"
+              >
+                {suggestingTransfer ? "Finding best transfer..." : "Suggest Best Transfer"}
+              </button>
+            </div>
             <p className="text-xs text-[var(--muted)] mb-4">
               Maximises model probability of scoring &gt;6 pts, respecting budget, 3-per-club limit and position limits.
               Clubs at 3-player limit: {Object.entries(clubCount).filter(([, n]) => n >= 3).map(([c]) => c).join(", ") || "none"}
             </p>
-            {suggestions.length === 0 ? (
+            {suggestingTransfer ? (
+              <p className="text-sm text-[var(--muted)]">Checking every valid starting XI and transfer option...</p>
+            ) : suggestions.length === 0 ? (
               <p className="text-sm text-[var(--muted)]">No transfers suggested — squad looks optimal for the budget.</p>
             ) : (
               <div className="space-y-4">
@@ -351,7 +425,7 @@ export default function Home() {
                   <div key={i} className="border border-[var(--border)] rounded-xl p-4 bg-[#0d1526]">
                     <div className="flex items-center justify-between mb-3">
                       <span className="badge bg-[var(--accent)]/15 text-[var(--accent)]">{s.transferLabel}</span>
-                      <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className="text-[var(--accent)]">+{s.improvement.toFixed(3)}</strong></span>
+                      <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
                     <div className="grid md:grid-cols-[1fr_auto_1fr] gap-3 items-center">
                       <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3">
@@ -371,8 +445,17 @@ export default function Home() {
                         <div className="text-xs mt-1 text-[var(--muted)]">
                           GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6.toFixed(2)}`).join("  ")}
                         </div>
+                        <button
+                          onClick={() => approveTransfer(s)}
+                          className="mt-3 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/30"
+                        >
+                          Approve Transfer
+                        </button>
                       </div>
                     </div>
+                    {s.improvement <= 0 && (
+                      <p className="mt-3 text-xs text-rose-300">No affordable transfer improves the optimized XI; this is the best available alternative.</p>
+                    )}
                     {s.alternatives.length > 0 && (
                       <div className="mt-3 text-xs text-[var(--muted)]">
                         Alternatives:{" "}
@@ -385,7 +468,7 @@ export default function Home() {
             )}
             {suggestions.length > 0 && (
               <div className="mt-4 p-4 rounded-xl bg-[#0d1526] border border-[var(--border)] text-sm">
-                <strong>Summary:</strong> {suggestions.length} transfer(s) · Total cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Total prediction gain +{totalGain.toFixed(3)}
+                <strong>Summary:</strong> {suggestions.length} transfer(s) · Total cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Total prediction gain {totalGain >= 0 ? "+" : ""}{totalGain.toFixed(3)}
                 {finalBank < 0 && <p className="text-rose-400 mt-1">⚠ Insufficient budget — these transfers cannot all be made.</p>}
                 {suggestions.length > 1 && <p className="text-[var(--muted)] mt-1">Point hits: -{(suggestions.length - 1) * 4}</p>}
                 {finalBank > 4.0 && <p className="text-[var(--muted)] mt-1">£{finalBank.toFixed(1)}m surplus — consider upgrading bench or saving for next week.</p>}

@@ -10,10 +10,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "bootstrap",
       "source_file": "app/page.tsx",
-      "source_location": "L8"
+      "source_location": "L10"
     },
     {
       "id": "app_page_manager",
@@ -22,22 +23,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "manager",
       "source_file": "app/page.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "lib_db_predictionrow",
-      "label": "PredictionRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "predictionrow",
-      "source_file": "lib/db.ts",
-      "source_location": "L42"
+      "source_location": "L9"
     },
     {
       "id": "lib_suggestions_optimizeresult",
@@ -46,6 +36,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "optimizeresult",
       "source_file": "lib/suggestions.ts",
@@ -58,6 +49,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "replacement",
       "source_file": "lib/suggestions.ts",
@@ -70,6 +62,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "squadplayer",
       "source_file": "lib/suggestions.ts",
@@ -82,6 +75,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "statsrow",
       "source_file": "lib/suggestions.ts",
@@ -94,6 +88,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "suggestion",
       "source_file": "lib/suggestions.ts",
@@ -106,6 +101,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "transferrecord",
       "source_file": "lib/suggestions.ts",
@@ -131,6 +127,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
+      "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "gwprediction",
       "source_file": "lib/db.ts",
@@ -143,10 +140,24 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
+      "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "playerrow",
       "source_file": "lib/db.ts",
       "source_location": "L21"
+    },
+    {
+      "id": "lib_db_predictionrow",
+      "label": "PredictionRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "predictionrow",
+      "source_file": "lib/db.ts",
+      "source_location": "L42"
     },
     {
       "id": "app_page_home",
@@ -154,10 +165,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "app/page.tsx",
-      "source_location": "L21"
+      "source_location": "L23"
     },
     {
       "id": "app_page_posbadge",
@@ -165,10 +177,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "posbadge()",
       "source_file": "app/page.tsx",
-      "source_location": "L17"
+      "source_location": "L19"
     },
     {
       "id": "app_page_stat",
@@ -176,10 +189,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/page.tsx",
-      "source_location": "L405"
+      "source_location": "L485"
     },
     {
       "id": "lib_suggestions_buildsquadwithpred",
@@ -187,6 +201,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "buildsquadwithpred()",
       "source_file": "lib/suggestions.ts",
@@ -198,10 +213,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "computesellprices()",
       "source_file": "lib/suggestions.ts",
       "source_location": "L70"
+    },
+    {
+      "id": "lib_suggestions_findbesttransfer",
+      "label": "findBestTransfer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "suggestions.ts",
+      "file_type": "code",
+      "norm_label": "findbesttransfer()",
+      "source_file": "lib/suggestions.ts",
+      "source_location": "L321"
     },
     {
       "id": "lib_suggestions_findreplacements",
@@ -209,6 +237,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "findreplacements()",
       "source_file": "lib/suggestions.ts",
@@ -220,6 +249,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "generatesuggestions()",
       "source_file": "lib/suggestions.ts",
@@ -231,6 +261,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "optimizestartingeleven()",
       "source_file": "lib/suggestions.ts",
@@ -242,6 +273,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "statsbyplayername()",
       "source_file": "lib/suggestions.ts",
@@ -349,6 +381,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
+      "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "fetchplayers()",
       "source_file": "lib/db.ts",
@@ -360,6 +393,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
+      "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "fetchpredictions()",
       "source_file": "lib/db.ts",
@@ -371,27 +405,18 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
+      "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "getpool()",
       "source_file": "lib/db.ts",
       "source_location": "L8"
     },
     {
-      "id": "ref_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "suggestions.ts",
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L13"
-    },
-    {
       "id": "app_page",
       "label": "page.tsx",
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "page.tsx",
       "source_file": "app/page.tsx",
@@ -402,16 +427,18 @@
       "label": "POS_COLORS",
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "pos_colors",
       "source_file": "app/page.tsx",
-      "source_location": "L10"
+      "source_location": "L12"
     },
     {
       "id": "lib_suggestions",
       "label": "suggestions.ts",
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "suggestions.ts",
       "source_file": "lib/suggestions.ts",
@@ -422,6 +449,7 @@
       "label": "POS_BY_ELEMENT",
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "pos_by_element",
       "source_file": "lib/suggestions.ts",
@@ -432,6 +460,7 @@
       "label": "VALID_FORMATIONS",
       "_origin": "ast",
       "community": 0,
+      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "valid_formations",
       "source_file": "lib/suggestions.ts",
@@ -581,6 +610,17 @@
       "source_location": "L21"
     },
     {
+      "id": "ref_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
       "id": "ref_react_dom",
       "label": "react-dom",
       "_origin": "ast",
@@ -656,6 +696,17 @@
       "norm_label": "postcss.config.js",
       "source_file": "postcss.config.js",
       "source_location": "L1"
+    },
+    {
+      "id": "tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "tailwind.config.js",
+      "confidence": "EXTRACTED",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "tailwindcss"
     },
     {
       "id": "tailwind_config",
@@ -988,6 +1039,17 @@
       "source_location": "L9"
     },
     {
+      "id": "lib_db",
+      "label": "db.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "db.ts",
+      "source_file": "lib/db.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "ref_pg",
       "label": "pg",
       "_origin": "ast",
@@ -997,16 +1059,6 @@
       "norm_label": "pg",
       "source_file": "package.json",
       "source_location": "L12"
-    },
-    {
-      "id": "lib_db",
-      "label": "db.ts",
-      "_origin": "ast",
-      "community": 4,
-      "file_type": "code",
-      "norm_label": "db.ts",
-      "source_file": "lib/db.ts",
-      "source_location": "L1"
     },
     {
       "id": "package_devdependencies",
@@ -1118,7 +1170,7 @@
       "node_kind": "heading",
       "norm_label": "api routes",
       "source_file": "README.md",
-      "source_location": "L45"
+      "source_location": "L36"
     },
     {
       "id": "readme_deploy_to_vercel",
@@ -1130,7 +1182,7 @@
       "node_kind": "heading",
       "norm_label": "deploy to vercel",
       "source_file": "README.md",
-      "source_location": "L22"
+      "source_location": "L19"
     },
     {
       "id": "readme_env_vars",
@@ -1142,7 +1194,7 @@
       "node_kind": "heading",
       "norm_label": "env vars",
       "source_file": "README.md",
-      "source_location": "L34"
+      "source_location": "L28"
     },
     {
       "id": "readme_fpl_team_manager_vercel_frontend",
@@ -1222,6 +1274,17 @@
       "norm_label": "react-dom",
       "source_file": "package.json",
       "source_location": "L14"
+    },
+    {
+      "id": "next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "next.config.js",
+      "confidence": "EXTRACTED",
+      "file_type": "code",
+      "norm_label": "next",
+      "source_file": "next"
     },
     {
       "id": "next_config",
@@ -1350,7 +1413,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L169",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -1362,7 +1425,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L49",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_home",
+      "target": "lib_suggestions_findbesttransfer",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/page.tsx",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -1390,6 +1465,30 @@
       "weight": 1.0
     },
     {
+      "source": "lib_suggestions_findbesttransfer",
+      "target": "lib_suggestions_optimizestartingeleven",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/suggestions.ts",
+      "source_location": "L328",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_suggestions_findbesttransfer",
+      "target": "lib_suggestions_findreplacements",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "lib/suggestions.ts",
+      "source_location": "L337",
+      "weight": 1.0
+    },
+    {
       "source": "lib_suggestions_generatesuggestions",
       "target": "lib_suggestions_findreplacements",
       "relation": "calls",
@@ -1411,7 +1510,7 @@
       "context": "import",
       "deferred": true,
       "source_file": "app/page.tsx",
-      "source_location": "L48",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -1500,7 +1599,7 @@
     },
     {
       "source": "app_page",
-      "target": "lib_suggestions_optimizeresult",
+      "target": "lib_suggestions_findbesttransfer",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1508,6 +1607,42 @@
       "context": "import",
       "source_file": "app/page.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_suggestions_generatesuggestions",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_suggestions_optimizestartingeleven",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_suggestions_optimizeresult",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -1519,7 +1654,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -1531,7 +1666,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -1543,7 +1678,19 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_db_predictionrow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -1797,7 +1944,20 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "lib_db",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/page.tsx",
+      "source_location": "L7",
       "type_only": true,
       "weight": 1.0
     },
@@ -1919,7 +2079,7 @@
     },
     {
       "source": "app_page",
-      "target": "app_page_pos_colors",
+      "target": "app_page_bootstrap",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1930,13 +2090,24 @@
     },
     {
       "source": "app_page",
+      "target": "app_page_pos_colors",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/page.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
       "target": "app_page_posbadge",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L17",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -1947,7 +2118,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L21",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -1958,7 +2129,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L405",
+      "source_location": "L485",
       "weight": 1.0
     },
     {
@@ -1969,18 +2140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "app_page",
-      "target": "app_page_bootstrap",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/page.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -2212,6 +2372,17 @@
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
       "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_suggestions",
+      "target": "lib_suggestions_findbesttransfer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/suggestions.ts",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -2541,7 +2712,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L22",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -2552,7 +2723,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L34",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -2563,7 +2734,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L45",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -2776,6 +2947,24 @@
       "weight": 1.0
     },
     {
+      "source": "next_config",
+      "target": "next",
+      "relation": "dynamic_import",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "next.config.js"
+    },
+    {
+      "source": "tailwind_config",
+      "target": "tailwindcss",
+      "relation": "dynamic_import",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tailwind.config.js"
+    },
+    {
       "source": "next_env_d_rationale_4",
       "target": "next_env_d",
       "relation": "rationale_for",
@@ -2788,5 +2977,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a9270b7b238724353a9c3a9a8db7caf31438b081"
+  "built_at_commit": "be137e829dc74df12be0d2edd6199a782418f49b"
 }
