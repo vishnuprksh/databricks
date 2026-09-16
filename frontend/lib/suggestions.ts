@@ -368,11 +368,11 @@ export function findBestTransfer(
           in: incoming,
           improvement,
           alternatives: [],
-          transferLabel: "BEST XI TRANSFER",
+          transferLabel: improvement > 0 ? "BEST XI TRANSFER" : "BEST AVAILABLE TRANSFER",
         };
       }
     }
   }
 
-  return best && best.improvement > 0 ? best : null;
+  return best;
 }

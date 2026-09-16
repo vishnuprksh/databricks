@@ -193,7 +193,7 @@
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/page.tsx",
-      "source_location": "L476"
+      "source_location": "L488"
     },
     {
       "id": "lib_suggestions_buildsquadwithpred",
@@ -698,6 +698,17 @@
       "source_location": "L1"
     },
     {
+      "id": "tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "tailwind.config.js",
+      "confidence": "EXTRACTED",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "tailwindcss"
+    },
+    {
       "id": "tailwind_config",
       "label": "tailwind.config.js",
       "_origin": "ast",
@@ -1159,7 +1170,7 @@
       "node_kind": "heading",
       "norm_label": "api routes",
       "source_file": "README.md",
-      "source_location": "L45"
+      "source_location": "L36"
     },
     {
       "id": "readme_deploy_to_vercel",
@@ -1171,7 +1182,7 @@
       "node_kind": "heading",
       "norm_label": "deploy to vercel",
       "source_file": "README.md",
-      "source_location": "L22"
+      "source_location": "L19"
     },
     {
       "id": "readme_env_vars",
@@ -1183,7 +1194,7 @@
       "node_kind": "heading",
       "norm_label": "env vars",
       "source_file": "README.md",
-      "source_location": "L34"
+      "source_location": "L28"
     },
     {
       "id": "readme_fpl_team_manager_vercel_frontend",
@@ -1263,6 +1274,17 @@
       "norm_label": "react-dom",
       "source_file": "package.json",
       "source_location": "L14"
+    },
+    {
+      "id": "next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "next.config.js",
+      "confidence": "EXTRACTED",
+      "file_type": "code",
+      "norm_label": "next",
+      "source_file": "next"
     },
     {
       "id": "next_config",
@@ -1391,7 +1413,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L225",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -1403,7 +1425,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -1415,7 +1437,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L58",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -1488,7 +1510,7 @@
       "context": "import",
       "deferred": true,
       "source_file": "app/page.tsx",
-      "source_location": "L224",
+      "source_location": "L231",
       "weight": 1.0
     },
     {
@@ -2107,7 +2129,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L476",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -2690,7 +2712,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L22",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -2701,7 +2723,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L34",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -2712,7 +2734,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L45",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -2925,6 +2947,24 @@
       "weight": 1.0
     },
     {
+      "source": "next_config",
+      "target": "next",
+      "relation": "dynamic_import",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "next.config.js"
+    },
+    {
+      "source": "tailwind_config",
+      "target": "tailwindcss",
+      "relation": "dynamic_import",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tailwind.config.js"
+    },
+    {
       "source": "next_env_d_rationale_4",
       "target": "next_env_d",
       "relation": "rationale_for",
@@ -2937,5 +2977,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "990164b3dc0efd8896e4185a1b1a060e1d3393bd"
+  "built_at_commit": "be137e829dc74df12be0d2edd6199a782418f49b"
 }

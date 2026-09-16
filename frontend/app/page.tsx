@@ -39,6 +39,7 @@ export default function Home() {
   const [predictions, setPredictions] = useState<PredictionRow[]>([]);
   const [noPred, setNoPred] = useState<string[]>([]);
   const [optimizing, setOptimizing] = useState(false);
+  const [suggestingTransfer, setSuggestingTransfer] = useState(false);
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
 
   const optimize = async () => {
@@ -54,12 +55,18 @@ export default function Home() {
     }
   };
 
-  const suggestBestTransfer = () => {
-    const best = findBestTransfer(squad, predictions, stats, bank, teamRows.map((r) => r.player_name));
-    setSuggestions(best ? [best] : []);
-    const nextClubCount: Record<string, number> = {};
-    for (const player of squad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
-    setClubCount(nextClubCount);
+  const suggestBestTransfer = async () => {
+    setSuggestingTransfer(true);
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    try {
+      const best = findBestTransfer(squad, predictions, stats, bank, teamRows.map((r) => r.player_name));
+      setSuggestions(best ? [best] : []);
+      const nextClubCount: Record<string, number> = {};
+      for (const player of squad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
+      setClubCount(nextClubCount);
+    } finally {
+      setSuggestingTransfer(false);
+    }
   };
 
   const approveTransfer = (suggestion: Suggestion) => {
@@ -398,17 +405,19 @@ export default function Home() {
               <h2 className="text-lg font-bold">🔮 Transfer Suggestions (ML-Powered)</h2>
               <button
                 onClick={suggestBestTransfer}
-                disabled={!predictions.length}
+                disabled={!predictions.length || suggestingTransfer}
                 className="bg-[var(--accent)] text-[#04140b] font-bold px-4 py-2 rounded-lg hover:brightness-110 disabled:opacity-50"
               >
-                Suggest Best Transfer
+                {suggestingTransfer ? "Finding best transfer..." : "Suggest Best Transfer"}
               </button>
             </div>
             <p className="text-xs text-[var(--muted)] mb-4">
               Maximises model probability of scoring &gt;6 pts, respecting budget, 3-per-club limit and position limits.
               Clubs at 3-player limit: {Object.entries(clubCount).filter(([, n]) => n >= 3).map(([c]) => c).join(", ") || "none"}
             </p>
-            {suggestions.length === 0 ? (
+            {suggestingTransfer ? (
+              <p className="text-sm text-[var(--muted)]">Checking every valid starting XI and transfer option...</p>
+            ) : suggestions.length === 0 ? (
               <p className="text-sm text-[var(--muted)]">No transfers suggested — squad looks optimal for the budget.</p>
             ) : (
               <div className="space-y-4">
@@ -416,7 +425,7 @@ export default function Home() {
                   <div key={i} className="border border-[var(--border)] rounded-xl p-4 bg-[#0d1526]">
                     <div className="flex items-center justify-between mb-3">
                       <span className="badge bg-[var(--accent)]/15 text-[var(--accent)]">{s.transferLabel}</span>
-                      <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className="text-[var(--accent)]">+{s.improvement.toFixed(3)}</strong></span>
+                      <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
                     <div className="grid md:grid-cols-[1fr_auto_1fr] gap-3 items-center">
                       <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3">
@@ -444,6 +453,9 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
+                    {s.improvement <= 0 && (
+                      <p className="mt-3 text-xs text-rose-300">No affordable transfer improves the optimized XI; this is the best available alternative.</p>
+                    )}
                     {s.alternatives.length > 0 && (
                       <div className="mt-3 text-xs text-[var(--muted)]">
                         Alternatives:{" "}
@@ -456,7 +468,7 @@ export default function Home() {
             )}
             {suggestions.length > 0 && (
               <div className="mt-4 p-4 rounded-xl bg-[#0d1526] border border-[var(--border)] text-sm">
-                <strong>Summary:</strong> {suggestions.length} transfer(s) · Total cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Total prediction gain +{totalGain.toFixed(3)}
+                <strong>Summary:</strong> {suggestions.length} transfer(s) · Total cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Total prediction gain {totalGain >= 0 ? "+" : ""}{totalGain.toFixed(3)}
                 {finalBank < 0 && <p className="text-rose-400 mt-1">⚠ Insufficient budget — these transfers cannot all be made.</p>}
                 {suggestions.length > 1 && <p className="text-[var(--muted)] mt-1">Point hits: -{(suggestions.length - 1) * 4}</p>}
                 {finalBank > 4.0 && <p className="text-[var(--muted)] mt-1">£{finalBank.toFixed(1)}m surplus — consider upgrading bench or saving for next week.</p>}
