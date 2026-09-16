@@ -12,10 +12,7 @@ Next.js frontend replicating `fpl_team_manager(1).py`:
 cd fpl-frontend
 npm install
 # create .env.local (never commit):
-#   PGHOST=ep-....cloud.databricks.com
-#   PGDATABASE=databricks_postgres
-#   PGUSER=vishnuprksh
-#   PGPASSWORD=<static password, does not expire>
+#   DATABASE_URL=postgresql://user:password@host/databricks_postgres?sslmode=require
 npm run dev
 ```
 
@@ -24,10 +21,7 @@ npm run dev
 ```bash
 npm i -g vercel
 vercel
-vercel env add PGHOST
-vercel env add PGDATABASE
-vercel env add PGUSER
-vercel env add PGPASSWORD
+vercel env add DATABASE_URL
 vercel --prod
 ```
 
@@ -35,12 +29,9 @@ vercel --prod
 
 | Name | Description |
 |---|---|
-| `PGHOST` | Databricks Postgres host |
-| `PGDATABASE` | Database name (`databricks_postgres`) |
-| `PGUSER` | Postgres user (static, non-expiring) |
-| `PGPASSWORD` | Postgres password (static, non-expiring) |
+| `DATABASE_URL` | PostgreSQL connection URL for Databricks Postgres |
 
-> Note: the older `DATABASE_PASSWORD` OAuth JWT from `.env` expires every ~1h and is NOT used here.
+> Note: include `sslmode=require` in the URL. The older `DATABASE_PASSWORD` OAuth JWT from `.env` expires every ~1h and is NOT used here.
 
 ## API routes
 
