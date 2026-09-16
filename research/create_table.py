@@ -4,12 +4,8 @@ import os
 import sys
 
 import psycopg
-from dotenv import load_dotenv
-
-load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS employees (
@@ -26,11 +22,9 @@ CREATE TABLE IF NOT EXISTS employees (
 def main() -> None:
     if not DATABASE_URL:
         sys.exit("DATABASE_URL not set in .env")
-    if not DATABASE_PASSWORD:
-        sys.exit("DATABASE_PASSWORD not set in .env")
 
     print("Connecting to Databricks Postgres...")
-    with psycopg.connect(DATABASE_URL, password=DATABASE_PASSWORD) as conn:
+    with psycopg.connect(DATABASE_URL, connect_timeout=15) as conn:
         with conn.cursor() as cur:
             cur.execute(CREATE_TABLE_SQL)
             conn.commit()
