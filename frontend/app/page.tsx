@@ -479,8 +479,24 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
   gameweek: number | null;
   squad: SquadPlayer[];
 }) {
-  const rows = ROW_ORDER.map((pos) => ({ pos, players: teamRows.filter((r) => r.position === pos && r.is_starter) }));
-  const bench = teamRows.filter((r) => !r.is_starter);
+  // When an optimization result exists, rearrange the pitch to show the
+  // optimal XI grouped by position (per the new formation), with subbed-out
+  // players moved to the bench. Otherwise show the original lineup.
+  const displayRows: { pos: string; players: TeamRow[] }[] = optResult
+    ? ROW_ORDER.map((pos) => ({
+        pos,
+        players: optResult.xi
+          .filter((p) => p.pos === pos)
+          .map((p) => teamRows.find((r) => r.player_name === p.name))
+          .filter((r): r is TeamRow => !!r),
+      }))
+    : ROW_ORDER.map((pos) => ({ pos, players: teamRows.filter((r) => r.position === pos && r.is_starter) }));
+
+  const bench = optResult
+    ? optResult.bench
+        .map((p) => teamRows.find((r) => r.player_name === p.name))
+        .filter((r): r is TeamRow => !!r)
+    : teamRows.filter((r) => !r.is_starter);
 
   return (
     <div
@@ -494,7 +510,7 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
         Gameweek {gameweek} · Formation {optResult?.formation ?? "—"}
       </div>
       <div className="flex flex-col gap-2 px-3 pb-3">
-        {rows.map(({ pos, players }) => (
+        {displayRows.map(({ pos, players }) => (
           <div key={pos} className={`rounded-lg border ${ROW_BG[pos]} px-2 py-3`}>
             <div className="flex justify-center gap-2 flex-wrap">
               {players.length === 0 ? (
@@ -505,8 +521,8 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
                     key={r.player_id}
                     row={r}
                     squad={squad}
-                    onBench={!r.is_starter}
-                    isOptXI={optResult?.xi.some((p) => p.name === r.player_name) ?? false}
+                    onBench={false}
+                    isOptXI={true}
                     isCaptain={optResult ? optResult.captain === r.player_name : r.is_captain}
                     isVice={optResult ? optResult.viceCaptain === r.player_name : r.is_vice_captain}
                   />
@@ -525,7 +541,7 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
                 squad={squad}
                 onBench
                 isOptXI={false}
-                dimmed={optResult?.bench.some((p) => p.name === r.player_name) ?? false}
+                dimmed={!!optResult}
                 isCaptain={false}
                 isVice={false}
               />
