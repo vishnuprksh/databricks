@@ -317,3 +317,62 @@ export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | n
     gain: best.total - currentTotal,
   };
 }
+
+export function findBestTransfer(
+  squad: SquadPlayer[],
+  predictions: PredictionRow[],
+  stats: Record<string, StatsRow>,
+  bank: number,
+  squadNames: string[]
+): Suggestion | null {
+  const current = optimizeStartingEleven(squad);
+  if (!current) return null;
+
+  const clubCount: Record<string, number> = {};
+  for (const player of squad) clubCount[player.club] = (clubCount[player.club] ?? 0) + 1;
+  const squadNamesSet = new Set(squadNames);
+  let best: Suggestion | null = null;
+
+  for (const outgoing of squad.filter((player) => player.starter)) {
+    const replacements = findReplacements(
+      outgoing.pos,
+      outgoing.sellPrice,
+      outgoing.club,
+      clubCount,
+      bank,
+      predictions,
+      squadNamesSet,
+      new Set<string>(),
+      stats,
+      false
+    );
+
+    for (const incoming of replacements) {
+      const incomingPlayer: SquadPlayer = {
+        name: incoming.name,
+        pos: outgoing.pos,
+        nowPrice: incoming.price,
+        sellPrice: incoming.price,
+        pred: incoming.pred,
+        starter: outgoing.starter,
+        club: incoming.club,
+      };
+      const candidateSquad = squad.map((player) => player.name === outgoing.name ? incomingPlayer : player);
+      const candidate = optimizeStartingEleven(candidateSquad);
+      if (!candidate) continue;
+
+      const improvement = candidate.totalPred - current.totalPred;
+      if (!best || improvement > best.improvement) {
+        best = {
+          out: outgoing,
+          in: incoming,
+          improvement,
+          alternatives: [],
+          transferLabel: "BEST XI TRANSFER",
+        };
+      }
+    }
+  }
+
+  return best && best.improvement > 0 ? best : null;
+}

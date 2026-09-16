@@ -8,10 +8,10 @@
       "app_page_pos_colors",
       "app_page_posbadge",
       "app_page_stat",
-      "lib_db_predictionrow",
       "lib_suggestions",
       "lib_suggestions_buildsquadwithpred",
       "lib_suggestions_computesellprices",
+      "lib_suggestions_findbesttransfer",
       "lib_suggestions_findreplacements",
       "lib_suggestions_generatesuggestions",
       "lib_suggestions_optimizeresult",
@@ -23,8 +23,7 @@
       "lib_suggestions_statsrow",
       "lib_suggestions_suggestion",
       "lib_suggestions_transferrecord",
-      "lib_suggestions_valid_formations",
-      "ref_react"
+      "lib_suggestions_valid_formations"
     ],
     "1": [
       "app_layout",
@@ -41,6 +40,7 @@
       "ref_autoprefixer",
       "ref_next",
       "ref_postcss",
+      "ref_react",
       "ref_react_dom",
       "ref_tailwindcss",
       "ref_types_node",
@@ -96,6 +96,7 @@
       "lib_db_getpool",
       "lib_db_gwprediction",
       "lib_db_playerrow",
+      "lib_db_predictionrow",
       "ref_pg"
     ],
     "5": [
@@ -139,11 +140,11 @@
     ]
   },
   "cohesion": {
-    "0": 0.11231884057971014,
-    "1": 0.1,
+    "0": 0.1422924901185771,
+    "1": 0.09523809523809523,
     "2": 0.10526315789473684,
     "3": 0.2564102564102564,
-    "4": 0.25757575757575757,
+    "4": 0.23076923076923078,
     "5": 0.25,
     "6": 0.3333333333333333,
     "7": 0.4,
@@ -169,13 +170,18 @@
       "degree": 5
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
-      "degree": 4
-    },
-    {
       "id": "app_page_home",
       "label": "Home()",
+      "degree": 5
+    },
+    {
+      "id": "lib_suggestions_findbesttransfer",
+      "label": "findBestTransfer()",
+      "degree": 5
+    },
+    {
+      "id": "lib_db_fetchplayers",
+      "label": "fetchPlayers()",
       "degree": 4
     },
     {
@@ -184,24 +190,19 @@
       "degree": 4
     },
     {
-      "id": "lib_db_fetchplayers",
-      "label": "fetchPlayers()",
+      "id": "package_scripts",
+      "label": "scripts",
       "degree": 4
     },
     {
-      "id": "lib_fpl_teamrow",
-      "label": "TeamRow",
-      "degree": 3
+      "id": "lib_suggestions_generatesuggestions",
+      "label": "generateSuggestions()",
+      "degree": 4
     },
     {
-      "id": "app_api_bootstrap_route_get",
-      "label": "GET()",
-      "degree": 3
-    },
-    {
-      "id": "lib_fpl_choosegameweek",
-      "label": "chooseGameweek()",
-      "degree": 3
+      "id": "lib_suggestions_optimizestartingeleven",
+      "label": "optimizeStartingEleven()",
+      "degree": 4
     }
   ],
   "surprises": [
