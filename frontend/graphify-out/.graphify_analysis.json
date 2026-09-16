@@ -26,9 +26,9 @@
       "lib_suggestions_valid_formations"
     ],
     "1": [
-      "app_layout",
-      "app_layout_metadata",
-      "app_layout_rootlayout",
+      "dbtest",
+      "dbtest_fs",
+      "dbtest_pool",
       "package",
       "package_name",
       "package_private",
@@ -38,9 +38,8 @@
       "package_scripts_start",
       "package_version",
       "ref_autoprefixer",
-      "ref_next",
+      "ref_pg",
       "ref_postcss",
-      "ref_react",
       "ref_react_dom",
       "ref_tailwindcss",
       "ref_types_node",
@@ -70,6 +69,23 @@
       "tsconfig_include"
     ],
     "3": [
+      "app_api_data_route",
+      "app_api_data_route_get",
+      "app_players_page",
+      "app_players_page_playerspage",
+      "app_players_page_pos_colors",
+      "app_players_page_posbadge",
+      "app_players_page_sortkey",
+      "lib_db",
+      "lib_db_fetchplayers",
+      "lib_db_fetchpredictions",
+      "lib_db_getpool",
+      "lib_db_gwprediction",
+      "lib_db_playerrow",
+      "lib_db_predictionrow",
+      "ref_react"
+    ],
+    "4": [
       "app_api_bootstrap_route",
       "app_api_bootstrap_route_get",
       "app_api_manager_route",
@@ -83,21 +99,6 @@
       "lib_fpl_fetchfpljson",
       "lib_fpl_headers",
       "lib_fpl_teamrow"
-    ],
-    "4": [
-      "app_api_data_route",
-      "app_api_data_route_get",
-      "dbtest",
-      "dbtest_fs",
-      "dbtest_pool",
-      "lib_db",
-      "lib_db_fetchplayers",
-      "lib_db_fetchpredictions",
-      "lib_db_getpool",
-      "lib_db_gwprediction",
-      "lib_db_playerrow",
-      "lib_db_predictionrow",
-      "ref_pg"
     ],
     "5": [
       "package_devdependencies",
@@ -125,33 +126,40 @@
       "package_dependencies_react_dom"
     ],
     "8": [
+      "app_layout",
+      "app_layout_metadata",
+      "app_layout_rootlayout",
+      "ref_next"
+    ],
+    "9": [
       "next_config",
       "next_config_nextconfig"
     ],
-    "9": [
+    "10": [
       "next_env_d",
       "next_env_d_rationale_4"
     ],
-    "10": [
+    "11": [
       "postcss_config"
     ],
-    "11": [
+    "12": [
       "tailwind_config"
     ]
   },
   "cohesion": {
     "0": 0.1422924901185771,
-    "1": 0.09523809523809523,
+    "1": 0.1,
     "2": 0.10526315789473684,
-    "3": 0.2564102564102564,
-    "4": 0.23076923076923078,
+    "3": 0.20952380952380953,
+    "4": 0.2564102564102564,
     "5": 0.25,
     "6": 0.3333333333333333,
     "7": 0.4,
-    "8": 1.0,
+    "8": 0.5,
     "9": 1.0,
     "10": 1.0,
-    "11": 1.0
+    "11": 1.0,
+    "12": 1.0
   },
   "gods": [
     {
@@ -180,6 +188,11 @@
       "degree": 5
     },
     {
+      "id": "lib_db_predictionrow",
+      "label": "PredictionRow",
+      "degree": 4
+    },
+    {
       "id": "lib_suggestions_generatesuggestions",
       "label": "generateSuggestions()",
       "degree": 4
@@ -197,11 +210,6 @@
     {
       "id": "lib_db_fetchpredictions",
       "label": "fetchPredictions()",
-      "degree": 4
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
       "degree": 4
     }
   ],
@@ -265,23 +273,23 @@
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `react` connect `package.json` to `suggestions.ts`?",
-      "why": "High betweenness centrality (0.168) - this node is a cross-community bridge."
+      "question": "Why does `react` connect `db.ts` to `suggestions.ts`, `package.json`?",
+      "why": "High betweenness centrality (0.186) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `pg` connect `db.ts` to `package.json`?",
-      "why": "High betweenness centrality (0.104) - this node is a cross-community bridge."
+      "question": "Why does `pg` connect `package.json` to `db.ts`?",
+      "why": "High betweenness centrality (0.094) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
       "question": "Why does `devDependencies` connect `devDependencies` to `package.json`?",
-      "why": "High betweenness centrality (0.086) - this node is a cross-community bridge."
+      "why": "High betweenness centrality (0.084) - this node is a cross-community bridge."
     },
     {
       "type": "isolated_nodes",
       "question": "What connects `Bootstrap`, `Manager`, `Replacement` to the rest of the system?",
-      "why": "61 weakly-connected nodes found - possible documentation gaps or missing edges."
+      "why": "62 weakly-connected nodes found - possible documentation gaps or missing edges."
     },
     {
       "type": "low_cohesion",
@@ -291,7 +299,7 @@
     {
       "type": "low_cohesion",
       "question": "Should `package.json` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected."
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
     },
     {
       "type": "low_cohesion",
