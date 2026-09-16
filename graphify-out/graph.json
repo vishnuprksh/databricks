@@ -30,19 +30,6 @@
       "source_location": "L7"
     },
     {
-      "id": "frontend_lib_db_predictionrow",
-      "label": "PredictionRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "Squad Suggestions UI",
-      "file_type": "code",
-      "norm_label": "predictionrow",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L48"
-    },
-    {
       "id": "frontend_lib_suggestions_optimizeresult",
       "label": "OptimizeResult",
       "_callable": true,
@@ -121,6 +108,18 @@
       "source_location": "L67"
     },
     {
+      "id": "frontend_lib_db_predictionrow",
+      "label": "PredictionRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "predictionrow",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L42"
+    },
+    {
       "id": "frontend_lib_fpl_teamrow",
       "label": "TeamRow",
       "_callable": true,
@@ -140,11 +139,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "Database Layer",
       "file_type": "code",
       "norm_label": "gwprediction",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L46"
+      "source_location": "L40"
     },
     {
       "id": "frontend_lib_db_playerrow",
@@ -153,11 +151,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "Database Layer",
       "file_type": "code",
       "norm_label": "playerrow",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L27"
+      "source_location": "L21"
     },
     {
       "id": "frontend_app_page_home",
@@ -369,11 +366,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "Database Layer",
       "file_type": "code",
       "norm_label": "fetchplayers()",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L73"
+      "source_location": "L67"
     },
     {
       "id": "frontend_lib_db_fetchpredictions",
@@ -381,11 +377,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "Database Layer",
       "file_type": "code",
       "norm_label": "fetchpredictions()",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L58"
+      "source_location": "L52"
     },
     {
       "id": "frontend_lib_db_getpool",
@@ -393,7 +388,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "Database Layer",
       "file_type": "code",
       "norm_label": "getpool()",
       "source_file": "frontend/lib/db.ts",
@@ -448,16 +442,37 @@
       "source_location": "L347"
     },
     {
-      "id": "research_create_table_main",
+      "id": "research_connect_database_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "Next.js Config",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "research/connect_database.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "research_connect_database_redact_url",
+      "label": "redact_url()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "file_type": "code",
+      "norm_label": "redact_url()",
+      "source_file": "research/connect_database.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "research_create_table_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "research/create_table.py",
-      "source_location": "L26"
+      "source_location": "L22"
     },
     {
       "id": "frontend_app_page",
@@ -735,10 +750,32 @@
       "source_location": "L23"
     },
     {
+      "id": "frontend_next_config",
+      "label": "next.config.js",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "DB Table Creation",
+      "file_type": "code",
+      "norm_label": "next.config.js",
+      "source_file": "frontend/next.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_next_config_nextconfig",
+      "label": "nextConfig",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "DB Table Creation",
+      "file_type": "code",
+      "norm_label": "nextconfig",
+      "source_file": "frontend/next.config.js",
+      "source_location": "L2"
+    },
+    {
       "id": "frontend_next_env_d",
       "label": "next-env.d.ts",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "community_name": "Next Env Types",
       "file_type": "code",
       "norm_label": "next-env.d.ts",
@@ -749,7 +786,7 @@
       "id": "frontend_next_env_d_rationale_4",
       "label": "NOTE: This file should not be edited",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "community_name": "Next Env Types",
       "file_type": "rationale",
       "norm_label": "note: this file should not be edited",
@@ -760,7 +797,7 @@
       "id": "research_test_static_creds",
       "label": "test_static_creds.py",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "community_name": "Tailwind Config",
       "file_type": "code",
       "norm_label": "test_static_creds.py",
@@ -771,7 +808,7 @@
       "id": "research_test_static_creds_rationale_1",
       "label": "Test non-expiring username/password credentials against Databricks Postgres.",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "community_name": "Tailwind Config",
       "file_type": "rationale",
       "norm_label": "test non-expiring username/password credentials against databricks postgres.",
@@ -782,7 +819,7 @@
       "id": "frontend_postcss_config",
       "label": "postcss.config.js",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "community_name": "Credential Tests",
       "file_type": "code",
       "norm_label": "postcss.config.js",
@@ -793,7 +830,7 @@
       "id": "frontend_tailwind_config",
       "label": "tailwind.config.js",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "PostCSS Config",
       "file_type": "code",
       "norm_label": "tailwind.config.js",
@@ -804,7 +841,7 @@
       "id": "research_inspect_fpl",
       "label": "_inspect_fpl.py",
       "_origin": "ast",
-      "community": 14,
+      "community": 15,
       "community_name": "FPL Inspection Script",
       "file_type": "code",
       "norm_label": "_inspect_fpl.py",
@@ -1131,17 +1168,6 @@
       "source_location": "L9"
     },
     {
-      "id": "frontend_lib_db",
-      "label": "db.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "Database Layer",
-      "file_type": "code",
-      "norm_label": "db.ts",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "ref_pg",
       "label": "pg",
       "_origin": "ast",
@@ -1151,6 +1177,16 @@
       "norm_label": "pg",
       "source_file": "frontend/package.json",
       "source_location": "L12"
+    },
+    {
+      "id": "frontend_lib_db",
+      "label": "db.ts",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "db.ts",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L1"
     },
     {
       "id": "research_fpl_team_manager",
@@ -1351,11 +1387,40 @@
       "source_location": "L14"
     },
     {
+      "id": "research_connect_database",
+      "label": "connect_database.py",
+      "_origin": "ast",
+      "community": 8,
+      "file_type": "code",
+      "norm_label": "connect_database.py",
+      "source_file": "research/connect_database.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "research_connect_database_rationale_1",
+      "label": "Check connectivity to a PostgreSQL-compatible database.",
+      "_origin": "ast",
+      "community": 8,
+      "file_type": "rationale",
+      "norm_label": "check connectivity to a postgresql-compatible database.",
+      "source_file": "research/connect_database.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "research_connect_database_rationale_12",
+      "label": "Return a connection URL with credentials and sensitive query values hidden.",
+      "_origin": "ast",
+      "community": 8,
+      "file_type": "rationale",
+      "norm_label": "return a connection url with credentials and sensitive query values hidden.",
+      "source_file": "research/connect_database.py",
+      "source_location": "L12"
+    },
+    {
       "id": "research_create_table",
       "label": "create_table.py",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "Next.js Config",
+      "community": 9,
       "file_type": "code",
       "norm_label": "create_table.py",
       "source_file": "research/create_table.py",
@@ -1365,34 +1430,11 @@
       "id": "research_create_table_rationale_1",
       "label": "Connect to Databricks Postgres and create a table.",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "Next.js Config",
+      "community": 9,
       "file_type": "rationale",
       "norm_label": "connect to databricks postgres and create a table.",
       "source_file": "research/create_table.py",
       "source_location": "L1"
-    },
-    {
-      "id": "frontend_next_config",
-      "label": "next.config.js",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "DB Table Creation",
-      "file_type": "code",
-      "norm_label": "next.config.js",
-      "source_file": "frontend/next.config.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_next_config_nextconfig",
-      "label": "nextConfig",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "DB Table Creation",
-      "file_type": "code",
-      "norm_label": "nextconfig",
-      "source_file": "frontend/next.config.js",
-      "source_location": "L2"
     }
   ],
   "links": [
@@ -1501,7 +1543,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L74",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -1513,7 +1555,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L59",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -1526,6 +1568,18 @@
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
       "source_location": "L175",
+      "weight": 1.0
+    },
+    {
+      "source": "research_connect_database_main",
+      "target": "research_connect_database_redact_url",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "research/connect_database.py",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -2140,7 +2194,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L27",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -2151,7 +2205,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L46",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -2162,7 +2216,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L48",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -2173,7 +2227,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L58",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -2184,7 +2238,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L73",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -2848,6 +2902,28 @@
       "weight": 1.0
     },
     {
+      "source": "research_connect_database",
+      "target": "research_connect_database_redact_url",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/connect_database.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "research_connect_database",
+      "target": "research_connect_database_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/connect_database.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
       "source": "research_create_table",
       "target": "research_create_table_main",
       "relation": "contains",
@@ -2855,7 +2931,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "research/create_table.py",
-      "source_location": "L26",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -2911,6 +2987,28 @@
       "confidence_score": 1.0,
       "source_file": "frontend/next-env.d.ts",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "research_connect_database_rationale_1",
+      "target": "research_connect_database",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/connect_database.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "research_connect_database_rationale_12",
+      "target": "research_connect_database_redact_url",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "research/connect_database.py",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -2981,5 +3079,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a1d552aaae3b0da86530b79d5f176949164ec57a"
+  "built_at_commit": "c5b9fbfa00c5904e8b1f7852a7258254f4a286e9"
 }

@@ -133,8 +133,8 @@ export default function Home() {
       }
       setStats(statsMap);
 
-      const predByName: Record<string, any> = {};
-      for (const p of data.predictions) predByName[p.player_name] = p;
+      const predById: Record<number, any> = {};
+      for (const p of data.predictions) predById[p.player_id] = p;
 
       // Sell prices from transfer history
       const purchasePrices: Record<number, number> = {};
@@ -154,7 +154,7 @@ export default function Home() {
         pos: r.position,
         nowPrice: r.price,
         sellPrice: sell[r.player_name] ?? r.price,
-        pred: predByName[r.player_name]?.avg_prob_gt_6 ?? null,
+        pred: predById[r.player_id]?.avg_prob_gt_6 ?? null,
         starter: r.is_starter,
         club: r.club,
       }));

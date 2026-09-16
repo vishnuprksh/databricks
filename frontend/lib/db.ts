@@ -7,16 +7,10 @@ declare global {
 
 export function getPool(): Pool {
   if (!global._fplPool) {
-    const host = process.env.PGHOST || "ep-quiet-wind-d8p01eiy.database.us-east-2.cloud.databricks.com";
-    const user = process.env.PGUSER || "vishnuprksh";
-    const password = process.env.PGPASSWORD || process.env.DATABASE_PASSWORD;
-    const database = process.env.PGDATABASE || "databricks_postgres";
-    if (!password) throw new Error("PGPASSWORD is not set");
+    const databaseUrl = process.env.DATABASE_URL;
+    if (!databaseUrl) throw new Error("DATABASE_URL is not set");
     global._fplPool = new Pool({
-      host,
-      user,
-      password,
-      database,
+      connectionString: databaseUrl,
       ssl: { rejectUnauthorized: false },
       max: 5,
     });

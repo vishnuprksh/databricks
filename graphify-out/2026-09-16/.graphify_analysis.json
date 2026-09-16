@@ -127,36 +127,29 @@
       "frontend_package_dependencies_react_dom"
     ],
     "8": [
-      "research_connect_database",
-      "research_connect_database_main",
-      "research_connect_database_rationale_1",
-      "research_connect_database_rationale_12",
-      "research_connect_database_redact_url"
-    ],
-    "9": [
       "research_create_table",
       "research_create_table_main",
       "research_create_table_rationale_1"
     ],
-    "10": [
+    "9": [
       "frontend_next_config",
       "frontend_next_config_nextconfig"
     ],
-    "11": [
+    "10": [
       "frontend_next_env_d",
       "frontend_next_env_d_rationale_4"
     ],
-    "12": [
+    "11": [
       "research_test_static_creds",
       "research_test_static_creds_rationale_1"
     ],
-    "13": [
+    "12": [
       "frontend_postcss_config"
     ],
-    "14": [
+    "13": [
       "frontend_tailwind_config"
     ],
-    "15": [
+    "14": [
       "research_inspect_fpl"
     ]
   },
@@ -169,14 +162,13 @@
     "5": 0.2222222222222222,
     "6": 0.25,
     "7": 0.4,
-    "8": 0.5,
-    "9": 0.6666666666666666,
+    "8": 0.6666666666666666,
+    "9": 1.0,
     "10": 1.0,
     "11": 1.0,
     "12": 1.0,
     "13": 1.0,
-    "14": 1.0,
-    "15": 1.0
+    "14": 1.0
   },
   "gods": [
     {
@@ -195,8 +187,8 @@
       "degree": 4
     },
     {
-      "id": "frontend_package_scripts",
-      "label": "scripts",
+      "id": "frontend_lib_db_fetchplayers",
+      "label": "fetchPlayers()",
       "degree": 4
     },
     {
@@ -205,8 +197,8 @@
       "degree": 4
     },
     {
-      "id": "frontend_lib_db_fetchplayers",
-      "label": "fetchPlayers()",
+      "id": "frontend_package_scripts",
+      "label": "scripts",
       "degree": 4
     },
     {
@@ -287,8 +279,41 @@
       "why": "cross-file semantic connection"
     }
   ],
-  "tokens": {
-    "input": 0,
-    "output": 0
-  }
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `react` connect `Squad Suggestions UI` to `App Layout & Package`?",
+      "why": "High betweenness centrality (0.137) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `pg` connect `Database Layer` to `App Layout & Package`?",
+      "why": "High betweenness centrality (0.097) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `devDependencies` connect `Dev Dependencies` to `App Layout & Package`?",
+      "why": "High betweenness centrality (0.074) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Bootstrap`, `Manager`, `Replacement` to the rest of the system?",
+      "why": "57 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Squad Suggestions UI` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11231884057971014 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `App Layout & Package` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `TypeScript Config` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected."
+    }
+  ]
 }
