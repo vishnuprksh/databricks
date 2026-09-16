@@ -36,10 +36,10 @@
     "semantic_hash": "a7f01cb538953de33f6de36f781e8666"
   },
   "app/page.tsx": {
-    "mtime": 1789562000.7903798,
-    "seen": 1789562048.207422,
-    "ast_hash": "8ebf6b55864b2c4299ddcf2c984251a1",
-    "semantic_hash": ""
+    "mtime": 1789563708.3534105,
+    "seen": 1789563955.7896347,
+    "ast_hash": "4607fee31cfedf53dda82b8fb3cd365a",
+    "semantic_hash": "4607fee31cfedf53dda82b8fb3cd365a"
   },
   "lib/db.ts": {
     "mtime": 1789557084.1042943,
@@ -54,10 +54,10 @@
     "semantic_hash": "c41abc0b47f898335012df11ae722716"
   },
   "lib/suggestions.ts": {
-    "mtime": 1789561924.0373783,
-    "seen": 1789562048.2074325,
+    "mtime": 1789562863.8253953,
+    "seen": 1789563955.789709,
     "ast_hash": "7c500d83dc4c29cbd41921303bdf7be6",
-    "semantic_hash": ""
+    "semantic_hash": "7c500d83dc4c29cbd41921303bdf7be6"
   },
   "next-env.d.ts": {
     "mtime": 1789322245.7171657,
@@ -100,5 +100,11 @@
     "seen": 1789560957.2412856,
     "ast_hash": "00c26800d7c4ce53fa0b2896a6c89735",
     "semantic_hash": ""
+  },
+  "app/players/page.tsx": {
+    "mtime": 1789563708.7014105,
+    "seen": 1789563955.7896376,
+    "ast_hash": "dc34630b4a7a7503f26a76de21ff2452",
+    "semantic_hash": "dc34630b4a7a7503f26a76de21ff2452"
   }
 }

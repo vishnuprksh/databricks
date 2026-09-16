@@ -108,17 +108,17 @@
       "source_location": "L67"
     },
     {
-      "id": "lib_fpl_teamrow",
-      "label": "TeamRow",
+      "id": "app_players_page_sortkey",
+      "label": "SortKey",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "fpl.ts",
+      "community_name": "db.ts",
       "file_type": "code",
-      "norm_label": "teamrow",
-      "source_file": "lib/fpl.ts",
-      "source_location": "L36"
+      "norm_label": "sortkey",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L6"
     },
     {
       "id": "lib_db_gwprediction",
@@ -126,7 +126,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "gwprediction",
@@ -139,7 +139,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "playerrow",
@@ -152,12 +152,25 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "predictionrow",
       "source_file": "lib/db.ts",
       "source_location": "L42"
+    },
+    {
+      "id": "lib_fpl_teamrow",
+      "label": "TeamRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "teamrow",
+      "source_file": "lib/fpl.ts",
+      "source_location": "L36"
     },
     {
       "id": "app_page_home",
@@ -193,7 +206,7 @@
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/page.tsx",
-      "source_location": "L488"
+      "source_location": "L493"
     },
     {
       "id": "lib_suggestions_buildsquadwithpred",
@@ -280,95 +293,11 @@
       "source_location": "L48"
     },
     {
-      "id": "app_layout_rootlayout",
-      "label": "RootLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "rootlayout()",
-      "source_file": "app/layout.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "app_api_bootstrap_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "fpl.ts",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/bootstrap/route.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "app_api_manager_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "fpl.ts",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/manager/route.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "app_api_picks_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "fpl.ts",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "app/api/picks/route.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "lib_fpl_buildteamrows",
-      "label": "buildTeamRows()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "fpl.ts",
-      "file_type": "code",
-      "norm_label": "buildteamrows()",
-      "source_file": "lib/fpl.ts",
-      "source_location": "L54"
-    },
-    {
-      "id": "lib_fpl_choosegameweek",
-      "label": "chooseGameweek()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "fpl.ts",
-      "file_type": "code",
-      "norm_label": "choosegameweek()",
-      "source_file": "lib/fpl.ts",
-      "source_location": "L18"
-    },
-    {
-      "id": "lib_fpl_fetchfpljson",
-      "label": "fetchFplJson()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "fpl.ts",
-      "file_type": "code",
-      "norm_label": "fetchfpljson()",
-      "source_file": "lib/fpl.ts",
-      "source_location": "L10"
-    },
-    {
       "id": "app_api_data_route_get",
       "label": "GET()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "get()",
@@ -376,11 +305,35 @@
       "source_location": "L4"
     },
     {
+      "id": "app_players_page_playerspage",
+      "label": "PlayersPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "playerspage()",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L19"
+    },
+    {
+      "id": "app_players_page_posbadge",
+      "label": "PosBadge()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "posbadge()",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L15"
+    },
+    {
       "id": "lib_db_fetchplayers",
       "label": "fetchPlayers()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "fetchplayers()",
@@ -392,7 +345,7 @@
       "label": "fetchPredictions()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "fetchpredictions()",
@@ -404,7 +357,7 @@
       "label": "getPool()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "community_name": "db.ts",
       "file_type": "code",
       "norm_label": "getpool()",
@@ -412,13 +365,97 @@
       "source_location": "L8"
     },
     {
+      "id": "app_api_bootstrap_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/bootstrap/route.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "app_api_manager_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/manager/route.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "app_api_picks_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "app/api/picks/route.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_fpl_buildteamrows",
+      "label": "buildTeamRows()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "buildteamrows()",
+      "source_file": "lib/fpl.ts",
+      "source_location": "L54"
+    },
+    {
+      "id": "lib_fpl_choosegameweek",
+      "label": "chooseGameweek()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "choosegameweek()",
+      "source_file": "lib/fpl.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "lib_fpl_fetchfpljson",
+      "label": "fetchFplJson()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "fpl.ts",
+      "file_type": "code",
+      "norm_label": "fetchfpljson()",
+      "source_file": "lib/fpl.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "app_layout_rootlayout",
+      "label": "RootLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "layout.tsx",
+      "file_type": "code",
+      "norm_label": "rootlayout()",
+      "source_file": "app/layout.tsx",
+      "source_location": "L9"
+    },
+    {
       "id": "app_page",
-      "label": "page.tsx",
+      "label": "app/page.tsx",
       "_origin": "ast",
       "community": 0,
       "community_name": "suggestions.ts",
       "file_type": "code",
-      "norm_label": "page.tsx",
+      "norm_label": "app/page.tsx",
       "source_file": "app/page.tsx",
       "source_location": "L1"
     },
@@ -467,26 +504,37 @@
       "source_location": "L233"
     },
     {
-      "id": "app_layout",
-      "label": "layout.tsx",
+      "id": "dbtest",
+      "label": "_dbtest.js",
       "_origin": "ast",
       "community": 1,
       "community_name": "package.json",
       "file_type": "code",
-      "norm_label": "layout.tsx",
-      "source_file": "app/layout.tsx",
+      "norm_label": "_dbtest.js",
+      "source_file": "_dbtest.js",
       "source_location": "L1"
     },
     {
-      "id": "app_layout_metadata",
-      "label": "metadata",
+      "id": "dbtest_fs",
+      "label": "fs",
       "_origin": "ast",
       "community": 1,
       "community_name": "package.json",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "app/layout.tsx",
-      "source_location": "L4"
+      "norm_label": "fs",
+      "source_file": "_dbtest.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "dbtest_pool",
+      "label": "{ Pool }",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "{ pool }",
+      "source_file": "_dbtest.js",
+      "source_location": "L9"
     },
     {
       "id": "package",
@@ -588,15 +636,15 @@
       "source_location": "L20"
     },
     {
-      "id": "ref_next",
-      "label": "next",
+      "id": "ref_pg",
+      "label": "pg",
       "_origin": "ast",
       "community": 1,
       "community_name": "package.json",
       "file_type": "concept",
-      "norm_label": "next",
+      "norm_label": "pg",
       "source_file": "package.json",
-      "source_location": "L11"
+      "source_location": "L12"
     },
     {
       "id": "ref_postcss",
@@ -608,17 +656,6 @@
       "norm_label": "postcss",
       "source_file": "package.json",
       "source_location": "L21"
-    },
-    {
-      "id": "ref_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "package.json",
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L13"
     },
     {
       "id": "ref_react_dom",
@@ -687,10 +724,32 @@
       "source_location": "L23"
     },
     {
+      "id": "next_env_d",
+      "label": "next-env.d.ts",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "next-env.d.ts",
+      "file_type": "code",
+      "norm_label": "next-env.d.ts",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "next_env_d_rationale_4",
+      "label": "NOTE: This file should not be edited",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "next-env.d.ts",
+      "file_type": "rationale",
+      "norm_label": "note: this file should not be edited",
+      "source_file": "next-env.d.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "postcss_config",
       "label": "postcss.config.js",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "community_name": "postcss.config.js",
       "file_type": "code",
       "norm_label": "postcss.config.js",
@@ -698,21 +757,10 @@
       "source_location": "L1"
     },
     {
-      "id": "tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "tailwind.config.js",
-      "confidence": "EXTRACTED",
-      "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "tailwindcss"
-    },
-    {
       "id": "tailwind_config",
       "label": "tailwind.config.js",
       "_origin": "ast",
-      "community": 11,
+      "community": 12,
       "community_name": "tailwind.config.js",
       "file_type": "code",
       "norm_label": "tailwind.config.js",
@@ -929,10 +977,65 @@
       "source_location": "L31"
     },
     {
+      "id": "app_api_data_route",
+      "label": "data/route.ts",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "data/route.ts",
+      "source_file": "app/api/data/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_players_page",
+      "label": "players/page.tsx",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "players/page.tsx",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_players_page_pos_colors",
+      "label": "POS_COLORS",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "pos_colors",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "lib_db",
+      "label": "db.ts",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "code",
+      "norm_label": "db.ts",
+      "source_file": "lib/db.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "db.ts",
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
       "id": "app_api_bootstrap_route",
       "label": "bootstrap/route.ts",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "fpl.ts",
       "file_type": "code",
       "norm_label": "bootstrap/route.ts",
@@ -943,7 +1046,7 @@
       "id": "app_api_manager_route",
       "label": "manager/route.ts",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "fpl.ts",
       "file_type": "code",
       "norm_label": "manager/route.ts",
@@ -954,7 +1057,7 @@
       "id": "app_api_picks_route",
       "label": "picks/route.ts",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "fpl.ts",
       "file_type": "code",
       "norm_label": "picks/route.ts",
@@ -965,7 +1068,7 @@
       "id": "lib_fpl",
       "label": "fpl.ts",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "fpl.ts",
       "file_type": "code",
       "norm_label": "fpl.ts",
@@ -976,7 +1079,7 @@
       "id": "lib_fpl_base_url",
       "label": "BASE_URL",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "fpl.ts",
       "file_type": "code",
       "norm_label": "base_url",
@@ -987,78 +1090,12 @@
       "id": "lib_fpl_headers",
       "label": "HEADERS",
       "_origin": "ast",
-      "community": 3,
+      "community": 4,
       "community_name": "fpl.ts",
       "file_type": "code",
       "norm_label": "headers",
       "source_file": "lib/fpl.ts",
       "source_location": "L5"
-    },
-    {
-      "id": "app_api_data_route",
-      "label": "data/route.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "db.ts",
-      "file_type": "code",
-      "norm_label": "data/route.ts",
-      "source_file": "app/api/data/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "dbtest",
-      "label": "_dbtest.js",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "db.ts",
-      "file_type": "code",
-      "norm_label": "_dbtest.js",
-      "source_file": "_dbtest.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "dbtest_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "db.ts",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "_dbtest.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "dbtest_pool",
-      "label": "{ Pool }",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "db.ts",
-      "file_type": "code",
-      "norm_label": "{ pool }",
-      "source_file": "_dbtest.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "lib_db",
-      "label": "db.ts",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "db.ts",
-      "file_type": "code",
-      "norm_label": "db.ts",
-      "source_file": "lib/db.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_pg",
-      "label": "pg",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "db.ts",
-      "file_type": "concept",
-      "norm_label": "pg",
-      "source_file": "package.json",
-      "source_location": "L12"
     },
     {
       "id": "package_devdependencies",
@@ -1276,21 +1313,43 @@
       "source_location": "L14"
     },
     {
-      "id": "next",
+      "id": "app_layout",
+      "label": "layout.tsx",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "layout.tsx",
+      "file_type": "code",
+      "norm_label": "layout.tsx",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "layout.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "app/layout.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "ref_next",
       "label": "next",
       "_origin": "ast",
       "community": 8,
-      "community_name": "next.config.js",
-      "confidence": "EXTRACTED",
-      "file_type": "code",
+      "community_name": "layout.tsx",
+      "file_type": "concept",
       "norm_label": "next",
-      "source_file": "next"
+      "source_file": "package.json",
+      "source_location": "L11"
     },
     {
       "id": "next_config",
       "label": "next.config.js",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "community_name": "next.config.js",
       "file_type": "code",
       "norm_label": "next.config.js",
@@ -1301,34 +1360,12 @@
       "id": "next_config_nextconfig",
       "label": "nextConfig",
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "community_name": "next.config.js",
       "file_type": "code",
       "norm_label": "nextconfig",
       "source_file": "next.config.js",
       "source_location": "L2"
-    },
-    {
-      "id": "next_env_d",
-      "label": "next-env.d.ts",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "next-env.d.ts",
-      "file_type": "code",
-      "norm_label": "next-env.d.ts",
-      "source_file": "next-env.d.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "next_env_d_rationale_4",
-      "label": "NOTE: This file should not be edited",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "next-env.d.ts",
-      "file_type": "rationale",
-      "norm_label": "note: this file should not be edited",
-      "source_file": "next-env.d.ts",
-      "source_location": "L4"
     }
   ],
   "links": [
@@ -1694,6 +1731,30 @@
       "weight": 1.0
     },
     {
+      "source": "app_players_page",
+      "target": "lib_db_playerrow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_players_page",
+      "target": "lib_db_predictionrow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "lib_suggestions",
       "target": "lib_fpl_teamrow",
       "relation": "imports",
@@ -1962,6 +2023,31 @@
       "weight": 1.0
     },
     {
+      "source": "app_players_page",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_players_page",
+      "target": "lib_db",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L4",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
       "source": "dbtest",
       "target": "ref_pg",
       "relation": "imports_from",
@@ -2129,7 +2215,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L488",
+      "source_location": "L493",
       "weight": 1.0
     },
     {
@@ -2141,6 +2227,50 @@
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_players_page",
+      "target": "app_players_page_posbadge",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/players/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "app_players_page",
+      "target": "app_players_page_playerspage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/players/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "app_players_page",
+      "target": "app_players_page_sortkey",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/players/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_players_page",
+      "target": "app_players_page_pos_colors",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/players/page.tsx",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -2947,24 +3077,6 @@
       "weight": 1.0
     },
     {
-      "source": "next_config",
-      "target": "next",
-      "relation": "dynamic_import",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "next.config.js"
-    },
-    {
-      "source": "tailwind_config",
-      "target": "tailwindcss",
-      "relation": "dynamic_import",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tailwind.config.js"
-    },
-    {
       "source": "next_env_d_rationale_4",
       "target": "next_env_d",
       "relation": "rationale_for",
@@ -2977,5 +3089,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "be137e829dc74df12be0d2edd6199a782418f49b"
+  "built_at_commit": "f7bf2daa7b06c223eb5255081dd9e6207a37ae01"
 }

@@ -42,4 +42,11 @@ vercel --prod
 | `GET /api/picks?teamId=&gw=` | Squad picks + transfer history |
 | `GET /api/data` | `fpl.players` + `fpl.predictions` from Postgres |
 
+## Pages
+
+| Route | Purpose |
+|---|---|
+| `/` | Team manager, squad stats and transfer suggestions |
+| `/players` | Searchable player market with stats and predictions |
+
 Transfer suggestion logic lives in `lib/suggestions.ts` (port of the notebook's algorithm).
