@@ -30,14 +30,14 @@
     "semantic_hash": "bd6b74e57319de2e0850daae7cc6d6d3"
   },
   "app/layout.tsx": {
-    "mtime": 1789322264.9481666,
-    "seen": 1789325943.9877698,
-    "ast_hash": "a7f01cb538953de33f6de36f781e8666",
-    "semantic_hash": "a7f01cb538953de33f6de36f781e8666"
+    "mtime": 1789567939.7368908,
+    "seen": 1789568146.880054,
+    "ast_hash": "191adb86d998a3ed051f5d207b560955",
+    "semantic_hash": "191adb86d998a3ed051f5d207b560955"
   },
   "app/page.tsx": {
-    "mtime": 1789563708.3534105,
-    "seen": 1789563955.7896347,
+    "mtime": 1789563988.5464156,
+    "seen": 1789564217.6418972,
     "ast_hash": "4607fee31cfedf53dda82b8fb3cd365a",
     "semantic_hash": "4607fee31cfedf53dda82b8fb3cd365a"
   },
@@ -84,10 +84,10 @@
     "semantic_hash": "835cfcbb2d123f0abba7aabcff7176bd"
   },
   "tailwind.config.js": {
-    "mtime": 1789323202.64121,
-    "seen": 1789325943.9877815,
-    "ast_hash": "23d02b5949241b8738e39139e5a37aea",
-    "semantic_hash": "23d02b5949241b8738e39139e5a37aea"
+    "mtime": 1789568195.55088,
+    "seen": 1789568242.0879903,
+    "ast_hash": "a54e92dd174b6acefbd908f85ddbe379",
+    "semantic_hash": "a54e92dd174b6acefbd908f85ddbe379"
   },
   "tsconfig.json": {
     "mtime": 1789322264.9471664,
@@ -96,15 +96,27 @@
     "semantic_hash": "4170876238a64b499a7bd47f54f9f005"
   },
   "README.md": {
-    "mtime": 1789557084.0962944,
-    "seen": 1789560957.2412856,
-    "ast_hash": "00c26800d7c4ce53fa0b2896a6c89735",
+    "mtime": 1789563988.5464156,
+    "seen": 1789564217.6419373,
+    "ast_hash": "5234f7e83f5e2f716ad2f4e715a592b9",
     "semantic_hash": ""
   },
   "app/players/page.tsx": {
-    "mtime": 1789563708.7014105,
-    "seen": 1789563955.7896376,
+    "mtime": 1789563988.5464156,
+    "seen": 1789564217.6419005,
     "ast_hash": "dc34630b4a7a7503f26a76de21ff2452",
     "semantic_hash": "dc34630b4a7a7503f26a76de21ff2452"
+  },
+  "app/about/page.tsx": {
+    "mtime": 1789566620.3717418,
+    "seen": 1789568146.879812,
+    "ast_hash": "661b9c6df3a68739b88f0b5fa6b42a15",
+    "semantic_hash": "661b9c6df3a68739b88f0b5fa6b42a15"
+  },
+  "components/SiteHeader.tsx": {
+    "mtime": 1789568217.484879,
+    "seen": 1789568242.0877244,
+    "ast_hash": "d2bc2b7c97166fd725473ea6d05acc4c",
+    "semantic_hash": "d2bc2b7c97166fd725473ea6d05acc4c"
   }
 }

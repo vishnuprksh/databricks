@@ -116,34 +116,42 @@
       "readme_deploy_to_vercel",
       "readme_env_vars",
       "readme_fpl_team_manager_vercel_frontend",
+      "readme_pages",
       "readme_setup_local_dev"
     ],
     "7": [
+      "app_layout",
+      "app_layout_metadata",
+      "app_layout_rootlayout",
+      "components_siteheader",
+      "components_siteheader_siteheader",
+      "ref_next"
+    ],
+    "8": [
       "package_dependencies",
       "package_dependencies_next",
       "package_dependencies_pg",
       "package_dependencies_react",
       "package_dependencies_react_dom"
     ],
-    "8": [
-      "app_layout",
-      "app_layout_metadata",
-      "app_layout_rootlayout",
-      "ref_next"
-    ],
     "9": [
+      "app_about_page",
+      "app_about_page_aboutpage"
+    ],
+    "10": [
       "next_config",
       "next_config_nextconfig"
     ],
-    "10": [
+    "11": [
       "next_env_d",
       "next_env_d_rationale_4"
     ],
-    "11": [
-      "postcss_config"
-    ],
     "12": [
-      "tailwind_config"
+      "tailwind_config",
+      "tailwindcss"
+    ],
+    "13": [
+      "postcss_config"
     ]
   },
   "cohesion": {
@@ -153,13 +161,14 @@
     "3": 0.20952380952380953,
     "4": 0.2564102564102564,
     "5": 0.25,
-    "6": 0.3333333333333333,
+    "6": 0.2857142857142857,
     "7": 0.4,
-    "8": 0.5,
+    "8": 0.4,
     "9": 1.0,
     "10": 1.0,
     "11": 1.0,
-    "12": 1.0
+    "12": 1.0,
+    "13": 1.0
   },
   "gods": [
     {
@@ -175,7 +184,7 @@
     {
       "id": "readme_fpl_team_manager_vercel_frontend",
       "label": "FPL Team Manager \u2014 Vercel Frontend",
-      "degree": 5
+      "degree": 6
     },
     {
       "id": "app_page_home",
@@ -193,6 +202,16 @@
       "degree": 4
     },
     {
+      "id": "lib_suggestions_generatesuggestions",
+      "label": "generateSuggestions()",
+      "degree": 4
+    },
+    {
+      "id": "lib_suggestions_optimizestartingeleven",
+      "label": "optimizeStartingEleven()",
+      "degree": 4
+    },
+    {
       "id": "lib_db_fetchplayers",
       "label": "fetchPlayers()",
       "degree": 4
@@ -200,16 +219,6 @@
     {
       "id": "lib_db_fetchpredictions",
       "label": "fetchPredictions()",
-      "degree": 4
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "degree": 4
-    },
-    {
-      "id": "lib_suggestions_generatesuggestions",
-      "label": "generateSuggestions()",
       "degree": 4
     }
   ],
@@ -237,33 +246,33 @@
       "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
     },
     {
-      "source": "GET()",
-      "target": "chooseGameweek()",
+      "source": "Home()",
+      "target": "findBestTransfer()",
       "source_files": [
-        "app/api/bootstrap/route.ts",
-        "lib/fpl.ts"
+        "app/page.tsx",
+        "lib/suggestions.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories"
     },
     {
-      "source": "GET()",
-      "target": "fetchFplJson()",
+      "source": "Home()",
+      "target": "generateSuggestions()",
       "source_files": [
-        "app/api/bootstrap/route.ts",
-        "lib/fpl.ts"
+        "app/page.tsx",
+        "lib/suggestions.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories"
     },
     {
-      "source": "GET()",
-      "target": "fetchPlayers()",
+      "source": "Home()",
+      "target": "optimizeStartingEleven()",
       "source_files": [
-        "app/api/data/route.ts",
-        "lib/db.ts"
+        "app/page.tsx",
+        "lib/suggestions.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",

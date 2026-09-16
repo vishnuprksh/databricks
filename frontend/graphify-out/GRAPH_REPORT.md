@@ -4,12 +4,12 @@
 - cluster-only mode — file stats not available
 
 ## Summary
-- 119 nodes · 150 edges · 13 communities (8 shown, 3 thin omitted)
+- 125 nodes · 156 edges · 14 communities (9 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f7bf2daa`
+- Built from commit: `133effe7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,17 +21,17 @@
 - fpl.ts
 - devDependencies
 - FPL Team Manager — Vercel Frontend
-- dependencies
 - layout.tsx
+- dependencies
 - next.config.js
 - next-env.d.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 16 edges
 2. `fetchFplJson()` - 7 edges
-3. `Home()` - 5 edges
-4. `findBestTransfer()` - 5 edges
-5. `FPL Team Manager — Vercel Frontend` - 5 edges
+3. `FPL Team Manager — Vercel Frontend` - 6 edges
+4. `Home()` - 5 edges
+5. `findBestTransfer()` - 5 edges
 6. `PredictionRow` - 4 edges
 7. `generateSuggestions()` - 4 edges
 8. `optimizeStartingEleven()` - 4 edges
@@ -53,7 +53,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (13 total, 3 thin omitted)
+## Communities (14 total, 2 thin omitted)
 
 ### Community 0 - "suggestions.ts"
 Cohesion: 0.14
@@ -80,29 +80,33 @@ Cohesion: 0.25
 Nodes (8): devDependencies, autoprefixer, postcss, tailwindcss, @types/node, @types/pg, @types/react, typescript
 
 ### Community 6 - "FPL Team Manager — Vercel Frontend"
-Cohesion: 0.33
-Nodes (5): API routes, Deploy to Vercel, Env vars, FPL Team Manager — Vercel Frontend, Setup (local dev)
+Cohesion: 0.29
+Nodes (6): API routes, Deploy to Vercel, Env vars, FPL Team Manager — Vercel Frontend, Pages, Setup (local dev)
 
-### Community 7 - "dependencies"
+### Community 7 - "layout.tsx"
+Cohesion: 0.40
+Nodes (3): metadata, SiteHeader(), next
+
+### Community 8 - "dependencies"
 Cohesion: 0.40
 Nodes (5): dependencies, next, pg, react, react-dom
 
 ## Knowledge Gaps
-- **62 isolated node(s):** `Bootstrap`, `Manager`, `Replacement`, `TransferRecord`, `GwPrediction` (+57 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 77 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **63 isolated node(s):** `Bootstrap`, `Manager`, `Replacement`, `TransferRecord`, `SortKey` (+58 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 81 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `db.ts` to `suggestions.ts`, `package.json`?**
-  _High betweenness centrality (0.186) - this node is a cross-community bridge._
+  _High betweenness centrality (0.178) - this node is a cross-community bridge._
 - **Why does `pg` connect `package.json` to `db.ts`?**
-  _High betweenness centrality (0.094) - this node is a cross-community bridge._
+  _High betweenness centrality (0.089) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `package.json`?**
-  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
 - **What connects `Bootstrap`, `Manager`, `Replacement` to the rest of the system?**
-  _62 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _63 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `suggestions.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.1422924901185771 - nodes in this community are weakly interconnected._
 - **Should `package.json` be split into smaller, more focused modules?**

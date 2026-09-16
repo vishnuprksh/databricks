@@ -441,12 +441,36 @@
       "label": "RootLayout()",
       "_callable": true,
       "_origin": "ast",
-      "community": 8,
+      "community": 7,
       "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "rootlayout()",
       "source_file": "app/layout.tsx",
-      "source_location": "L9"
+      "source_location": "L10"
+    },
+    {
+      "id": "components_siteheader_siteheader",
+      "label": "SiteHeader()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "layout.tsx",
+      "file_type": "code",
+      "norm_label": "siteheader()",
+      "source_file": "components/SiteHeader.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "app_about_page_aboutpage",
+      "label": "AboutPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "about/page.tsx",
+      "file_type": "code",
+      "norm_label": "aboutpage()",
+      "source_file": "app/about/page.tsx",
+      "source_location": "L3"
     },
     {
       "id": "app_page",
@@ -724,10 +748,32 @@
       "source_location": "L23"
     },
     {
+      "id": "next_config",
+      "label": "next.config.js",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "next.config.js",
+      "file_type": "code",
+      "norm_label": "next.config.js",
+      "source_file": "next.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "next_config_nextconfig",
+      "label": "nextConfig",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "next.config.js",
+      "file_type": "code",
+      "norm_label": "nextconfig",
+      "source_file": "next.config.js",
+      "source_location": "L2"
+    },
+    {
       "id": "next_env_d",
       "label": "next-env.d.ts",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "community_name": "next-env.d.ts",
       "file_type": "code",
       "norm_label": "next-env.d.ts",
@@ -738,7 +784,7 @@
       "id": "next_env_d_rationale_4",
       "label": "NOTE: This file should not be edited",
       "_origin": "ast",
-      "community": 10,
+      "community": 11,
       "community_name": "next-env.d.ts",
       "file_type": "rationale",
       "norm_label": "note: this file should not be edited",
@@ -746,15 +792,15 @@
       "source_location": "L4"
     },
     {
-      "id": "postcss_config",
-      "label": "postcss.config.js",
+      "id": "tailwindcss",
+      "label": "tailwindcss",
       "_origin": "ast",
-      "community": 11,
-      "community_name": "postcss.config.js",
+      "community": 12,
+      "community_name": "tailwind.config.js",
+      "confidence": "EXTRACTED",
       "file_type": "code",
-      "norm_label": "postcss.config.js",
-      "source_file": "postcss.config.js",
-      "source_location": "L1"
+      "norm_label": "tailwindcss",
+      "source_file": "tailwindcss"
     },
     {
       "id": "tailwind_config",
@@ -765,6 +811,17 @@
       "file_type": "code",
       "norm_label": "tailwind.config.js",
       "source_file": "tailwind.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "postcss_config",
+      "label": "postcss.config.js",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "postcss.config.js",
+      "file_type": "code",
+      "norm_label": "postcss.config.js",
+      "source_file": "postcss.config.js",
       "source_location": "L1"
     },
     {
@@ -1246,6 +1303,18 @@
       "source_location": "L1"
     },
     {
+      "id": "readme_pages",
+      "label": "Pages",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "FPL Team Manager \u2014 Vercel Frontend",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "pages",
+      "source_file": "README.md",
+      "source_location": "L45"
+    },
+    {
       "id": "readme_setup_local_dev",
       "label": "Setup (local dev)",
       "_origin": "ast",
@@ -1258,65 +1327,10 @@
       "source_location": "L9"
     },
     {
-      "id": "package_dependencies",
-      "label": "dependencies",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "dependencies",
-      "source_file": "package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "package_dependencies_next",
-      "label": "next",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "next",
-      "source_file": "package.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "package_dependencies_pg",
-      "label": "pg",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "pg",
-      "source_file": "package.json",
-      "source_location": "L12"
-    },
-    {
-      "id": "package_dependencies_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "package_dependencies_react_dom",
-      "label": "react-dom",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "react-dom",
-      "source_file": "package.json",
-      "source_location": "L14"
-    },
-    {
       "id": "app_layout",
       "label": "layout.tsx",
       "_origin": "ast",
-      "community": 8,
+      "community": 7,
       "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "layout.tsx",
@@ -1327,18 +1341,29 @@
       "id": "app_layout_metadata",
       "label": "metadata",
       "_origin": "ast",
-      "community": 8,
+      "community": 7,
       "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "app/layout.tsx",
-      "source_location": "L4"
+      "source_location": "L5"
+    },
+    {
+      "id": "components_siteheader",
+      "label": "SiteHeader.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "layout.tsx",
+      "file_type": "code",
+      "norm_label": "siteheader.tsx",
+      "source_file": "components/SiteHeader.tsx",
+      "source_location": "L1"
     },
     {
       "id": "ref_next",
       "label": "next",
       "_origin": "ast",
-      "community": 8,
+      "community": 7,
       "community_name": "layout.tsx",
       "file_type": "concept",
       "norm_label": "next",
@@ -1346,26 +1371,70 @@
       "source_location": "L11"
     },
     {
-      "id": "next_config",
-      "label": "next.config.js",
+      "id": "package_dependencies",
+      "label": "dependencies",
       "_origin": "ast",
-      "community": 9,
-      "community_name": "next.config.js",
+      "community": 8,
+      "community_name": "dependencies",
       "file_type": "code",
-      "norm_label": "next.config.js",
-      "source_file": "next.config.js",
-      "source_location": "L1"
+      "norm_label": "dependencies",
+      "source_file": "package.json",
+      "source_location": "L10"
     },
     {
-      "id": "next_config_nextconfig",
-      "label": "nextConfig",
+      "id": "package_dependencies_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "package_dependencies_pg",
+      "label": "pg",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "pg",
+      "source_file": "package.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "package_dependencies_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "package_dependencies_react_dom",
+      "label": "react-dom",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "react-dom",
+      "source_file": "package.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "app_about_page",
+      "label": "about/page.tsx",
       "_origin": "ast",
       "community": 9,
-      "community_name": "next.config.js",
+      "community_name": "about/page.tsx",
       "file_type": "code",
-      "norm_label": "nextconfig",
-      "source_file": "next.config.js",
-      "source_location": "L2"
+      "norm_label": "about/page.tsx",
+      "source_file": "app/about/page.tsx",
+      "source_location": "L1"
     }
   ],
   "links": [
@@ -1620,6 +1689,18 @@
       "context": "import",
       "source_file": "app/api/picks/route.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout",
+      "target": "components_siteheader_siteheader",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/layout.tsx",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -1972,6 +2053,18 @@
       "weight": 1.0
     },
     {
+      "source": "app_layout",
+      "target": "components_siteheader",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "app/layout.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "app_page",
       "target": "ref_react",
       "relation": "imports_from",
@@ -2098,6 +2191,17 @@
       "weight": 1.0
     },
     {
+      "source": "app_about_page",
+      "target": "app_about_page_aboutpage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/about/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
       "source": "app_api_bootstrap_route",
       "target": "app_api_bootstrap_route_get",
       "relation": "contains",
@@ -2143,24 +2247,24 @@
     },
     {
       "source": "app_layout",
-      "target": "app_layout_metadata",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/layout.tsx",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "app_layout",
       "target": "app_layout_rootlayout",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/layout.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout",
+      "target": "app_layout_metadata",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/layout.tsx",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -2271,6 +2375,17 @@
       "confidence_score": 1.0,
       "source_file": "app/players/page.tsx",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "components_siteheader",
+      "target": "components_siteheader_siteheader",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/SiteHeader.tsx",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -2869,6 +2984,17 @@
     },
     {
       "source": "readme_fpl_team_manager_vercel_frontend",
+      "target": "readme_pages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_fpl_team_manager_vercel_frontend",
       "target": "readme_setup_local_dev",
       "relation": "contains",
       "_origin": "ast",
@@ -3077,6 +3203,15 @@
       "weight": 1.0
     },
     {
+      "source": "tailwind_config",
+      "target": "tailwindcss",
+      "relation": "dynamic_import",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tailwind.config.js"
+    },
+    {
       "source": "next_env_d_rationale_4",
       "target": "next_env_d",
       "relation": "rationale_for",
@@ -3089,5 +3224,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f7bf2daa7b06c223eb5255081dd9e6207a37ae01"
+  "built_at_commit": "133effe7ef10634cbb2bfd5c5b7371264b37b4a4"
 }

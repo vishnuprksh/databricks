@@ -116,34 +116,42 @@
       "readme_deploy_to_vercel",
       "readme_env_vars",
       "readme_fpl_team_manager_vercel_frontend",
+      "readme_pages",
       "readme_setup_local_dev"
     ],
     "7": [
+      "app_layout",
+      "app_layout_metadata",
+      "app_layout_rootlayout",
+      "components_siteheader",
+      "components_siteheader_siteheader",
+      "ref_next"
+    ],
+    "8": [
       "package_dependencies",
       "package_dependencies_next",
       "package_dependencies_pg",
       "package_dependencies_react",
       "package_dependencies_react_dom"
     ],
-    "8": [
-      "app_layout",
-      "app_layout_metadata",
-      "app_layout_rootlayout",
-      "ref_next"
-    ],
     "9": [
+      "app_about_page",
+      "app_about_page_aboutpage"
+    ],
+    "10": [
       "next_config",
       "next_config_nextconfig"
     ],
-    "10": [
+    "11": [
       "next_env_d",
       "next_env_d_rationale_4"
     ],
-    "11": [
-      "postcss_config"
-    ],
     "12": [
-      "tailwind_config"
+      "tailwind_config",
+      "tailwindcss"
+    ],
+    "13": [
+      "postcss_config"
     ]
   },
   "cohesion": {
@@ -153,13 +161,14 @@
     "3": 0.20952380952380953,
     "4": 0.2564102564102564,
     "5": 0.25,
-    "6": 0.3333333333333333,
+    "6": 0.2857142857142857,
     "7": 0.4,
-    "8": 0.5,
+    "8": 0.4,
     "9": 1.0,
     "10": 1.0,
     "11": 1.0,
-    "12": 1.0
+    "12": 1.0,
+    "13": 1.0
   },
   "gods": [
     {
@@ -173,6 +182,11 @@
       "degree": 7
     },
     {
+      "id": "readme_fpl_team_manager_vercel_frontend",
+      "label": "FPL Team Manager — Vercel Frontend",
+      "degree": 6
+    },
+    {
       "id": "app_page_home",
       "label": "Home()",
       "degree": 5
@@ -180,11 +194,6 @@
     {
       "id": "lib_suggestions_findbesttransfer",
       "label": "findBestTransfer()",
-      "degree": 5
-    },
-    {
-      "id": "readme_fpl_team_manager_vercel_frontend",
-      "label": "FPL Team Manager — Vercel Frontend",
       "degree": 5
     },
     {
@@ -274,22 +283,22 @@
     {
       "type": "bridge_node",
       "question": "Why does `react` connect `db.ts` to `suggestions.ts`, `package.json`?",
-      "why": "High betweenness centrality (0.186) - this node is a cross-community bridge."
+      "why": "High betweenness centrality (0.178) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
       "question": "Why does `pg` connect `package.json` to `db.ts`?",
-      "why": "High betweenness centrality (0.094) - this node is a cross-community bridge."
+      "why": "High betweenness centrality (0.089) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
       "question": "Why does `devDependencies` connect `devDependencies` to `package.json`?",
-      "why": "High betweenness centrality (0.084) - this node is a cross-community bridge."
+      "why": "High betweenness centrality (0.078) - this node is a cross-community bridge."
     },
     {
       "type": "isolated_nodes",
       "question": "What connects `Bootstrap`, `Manager`, `Replacement` to the rest of the system?",
-      "why": "62 weakly-connected nodes found - possible documentation gaps or missing edges."
+      "why": "63 weakly-connected nodes found - possible documentation gaps or missing edges."
     },
     {
       "type": "low_cohesion",
