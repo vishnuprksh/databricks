@@ -165,6 +165,7 @@ export default function Home() {
             is_captain: pick.is_captain,
             is_vice_captain: pick.is_vice_captain,
             is_starter: pick.position <= 11,
+            photo: (player.photo ?? "").replace(/\.jpg$/, ""), // e.g. "95658" → /p95658.png
           };
         })
         .filter(Boolean) as TeamRow[];
@@ -220,6 +221,7 @@ export default function Home() {
         pred: predById[r.player_id]?.avg_prob_gt_6 ?? null,
         starter: r.is_starter,
         club: r.club,
+        photo: (r as any).photo,
       }));
       setSquad(squadPlayers);
       setNoPred(squadPlayers.filter((p) => p.pred === null).map((p) => p.name));
@@ -335,14 +337,14 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Squad table with integrated optimizer */}
+          {/* Squad pitch view */}
           <section className="card p-5 mb-8">
             <div className="flex items-center justify-between mb-4 gap-4 flex-wrap">
               <div>
                 <h2 className="text-lg font-bold">Squad — Gameweek {gameweek}</h2>
                 <p className="text-xs text-[var(--muted)]">
                   {optResult
-                    ? <>⚡ Optimal XI highlighted in green · Formation <strong>{optResult.formation}</strong> · Optimal pred <strong className="text-[var(--accent)]">{optResult.totalPred.toFixed(3)}</strong> vs current {optResult.currentTotal.toFixed(3)} · Gain <strong className="text-emerald-400">+{optResult.gain.toFixed(3)}</strong> · C: <strong>{optResult.captain ?? "—"}</strong> · VC: <strong>{optResult.viceCaptain ?? "—"}</strong>{optResult.gain <= 0 && <> · Current XI already optimal ✅</>}</>
+                    ? <>⚡ Optimal XI highlighted · Formation <strong>{optResult.formation}</strong> · Optimal pred <strong className="text-[var(--accent)]">{optResult.totalPred.toFixed(3)}</strong> vs current {optResult.currentTotal.toFixed(3)} · Gain <strong className="text-emerald-400">+{optResult.gain.toFixed(3)}</strong> · C: <strong>{optResult.captain ?? "—"}</strong> · VC: <strong>{optResult.viceCaptain ?? "—"}</strong>{optResult.gain <= 0 && <> · Current XI already optimal ✅</>}</>
                     : "Run the optimizer to highlight the best starting XI by model prediction (1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD)."}
                 </p>
               </div>
@@ -354,49 +356,7 @@ export default function Home() {
                 {optimizing ? "Optimizing…" : optResult ? "Re-optimize" : "⚡ Optimize Team"}
               </button>
             </div>
-            <div className="overflow-x-auto">
-              <table className="data">
-                <thead>
-                  <tr>
-                    <th>#</th><th>Player</th><th>Pos</th><th>Club</th><th>Price</th>
-                    <th>Starter</th><th>Opt XI</th><th>C</th><th>VC</th><th>GW Pts</th><th>xMult</th>
-                    <th>Total</th><th>Form</th><th>Own %</th><th>Pred</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {teamRows.map((r) => {
-                    const sp = squad.find((s) => s.name === r.player_name);
-                    const optPlayer = optResult?.xi.find((p) => p.name === r.player_name);
-                    const optBench = optResult?.bench.find((p) => p.name === r.player_name);
-                    const optMark = optPlayer ? "🟢 XI" : optBench ? "🪑 Bench" : "";
-                    const rowClass = optPlayer
-                      ? "bg-emerald-500/10 border-l-2 border-emerald-400"
-                      : optBench
-                      ? "opacity-70 border-l-2 border-transparent"
-                      : "";
-                    return (
-                      <tr key={r.player_id} className={rowClass}>
-                        <td className="text-[var(--muted)]">{r.squad_position}</td>
-                        <td className="font-semibold">{r.player_name}</td>
-                        <td><PosBadge pos={r.position} /></td>
-                        <td className="text-[var(--muted)]">{r.club}</td>
-                        <td>£{r.price.toFixed(1)}m</td>
-                        <td>{r.is_starter ? "✅" : "🪑"}</td>
-                        <td className="whitespace-nowrap">{optMark}</td>
-                        <td>{r.is_captain ? "⭐" : ""}</td>
-                        <td>{r.is_vice_captain ? "🅥" : ""}</td>
-                        <td>{r.gameweek_points}</td>
-                        <td>×{r.multiplier}</td>
-                        <td>{r.total_points}</td>
-                        <td>{r.form.toFixed(1)}</td>
-                        <td>{r.selected_by_percent.toFixed(1)}%</td>
-                        <td>{sp?.pred != null ? sp.pred.toFixed(3) : <span className="text-[var(--muted)]">N/A</span>}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            <Pitch teamRows={teamRows} optResult={optResult} gameweek={gameweek} squad={squad} />
             {noPred.length > 0 && (
               <p className="mt-3 text-xs text-[var(--muted)]">
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
@@ -495,6 +455,140 @@ function Stat({ label, value, accent }: { label: string; value: any; accent?: bo
     <div className="bg-[#0d1526] border border-[var(--border)] rounded-lg px-3 py-2">
       <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">{label}</div>
       <div className={`font-bold ${accent ? "text-[var(--accent)] text-lg" : ""}`}>{value ?? "—"}</div>
+    </div>
+  );
+}
+
+const PHOTO_BASE = "https://resources.premierleague.com/premierleague/photos/players/110x140";
+const ROW_ORDER = ["GKP", "DEF", "MID", "FWD"] as const;
+const ROW_BG: Record<string, string> = {
+  GKP: "bg-[#0a1f14]/70 border-emerald-900/40",
+  DEF: "bg-[#0a1524]/70 border-sky-900/40",
+  MID: "bg-[#0a1f14]/70 border-emerald-900/40",
+  FWD: "bg-[#1f0a14]/70 border-rose-900/40",
+};
+
+function Pitch({ teamRows, optResult, gameweek, squad }: {
+  teamRows: TeamRow[];
+  optResult: OptimizeResult | null;
+  gameweek: number | null;
+  squad: SquadPlayer[];
+}) {
+  const rows = ROW_ORDER.map((pos) => ({ pos, players: teamRows.filter((r) => r.position === pos && r.is_starter) }));
+  const bench = teamRows.filter((r) => !r.is_starter);
+
+  return (
+    <div
+      className="rounded-xl overflow-hidden border border-[var(--border)]"
+      style={{
+        background:
+          "repeating-linear-gradient(0deg, #0c2a18 0px, #0c2a18 44px, #0e3120 44px, #0e3120 88px)",
+      }}
+    >
+      <div className="px-4 py-3 text-center text-[10px] uppercase tracking-widest text-emerald-200/60">
+        Gameweek {gameweek} · Formation {optResult?.formation ?? "—"}
+      </div>
+      <div className="flex flex-col gap-2 px-3 pb-3">
+        {rows.map(({ pos, players }) => (
+          <div key={pos} className={`rounded-lg border ${ROW_BG[pos]} px-2 py-3`}>
+            <div className="flex justify-center gap-2 flex-wrap">
+              {players.length === 0 ? (
+                <span className="text-xs text-[var(--muted)] py-4">—</span>
+              ) : (
+                players.map((r) => (
+                  <PlayerCard
+                    key={r.player_id}
+                    row={r}
+                    squad={squad}
+                    onBench={!r.is_starter}
+                    isOptXI={optResult?.xi.some((p) => p.name === r.player_name) ?? false}
+                    isCaptain={optResult ? optResult.captain === r.player_name : r.is_captain}
+                    isVice={optResult ? optResult.viceCaptain === r.player_name : r.is_vice_captain}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        ))}
+        {/* Bench */}
+        <div className="rounded-lg border border-[var(--border)] bg-black/30 px-2 py-3">
+          <div className="flex justify-center gap-2 flex-wrap">
+            {bench.map((r) => (
+              <PlayerCard
+                key={r.player_id}
+                row={r}
+                squad={squad}
+                onBench
+                isOptXI={false}
+                dimmed={optResult?.bench.some((p) => p.name === r.player_name) ?? false}
+                isCaptain={false}
+                isVice={false}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PlayerCard({
+  row,
+  squad,
+  onBench,
+  isOptXI,
+  isCaptain,
+  isVice,
+  dimmed,
+}: {
+  row: TeamRow;
+  squad: SquadPlayer[];
+  onBench: boolean;
+  isOptXI: boolean;
+  isCaptain: boolean;
+  isVice: boolean;
+  dimmed?: boolean;
+}) {
+  const photo = (row as any).photo as string | undefined;
+  const sp = squad.find((s) => s.name === row.player_name);
+  return (
+    <div
+      className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition
+        ${isOptXI ? "bg-emerald-500/20 ring-2 ring-emerald-400" : "bg-black/40 ring-1 ring-white/10"}
+        ${dimmed ? "opacity-60" : ""}`}
+    >
+      {isCaptain && (
+        <span className="absolute -top-2 -left-1 z-10 w-5 h-5 rounded-full bg-amber-400 text-[#04140b] text-[10px] font-extrabold flex items-center justify-center shadow">
+          C
+        </span>
+      )}
+      {isVice && (
+        <span className="absolute -top-2 -left-1 z-10 w-5 h-5 rounded-full bg-slate-300 text-[#04140b] text-[10px] font-extrabold flex items-center justify-center shadow">
+          V
+        </span>
+      )}
+      {isOptXI && <span className="absolute -top-2 right-1 z-10 text-[10px]">⚡</span>}
+      {photo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`${PHOTO_BASE}/p${photo}.png`}
+          alt={row.player_name}
+          className="w-14 h-[70px] object-contain drop-shadow"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }}
+        />
+      ) : (
+        <div className="w-14 h-[70px] flex items-center justify-center text-2xl">👕</div>
+      )}
+      <div className="text-[11px] font-bold leading-tight text-center truncate w-full">{row.player_name}</div>
+      <div className="text-[9px] text-[var(--muted)] text-center truncate w-full">{row.club}</div>
+      <div className="flex items-center gap-1 mt-0.5">
+        <span className={`badge ${POS_COLORS[row.position]} !text-[8px] !px-1 !py-0`}>{row.position}</span>
+        <span className="text-[9px] font-semibold">£{row.price.toFixed(1)}m</span>
+      </div>
+      <div className="text-[9px] text-[var(--muted)]">
+        GW {row.gameweek_points} · <span className="text-[var(--accent)]">{sp?.pred != null ? sp.pred.toFixed(2) : "N/A"}</span>
+        {onBench && <span className="ml-1">🪑</span>}
+      </div>
     </div>
   );
 }
