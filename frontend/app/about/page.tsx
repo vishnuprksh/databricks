@@ -3,11 +3,6 @@ import Link from "next/link";
 export default function AboutPage() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-10">
-      <nav className="text-sm text-[var(--muted)] mb-4">
-        <Link href="/" className="hover:text-[var(--accent)]">Team Manager</Link>
-        <span className="mx-2">/</span>
-        <span className="text-[var(--text)]">About</span>
-      </nav>
       <section className="card p-6 md:p-8">
         <h1 className="text-3xl font-extrabold tracking-tight">
           About <span className="text-[var(--accent)]">offside</span>

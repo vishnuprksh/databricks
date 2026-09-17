@@ -78,11 +78,6 @@ export default function PlayersPage() {
     <main className="max-w-7xl mx-auto px-4 py-10">
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <nav className="text-sm text-[var(--muted)] mb-4">
-            <a href="/" className="hover:text-[var(--accent)]">Team Manager</a>
-            <span className="mx-2">/</span>
-            <span className="text-[var(--text)]">Players</span>
-          </nav>
           <h1 className="text-3xl font-extrabold tracking-tight">
             Player <span className="text-[var(--accent)]">Market</span>
           </h1>

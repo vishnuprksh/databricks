@@ -39,11 +39,6 @@ export default function Dream15Page() {
   return (
     <main className="max-w-7xl mx-auto px-4 py-10">
       <header className="mb-8">
-        <nav className="text-sm text-[var(--muted)] mb-4">
-          <a href="/" className="hover:text-[var(--accent)]">Team Manager</a>
-          <span className="mx-2">/</span>
-          <span className="text-[var(--text)]">Dream 15</span>
-        </nav>
         <h1 className="text-3xl font-extrabold tracking-tight">
           Dream <span className="text-[var(--accent)]">15</span>
         </h1>
