@@ -1,4 +1,4 @@
-# FPL Team Manager — Vercel Frontend
+# offside — Vercel Frontend
 
 Next.js frontend replicating `fpl_team_manager(1).py`:
 

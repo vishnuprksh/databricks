@@ -10,10 +10,10 @@ export default function AboutPage() {
       </nav>
       <section className="card p-6 md:p-8">
         <h1 className="text-3xl font-extrabold tracking-tight">
-          About <span className="text-[var(--accent)]">FPL Manager</span>
+          About <span className="text-[var(--accent)]">offside</span>
         </h1>
         <p className="text-[var(--muted)] mt-4 leading-7">
-          FPL Manager brings your Fantasy Premier League squad, gameweek performance,
+          offside brings your Fantasy Premier League squad, gameweek performance,
           player data and transfer suggestions together in one focused workspace.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-3 text-sm">

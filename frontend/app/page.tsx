@@ -266,7 +266,7 @@ export default function Home() {
           <a href="/players" className="hover:text-[var(--accent)]">Players</a>
         </nav>
         <h1 className="text-3xl font-extrabold tracking-tight">
-          ⚽ FPL Team <span className="text-[var(--accent)]">Manager</span>
+          ⚽ <span className="text-[var(--accent)]">offside</span>
         </h1>
         <p className="text-[var(--muted)] mt-1">
           Squad overview, gameweek stats and ML-powered transfer suggestions

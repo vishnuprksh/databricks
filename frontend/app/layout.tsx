@@ -3,8 +3,8 @@ import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "FPL Team Manager",
-  description: "FPL squad, gameweek stats and ML-powered transfer suggestions",
+  title: "offside",
+  description: "offside: FPL squad, gameweek stats and ML-powered transfer suggestions",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
