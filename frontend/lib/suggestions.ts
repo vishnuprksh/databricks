@@ -106,6 +106,26 @@ export function buildSquadWithPred(
   });
 }
 
+/**
+ * Resolve a prediction's (possibly full) player name to a stats entry keyed by
+ * web_name. Matches exact, prefix/suffix, and last-token equality.
+ */
+export function resolveStats(
+  predName: string,
+  stats: Record<string, StatsRow>
+): StatsRow | undefined {
+  if (stats[predName]) return stats[predName];
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z ]/g, "").trim();
+  const p = norm(predName);
+  for (const s of Object.keys(stats)) {
+    const w = norm(s);
+    if (p.endsWith(w) || w.endsWith(p) || p.split(" ").pop() === w || w.split(" ").pop() === p) {
+      return stats[s];
+    }
+  }
+  return undefined;
+}
+
 function findReplacements(
   outPos: string,
   outPrice: number,
@@ -116,14 +136,16 @@ function findReplacements(
   squadNames: Set<string>,
   usedIncoming: Set<string>,
   stats: Record<string, StatsRow>,
-  preferReinvest: boolean
+  preferReinvest: boolean,
+  excludedIncoming: Set<string> = new Set()
 ): Replacement[] {
   const candidates: Replacement[] = [];
   for (const pred of predictions) {
     if (pred.position !== outPos) continue;
     if (squadNames.has(pred.player_name) || usedIncoming.has(pred.player_name)) continue;
-    const s = stats[pred.player_name];
+    const s = resolveStats(pred.player_name, stats);
     if (!s || (s.status !== "a" && s.status !== "d")) continue;
+    if (squadNames.has(s.web_name) || usedIncoming.has(s.web_name) || excludedIncoming.has(s.web_name)) continue;
     const targetClub = s.team_name;
     const tempCount = { ...clubCount };
     if (outClub === targetClub) tempCount[outClub] = (tempCount[outClub] ?? 0) - 1;
@@ -131,7 +153,7 @@ function findReplacements(
     const costDiff = s.price - outPrice;
     if (costDiff > budgetAvailable) continue;
     candidates.push({
-      name: pred.player_name,
+      name: s.web_name,
       price: s.price,
       pred: pred.avg_prob_gt_6,
       club: targetClub,
@@ -434,7 +456,8 @@ export function findBestTransfer(
   predictions: PredictionRow[],
   stats: Record<string, StatsRow>,
   bank: number,
-  squadNames: string[]
+  squadNames: string[],
+  declinedNames: string[] = []
 ): Suggestion | null {
   const current = optimizeStartingEleven(squad);
   if (!current) return null;
@@ -442,6 +465,7 @@ export function findBestTransfer(
   const clubCount: Record<string, number> = {};
   for (const player of squad) clubCount[player.club] = (clubCount[player.club] ?? 0) + 1;
   const squadNamesSet = new Set(squadNames);
+  const declined = new Set(Array.isArray(declinedNames) ? declinedNames : []);
 
   // Weakest current-XI player per position — the provably optimal outgoing.
   const weakestXiByPos: Record<string, SquadPlayer> = {};
@@ -463,7 +487,8 @@ export function findBestTransfer(
       squadNamesSet,
       new Set<string>(),
       stats,
-      false
+      false,
+      declined
     );
     for (const incoming of replacements) {
       const improvement = incoming.pred - (outgoing.pred ?? 0);
@@ -497,4 +522,49 @@ export function findBestTransfer(
     alternatives: [],
     transferLabel: verifiedImprovement > 0 ? "BEST XI TRANSFER" : "BEST AVAILABLE TRANSFER",
   };
+}
+
+/**
+ * All valid transfer options for one squad player, sorted by prediction (desc).
+ * Constraints: same position, budget (bank + sell price), max 3 per club
+ * (accounting for the outgoing player's club slot), availability, and not
+ * already in the squad.
+ */
+export function listTransferOptions(
+  out: SquadPlayer,
+  squad: SquadPlayer[],
+  predictions: PredictionRow[],
+  stats: Record<string, StatsRow>,
+  bank: number
+): Replacement[] {
+  const squadNames = new Set(squad.map((p) => p.name));
+  const clubCount: Record<string, number> = {};
+  for (const p of squad) clubCount[p.club] = (clubCount[p.club] ?? 0) + 1;
+
+  const budgetAvailable = bank + out.sellPrice - out.nowPrice;
+  const candidates: Replacement[] = [];
+  for (const pred of predictions) {
+    if (pred.position !== out.pos) continue;
+    const s = resolveStats(pred.player_name, stats);
+    if (!s || (s.status !== "a" && s.status !== "d")) continue;
+    if (squadNames.has(s.web_name)) continue;
+    const targetClub = s.team_name;
+    const tempCount = { ...clubCount };
+    if (out.club === targetClub) tempCount[out.club] = (tempCount[out.club] ?? 0) - 1;
+    if ((tempCount[targetClub] ?? 0) >= 3) continue;
+    const costDiff = s.price - out.sellPrice;
+    if (costDiff > budgetAvailable) continue;
+    candidates.push({
+      name: s.web_name,
+      price: s.price,
+      pred: pred.avg_prob_gt_6,
+      club: targetClub,
+      form: s.form,
+      ppg: s.points_per_game,
+      costDiff,
+      gw_predictions: pred.gw_predictions,
+    });
+  }
+  candidates.sort((a, b) => b.pred - a.pred);
+  return candidates;
 }
