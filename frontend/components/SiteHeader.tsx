@@ -30,6 +30,9 @@ export default function SiteHeader() {
         <Link href="/players" title="Players" className={`rounded-md py-2 text-sm hover:bg-white/5 hover:text-[var(--accent)] ${collapsed ? "px-2 text-center" : "px-3"}`}>
           {collapsed ? "PL" : "Players"}
         </Link>
+        <Link href="/dream15" title="Dream 15" className={`rounded-md py-2 text-sm hover:bg-white/5 hover:text-[var(--accent)] ${collapsed ? "px-2 text-center" : "px-3"}`}>
+          {collapsed ? "D15" : "Dream 15"}
+        </Link>
         <Link href="/about" title="About" className={`rounded-md py-2 text-sm hover:bg-white/5 hover:text-[var(--accent)] ${collapsed ? "px-2 text-center" : "px-3"}`}>
           {collapsed ? "AB" : "About"}
         </Link>
