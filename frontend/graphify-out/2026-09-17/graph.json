@@ -10,7 +10,6 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "bootstrap",
       "source_file": "app/page.tsx",
@@ -23,7 +22,6 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "manager",
       "source_file": "app/page.tsx",
@@ -36,11 +34,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "optimizeresult",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L222"
+      "source_location": "L223"
     },
     {
       "id": "lib_suggestions_replacement",
@@ -49,11 +46,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "replacement",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L27"
+      "source_location": "L28"
     },
     {
       "id": "lib_suggestions_squadplayer",
@@ -62,7 +58,6 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "squadplayer",
       "source_file": "lib/suggestions.ts",
@@ -75,7 +70,6 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "statsrow",
       "source_file": "lib/suggestions.ts",
@@ -88,11 +82,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "suggestion",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L38"
+      "source_location": "L39"
     },
     {
       "id": "lib_suggestions_transferrecord",
@@ -101,11 +94,10 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "transferrecord",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L67"
+      "source_location": "L68"
     },
     {
       "id": "app_players_page_sortkey",
@@ -178,11 +170,32 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "app/page.tsx",
       "source_location": "L23"
+    },
+    {
+      "id": "app_page_pitch",
+      "label": "Pitch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "pitch()",
+      "source_file": "app/page.tsx",
+      "source_location": "L476"
+    },
+    {
+      "id": "app_page_playercard",
+      "label": "PlayerCard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "playercard()",
+      "source_file": "app/page.tsx",
+      "source_location": "L556"
     },
     {
       "id": "app_page_posbadge",
@@ -190,7 +203,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "posbadge()",
       "source_file": "app/page.tsx",
@@ -202,11 +214,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/page.tsx",
-      "source_location": "L493"
+      "source_location": "L458"
     },
     {
       "id": "lib_suggestions_buildsquadwithpred",
@@ -214,11 +225,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "buildsquadwithpred()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L88"
+      "source_location": "L89"
     },
     {
       "id": "lib_suggestions_computesellprices",
@@ -226,11 +236,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "computesellprices()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L70"
+      "source_location": "L71"
     },
     {
       "id": "lib_suggestions_findbesttransfer",
@@ -238,11 +247,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "findbesttransfer()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L321"
+      "source_location": "L322"
     },
     {
       "id": "lib_suggestions_findreplacements",
@@ -250,11 +258,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "findreplacements()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L107"
+      "source_location": "L108"
     },
     {
       "id": "lib_suggestions_generatesuggestions",
@@ -262,11 +269,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "generatesuggestions()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L148"
+      "source_location": "L149"
     },
     {
       "id": "lib_suggestions_optimizestartingeleven",
@@ -274,11 +280,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "optimizestartingeleven()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L244"
+      "source_location": "L245"
     },
     {
       "id": "lib_suggestions_statsbyplayername",
@@ -286,11 +291,10 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "statsbyplayername()",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L48"
+      "source_location": "L49"
     },
     {
       "id": "app_api_data_route_get",
@@ -442,7 +446,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "rootlayout()",
       "source_file": "app/layout.tsx",
@@ -454,7 +457,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "siteheader()",
       "source_file": "components/SiteHeader.tsx",
@@ -466,7 +468,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "about/page.tsx",
       "file_type": "code",
       "norm_label": "aboutpage()",
       "source_file": "app/about/page.tsx",
@@ -477,7 +478,6 @@
       "label": "app/page.tsx",
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "app/page.tsx",
       "source_file": "app/page.tsx",
@@ -488,18 +488,36 @@
       "label": "POS_COLORS",
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "pos_colors",
       "source_file": "app/page.tsx",
       "source_location": "L12"
     },
     {
+      "id": "app_page_row_bg",
+      "label": "ROW_BG",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "row_bg",
+      "source_file": "app/page.tsx",
+      "source_location": "L469"
+    },
+    {
+      "id": "app_page_row_order",
+      "label": "ROW_ORDER",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "row_order",
+      "source_file": "app/page.tsx",
+      "source_location": "L468"
+    },
+    {
       "id": "lib_suggestions",
       "label": "suggestions.ts",
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "suggestions.ts",
       "source_file": "lib/suggestions.ts",
@@ -510,22 +528,20 @@
       "label": "POS_BY_ELEMENT",
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "pos_by_element",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L46"
+      "source_location": "L47"
     },
     {
       "id": "lib_suggestions_valid_formations",
       "label": "VALID_FORMATIONS",
       "_origin": "ast",
       "community": 0,
-      "community_name": "suggestions.ts",
       "file_type": "code",
       "norm_label": "valid_formations",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L233"
+      "source_location": "L234"
     },
     {
       "id": "dbtest",
@@ -565,7 +581,6 @@
       "label": "package.json",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "package.json",
       "source_file": "package.json",
@@ -576,7 +591,6 @@
       "label": "name",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "name",
       "source_file": "package.json",
@@ -587,7 +601,6 @@
       "label": "private",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "private",
       "source_file": "package.json",
@@ -598,7 +611,6 @@
       "label": "scripts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "scripts",
       "source_file": "package.json",
@@ -609,7 +621,6 @@
       "label": "build",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "package.json",
@@ -620,7 +631,6 @@
       "label": "dev",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "dev",
       "source_file": "package.json",
@@ -631,7 +641,6 @@
       "label": "start",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "start",
       "source_file": "package.json",
@@ -642,7 +651,6 @@
       "label": "version",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "code",
       "norm_label": "version",
       "source_file": "package.json",
@@ -653,7 +661,6 @@
       "label": "autoprefixer",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "autoprefixer",
       "source_file": "package.json",
@@ -664,7 +671,6 @@
       "label": "pg",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "pg",
       "source_file": "package.json",
@@ -675,7 +681,6 @@
       "label": "postcss",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "postcss",
       "source_file": "package.json",
@@ -686,7 +691,6 @@
       "label": "react-dom",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "react-dom",
       "source_file": "package.json",
@@ -697,7 +701,6 @@
       "label": "tailwindcss",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
@@ -708,7 +711,6 @@
       "label": "@types/node",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "@types/node",
       "source_file": "package.json",
@@ -719,7 +721,6 @@
       "label": "@types/pg",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "@types/pg",
       "source_file": "package.json",
@@ -730,7 +731,6 @@
       "label": "@types/react",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "@types/react",
       "source_file": "package.json",
@@ -741,7 +741,6 @@
       "label": "typescript",
       "_origin": "ast",
       "community": 1,
-      "community_name": "package.json",
       "file_type": "concept",
       "norm_label": "typescript",
       "source_file": "package.json",
@@ -792,36 +791,25 @@
       "source_location": "L4"
     },
     {
-      "id": "tailwindcss",
-      "label": "tailwindcss",
+      "id": "postcss_config",
+      "label": "postcss.config.js",
       "_origin": "ast",
       "community": 12,
-      "community_name": "tailwind.config.js",
-      "confidence": "EXTRACTED",
+      "community_name": "postcss.config.js",
       "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "tailwindcss"
+      "norm_label": "postcss.config.js",
+      "source_file": "postcss.config.js",
+      "source_location": "L1"
     },
     {
       "id": "tailwind_config",
       "label": "tailwind.config.js",
       "_origin": "ast",
-      "community": 12,
+      "community": 13,
       "community_name": "tailwind.config.js",
       "file_type": "code",
       "norm_label": "tailwind.config.js",
       "source_file": "tailwind.config.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "postcss_config",
-      "label": "postcss.config.js",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "postcss.config.js",
-      "file_type": "code",
-      "norm_label": "postcss.config.js",
-      "source_file": "postcss.config.js",
       "source_location": "L1"
     },
     {
@@ -1082,7 +1070,6 @@
       "label": "react",
       "_origin": "ast",
       "community": 3,
-      "community_name": "db.ts",
       "file_type": "concept",
       "norm_label": "react",
       "source_file": "package.json",
@@ -1159,7 +1146,6 @@
       "label": "devDependencies",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "devdependencies",
       "source_file": "package.json",
@@ -1170,7 +1156,6 @@
       "label": "autoprefixer",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "autoprefixer",
       "source_file": "package.json",
@@ -1181,7 +1166,6 @@
       "label": "postcss",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "postcss",
       "source_file": "package.json",
@@ -1192,7 +1176,6 @@
       "label": "tailwindcss",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
@@ -1203,7 +1186,6 @@
       "label": "@types/node",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "@types/node",
       "source_file": "package.json",
@@ -1214,7 +1196,6 @@
       "label": "@types/pg",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "@types/pg",
       "source_file": "package.json",
@@ -1225,7 +1206,6 @@
       "label": "@types/react",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "@types/react",
       "source_file": "package.json",
@@ -1236,7 +1216,6 @@
       "label": "typescript",
       "_origin": "ast",
       "community": 5,
-      "community_name": "devDependencies",
       "file_type": "code",
       "norm_label": "typescript",
       "source_file": "package.json",
@@ -1331,7 +1310,6 @@
       "label": "layout.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "layout.tsx",
       "source_file": "app/layout.tsx",
@@ -1342,7 +1320,6 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 7,
-      "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "app/layout.tsx",
@@ -1353,7 +1330,6 @@
       "label": "SiteHeader.tsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "layout.tsx",
       "file_type": "code",
       "norm_label": "siteheader.tsx",
       "source_file": "components/SiteHeader.tsx",
@@ -1364,7 +1340,6 @@
       "label": "next",
       "_origin": "ast",
       "community": 7,
-      "community_name": "layout.tsx",
       "file_type": "concept",
       "norm_label": "next",
       "source_file": "package.json",
@@ -1375,7 +1350,6 @@
       "label": "dependencies",
       "_origin": "ast",
       "community": 8,
-      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "dependencies",
       "source_file": "package.json",
@@ -1386,7 +1360,6 @@
       "label": "next",
       "_origin": "ast",
       "community": 8,
-      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "next",
       "source_file": "package.json",
@@ -1397,7 +1370,6 @@
       "label": "pg",
       "_origin": "ast",
       "community": 8,
-      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "pg",
       "source_file": "package.json",
@@ -1408,7 +1380,6 @@
       "label": "react",
       "_origin": "ast",
       "community": 8,
-      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "react",
       "source_file": "package.json",
@@ -1419,7 +1390,6 @@
       "label": "react-dom",
       "_origin": "ast",
       "community": 8,
-      "community_name": "dependencies",
       "file_type": "code",
       "norm_label": "react-dom",
       "source_file": "package.json",
@@ -1430,7 +1400,6 @@
       "label": "about/page.tsx",
       "_origin": "ast",
       "community": 9,
-      "community_name": "about/page.tsx",
       "file_type": "code",
       "norm_label": "about/page.tsx",
       "source_file": "app/about/page.tsx",
@@ -1519,7 +1488,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/page.tsx",
-      "source_location": "L232",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -1579,7 +1548,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L328",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -1591,7 +1560,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L337",
+      "source_location": "L338",
       "weight": 1.0
     },
     {
@@ -1603,7 +1572,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "lib/suggestions.ts",
-      "source_location": "L175",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -1616,7 +1585,7 @@
       "context": "import",
       "deferred": true,
       "source_file": "app/page.tsx",
-      "source_location": "L231",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -2319,7 +2288,51 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L493",
+      "source_location": "L458",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_page_row_order",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/page.tsx",
+      "source_location": "L468",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_page_row_bg",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/page.tsx",
+      "source_location": "L469",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_page_pitch",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/page.tsx",
+      "source_location": "L476",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_page_playercard",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/page.tsx",
+      "source_location": "L556",
       "weight": 1.0
     },
     {
@@ -2550,7 +2563,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L107",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -2561,7 +2574,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L148",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -2583,7 +2596,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L222",
+      "source_location": "L223",
       "weight": 1.0
     },
     {
@@ -2594,7 +2607,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L233",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -2605,7 +2618,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L244",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
@@ -2616,7 +2629,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -2627,7 +2640,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L321",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -2638,7 +2651,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L38",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -2660,7 +2673,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -2671,7 +2684,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L48",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -2682,7 +2695,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L67",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -2693,7 +2706,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L70",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -2704,7 +2717,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "lib/suggestions.ts",
-      "source_location": "L88",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -3203,15 +3216,6 @@
       "weight": 1.0
     },
     {
-      "source": "tailwind_config",
-      "target": "tailwindcss",
-      "relation": "dynamic_import",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tailwind.config.js"
-    },
-    {
       "source": "next_env_d_rationale_4",
       "target": "next_env_d",
       "relation": "rationale_for",
@@ -3224,5 +3228,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "133effe7ef10634cbb2bfd5c5b7371264b37b4a4"
+  "built_at_commit": "1944ae21919f0c235b9072ab488cf172cda20e28"
 }
