@@ -297,39 +297,6 @@
       "source_location": "L49"
     },
     {
-      "id": "app_layout_rootlayout",
-      "label": "RootLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "rootlayout()",
-      "source_file": "app/layout.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "components_siteheader_siteheader",
-      "label": "SiteHeader()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "siteheader()",
-      "source_file": "components/SiteHeader.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "app_about_page_aboutpage",
-      "label": "AboutPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 10,
-      "file_type": "code",
-      "norm_label": "aboutpage()",
-      "source_file": "app/about/page.tsx",
-      "source_location": "L3"
-    },
-    {
       "id": "app_api_data_route_get",
       "label": "GET()",
       "_callable": true,
@@ -474,6 +441,39 @@
       "source_location": "L10"
     },
     {
+      "id": "app_layout_rootlayout",
+      "label": "RootLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "norm_label": "rootlayout()",
+      "source_file": "app/layout.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "components_siteheader_siteheader",
+      "label": "SiteHeader()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "norm_label": "siteheader()",
+      "source_file": "components/SiteHeader.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "app_about_page_aboutpage",
+      "label": "AboutPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "file_type": "code",
+      "norm_label": "aboutpage()",
+      "source_file": "app/about/page.tsx",
+      "source_location": "L3"
+    },
+    {
       "id": "app_page",
       "label": "app/page.tsx",
       "_origin": "ast",
@@ -544,34 +544,37 @@
       "source_location": "L234"
     },
     {
-      "id": "app_layout",
-      "label": "layout.tsx",
+      "id": "dbtest",
+      "label": "_dbtest.js",
       "_origin": "ast",
       "community": 1,
+      "community_name": "package.json",
       "file_type": "code",
-      "norm_label": "layout.tsx",
-      "source_file": "app/layout.tsx",
+      "norm_label": "_dbtest.js",
+      "source_file": "_dbtest.js",
       "source_location": "L1"
     },
     {
-      "id": "app_layout_metadata",
-      "label": "metadata",
+      "id": "dbtest_fs",
+      "label": "fs",
       "_origin": "ast",
       "community": 1,
+      "community_name": "package.json",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "app/layout.tsx",
-      "source_location": "L5"
+      "norm_label": "fs",
+      "source_file": "_dbtest.js",
+      "source_location": "L1"
     },
     {
-      "id": "components_siteheader",
-      "label": "SiteHeader.tsx",
+      "id": "dbtest_pool",
+      "label": "{ Pool }",
       "_origin": "ast",
       "community": 1,
+      "community_name": "package.json",
       "file_type": "code",
-      "norm_label": "siteheader.tsx",
-      "source_file": "components/SiteHeader.tsx",
-      "source_location": "L1"
+      "norm_label": "{ pool }",
+      "source_file": "_dbtest.js",
+      "source_location": "L9"
     },
     {
       "id": "package",
@@ -604,6 +607,46 @@
       "source_location": "L4"
     },
     {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
       "id": "package_version",
       "label": "version",
       "_origin": "ast",
@@ -624,14 +667,14 @@
       "source_location": "L20"
     },
     {
-      "id": "ref_next",
-      "label": "next",
+      "id": "ref_pg",
+      "label": "pg",
       "_origin": "ast",
       "community": 1,
       "file_type": "concept",
-      "norm_label": "next",
+      "norm_label": "pg",
       "source_file": "package.json",
-      "source_location": "L11"
+      "source_location": "L12"
     },
     {
       "id": "ref_postcss",
@@ -642,16 +685,6 @@
       "norm_label": "postcss",
       "source_file": "package.json",
       "source_location": "L21"
-    },
-    {
-      "id": "ref_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "package.json",
-      "source_location": "L13"
     },
     {
       "id": "ref_react_dom",
@@ -714,20 +747,10 @@
       "source_location": "L23"
     },
     {
-      "id": "app_about_page",
-      "label": "about/page.tsx",
-      "_origin": "ast",
-      "community": 10,
-      "file_type": "code",
-      "norm_label": "about/page.tsx",
-      "source_file": "app/about/page.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "next_config",
       "label": "next.config.js",
       "_origin": "ast",
-      "community": 11,
+      "community": 10,
       "community_name": "next.config.js",
       "file_type": "code",
       "norm_label": "next.config.js",
@@ -738,7 +761,7 @@
       "id": "next_config_nextconfig",
       "label": "nextConfig",
       "_origin": "ast",
-      "community": 11,
+      "community": 10,
       "community_name": "next.config.js",
       "file_type": "code",
       "norm_label": "nextconfig",
@@ -749,7 +772,7 @@
       "id": "next_env_d",
       "label": "next-env.d.ts",
       "_origin": "ast",
-      "community": 12,
+      "community": 11,
       "community_name": "next-env.d.ts",
       "file_type": "code",
       "norm_label": "next-env.d.ts",
@@ -760,7 +783,7 @@
       "id": "next_env_d_rationale_4",
       "label": "NOTE: This file should not be edited",
       "_origin": "ast",
-      "community": 12,
+      "community": 11,
       "community_name": "next-env.d.ts",
       "file_type": "rationale",
       "norm_label": "note: this file should not be edited",
@@ -771,7 +794,7 @@
       "id": "postcss_config",
       "label": "postcss.config.js",
       "_origin": "ast",
-      "community": 13,
+      "community": 12,
       "community_name": "postcss.config.js",
       "file_type": "code",
       "norm_label": "postcss.config.js",
@@ -782,7 +805,7 @@
       "id": "tailwind_config",
       "label": "tailwind.config.js",
       "_origin": "ast",
-      "community": 14,
+      "community": 13,
       "community_name": "tailwind.config.js",
       "file_type": "code",
       "norm_label": "tailwind.config.js",
@@ -1043,6 +1066,16 @@
       "source_location": "L1"
     },
     {
+      "id": "ref_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
       "id": "app_api_bootstrap_route",
       "label": "bootstrap/route.ts",
       "_origin": "ast",
@@ -1273,10 +1306,50 @@
       "source_location": "L9"
     },
     {
+      "id": "app_layout",
+      "label": "layout.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "norm_label": "layout.tsx",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "app/layout.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "components_siteheader",
+      "label": "SiteHeader.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "norm_label": "siteheader.tsx",
+      "source_file": "components/SiteHeader.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "concept",
+      "norm_label": "next",
+      "source_file": "package.json",
+      "source_location": "L11"
+    },
+    {
       "id": "package_dependencies",
       "label": "dependencies",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "file_type": "code",
       "norm_label": "dependencies",
       "source_file": "package.json",
@@ -1286,7 +1359,7 @@
       "id": "package_dependencies_next",
       "label": "next",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "file_type": "code",
       "norm_label": "next",
       "source_file": "package.json",
@@ -1296,7 +1369,7 @@
       "id": "package_dependencies_pg",
       "label": "pg",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "file_type": "code",
       "norm_label": "pg",
       "source_file": "package.json",
@@ -1306,7 +1379,7 @@
       "id": "package_dependencies_react",
       "label": "react",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "file_type": "code",
       "norm_label": "react",
       "source_file": "package.json",
@@ -1316,94 +1389,21 @@
       "id": "package_dependencies_react_dom",
       "label": "react-dom",
       "_origin": "ast",
-      "community": 7,
+      "community": 8,
       "file_type": "code",
       "norm_label": "react-dom",
       "source_file": "package.json",
       "source_location": "L14"
     },
     {
-      "id": "dbtest",
-      "label": "_dbtest.js",
+      "id": "app_about_page",
+      "label": "about/page.tsx",
       "_origin": "ast",
-      "community": 8,
-      "community_name": "package.json",
+      "community": 9,
       "file_type": "code",
-      "norm_label": "_dbtest.js",
-      "source_file": "_dbtest.js",
+      "norm_label": "about/page.tsx",
+      "source_file": "app/about/page.tsx",
       "source_location": "L1"
-    },
-    {
-      "id": "dbtest_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "_dbtest.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "dbtest_pool",
-      "label": "{ Pool }",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "package.json",
-      "file_type": "code",
-      "norm_label": "{ pool }",
-      "source_file": "_dbtest.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "ref_pg",
-      "label": "pg",
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "concept",
-      "norm_label": "pg",
-      "source_file": "package.json",
-      "source_location": "L12"
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 9,
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 9,
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 9,
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 9,
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "package.json",
-      "source_location": "L8"
     }
   ],
   "links": [
@@ -2110,18 +2110,6 @@
       "weight": 1.0
     },
     {
-      "source": "components_siteheader",
-      "target": "ref_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "components/SiteHeader.tsx",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
       "source": "dbtest",
       "target": "ref_pg",
       "relation": "imports_from",
@@ -2410,7 +2398,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/SiteHeader.tsx",
-      "source_location": "L6",
+      "source_location": "L3",
       "weight": 1.0
     },
     {

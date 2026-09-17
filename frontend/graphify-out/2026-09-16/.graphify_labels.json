@@ -1,14 +1,1 @@
-{
-  "0": "suggestions.ts",
-  "1": "package.json",
-  "2": "compilerOptions",
-  "3": "fpl.ts",
-  "4": "db.ts",
-  "5": "devDependencies",
-  "6": "FPL Team Manager — Vercel Frontend",
-  "7": "dependencies",
-  "8": "next.config.js",
-  "9": "next-env.d.ts",
-  "10": "postcss.config.js",
-  "11": "tailwind.config.js"
-}
+{"0": "suggestions.ts", "1": "package.json", "2": "compilerOptions", "3": "db.ts", "4": "fpl.ts", "5": "devDependencies", "6": "FPL Team Manager — Vercel Frontend", "7": "layout.tsx", "8": "dependencies", "9": "about/page.tsx", "10": "next.config.js", "11": "next-env.d.ts", "12": "postcss.config.js", "13": "tailwind.config.js"}

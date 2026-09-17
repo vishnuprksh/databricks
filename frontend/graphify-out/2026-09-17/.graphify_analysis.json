@@ -5,8 +5,12 @@
       "app_page_bootstrap",
       "app_page_home",
       "app_page_manager",
+      "app_page_pitch",
+      "app_page_playercard",
       "app_page_pos_colors",
       "app_page_posbadge",
+      "app_page_row_bg",
+      "app_page_row_order",
       "app_page_stat",
       "lib_suggestions",
       "lib_suggestions_buildsquadwithpred",
@@ -147,15 +151,14 @@
       "next_env_d_rationale_4"
     ],
     "12": [
-      "tailwind_config",
-      "tailwindcss"
+      "postcss_config"
     ],
     "13": [
-      "postcss_config"
+      "tailwind_config"
     ]
   },
   "cohesion": {
-    "0": 0.1422924901185771,
+    "0": 0.11396011396011396,
     "1": 0.1,
     "2": 0.10526315789473684,
     "3": 0.20952380952380953,
@@ -202,16 +205,6 @@
       "degree": 4
     },
     {
-      "id": "lib_suggestions_generatesuggestions",
-      "label": "generateSuggestions()",
-      "degree": 4
-    },
-    {
-      "id": "lib_suggestions_optimizestartingeleven",
-      "label": "optimizeStartingEleven()",
-      "degree": 4
-    },
-    {
       "id": "lib_db_fetchplayers",
       "label": "fetchPlayers()",
       "degree": 4
@@ -219,6 +212,16 @@
     {
       "id": "lib_db_fetchpredictions",
       "label": "fetchPredictions()",
+      "degree": 4
+    },
+    {
+      "id": "lib_suggestions_generatesuggestions",
+      "label": "generateSuggestions()",
+      "degree": 4
+    },
+    {
+      "id": "lib_suggestions_optimizestartingeleven",
+      "label": "optimizeStartingEleven()",
       "degree": 4
     }
   ],
@@ -246,33 +249,33 @@
       "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
     },
     {
-      "source": "Home()",
-      "target": "findBestTransfer()",
+      "source": "GET()",
+      "target": "fetchPlayers()",
       "source_files": [
-        "app/page.tsx",
-        "lib/suggestions.ts"
+        "app/api/data/route.ts",
+        "lib/db.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories"
     },
     {
-      "source": "Home()",
-      "target": "generateSuggestions()",
+      "source": "GET()",
+      "target": "fetchPredictions()",
       "source_files": [
-        "app/page.tsx",
-        "lib/suggestions.ts"
+        "app/api/data/route.ts",
+        "lib/db.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories"
     },
     {
-      "source": "Home()",
-      "target": "optimizeStartingEleven()",
+      "source": "GET()",
+      "target": "chooseGameweek()",
       "source_files": [
-        "app/page.tsx",
-        "lib/suggestions.ts"
+        "app/api/bootstrap/route.ts",
+        "lib/fpl.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",

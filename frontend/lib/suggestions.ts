@@ -22,6 +22,7 @@ export type SquadPlayer = {
   pred: number | null;
   starter: boolean;
   club: string;
+  photo?: string; // FPL photo code, image at resources.premierleague.com/.../p{photo}.png
 };
 
 export type Replacement = {

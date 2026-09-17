@@ -5,8 +5,12 @@
       "app_page_bootstrap",
       "app_page_home",
       "app_page_manager",
+      "app_page_pitch",
+      "app_page_playercard",
       "app_page_pos_colors",
       "app_page_posbadge",
+      "app_page_row_bg",
+      "app_page_row_order",
       "app_page_stat",
       "lib_suggestions",
       "lib_suggestions_buildsquadwithpred",
@@ -26,20 +30,19 @@
       "lib_suggestions_valid_formations"
     ],
     "1": [
-      "dbtest",
-      "dbtest_fs",
-      "dbtest_pool",
+      "app_layout",
+      "app_layout_metadata",
+      "app_layout_rootlayout",
+      "components_siteheader",
+      "components_siteheader_siteheader",
       "package",
       "package_name",
       "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_start",
       "package_version",
       "ref_autoprefixer",
-      "ref_pg",
+      "ref_next",
       "ref_postcss",
+      "ref_react",
       "ref_react_dom",
       "ref_tailwindcss",
       "ref_types_node",
@@ -82,8 +85,7 @@
       "lib_db_getpool",
       "lib_db_gwprediction",
       "lib_db_playerrow",
-      "lib_db_predictionrow",
-      "ref_react"
+      "lib_db_predictionrow"
     ],
     "4": [
       "app_api_bootstrap_route",
@@ -116,6 +118,7 @@
       "readme_deploy_to_vercel",
       "readme_env_vars",
       "readme_fpl_team_manager_vercel_frontend",
+      "readme_pages",
       "readme_setup_local_dev"
     ],
     "7": [
@@ -126,40 +129,52 @@
       "package_dependencies_react_dom"
     ],
     "8": [
-      "app_layout",
-      "app_layout_metadata",
-      "app_layout_rootlayout",
-      "ref_next"
+      "dbtest",
+      "dbtest_fs",
+      "dbtest_pool",
+      "ref_pg"
     ],
     "9": [
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_start"
+    ],
+    "10": [
+      "app_about_page",
+      "app_about_page_aboutpage"
+    ],
+    "11": [
       "next_config",
       "next_config_nextconfig"
     ],
-    "10": [
+    "12": [
       "next_env_d",
       "next_env_d_rationale_4"
     ],
-    "11": [
+    "13": [
       "postcss_config"
     ],
-    "12": [
+    "14": [
       "tailwind_config"
     ]
   },
   "cohesion": {
-    "0": 0.1422924901185771,
-    "1": 0.1,
+    "0": 0.11396011396011396,
+    "1": 0.11695906432748537,
     "2": 0.10526315789473684,
-    "3": 0.20952380952380953,
+    "3": 0.23076923076923078,
     "4": 0.2564102564102564,
     "5": 0.25,
-    "6": 0.3333333333333333,
+    "6": 0.2857142857142857,
     "7": 0.4,
     "8": 0.5,
-    "9": 1.0,
+    "9": 0.5,
     "10": 1.0,
     "11": 1.0,
-    "12": 1.0
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0
   },
   "gods": [
     {
@@ -173,6 +188,11 @@
       "degree": 7
     },
     {
+      "id": "readme_fpl_team_manager_vercel_frontend",
+      "label": "FPL Team Manager \u2014 Vercel Frontend",
+      "degree": 6
+    },
+    {
       "id": "app_page_home",
       "label": "Home()",
       "degree": 5
@@ -180,11 +200,6 @@
     {
       "id": "lib_suggestions_findbesttransfer",
       "label": "findBestTransfer()",
-      "degree": 5
-    },
-    {
-      "id": "readme_fpl_team_manager_vercel_frontend",
-      "label": "FPL Team Manager — Vercel Frontend",
       "degree": 5
     },
     {
@@ -270,41 +285,8 @@
       "why": "connects across different repos/directories"
     }
   ],
-  "questions": [
-    {
-      "type": "bridge_node",
-      "question": "Why does `react` connect `db.ts` to `suggestions.ts`, `package.json`?",
-      "why": "High betweenness centrality (0.186) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `pg` connect `package.json` to `db.ts`?",
-      "why": "High betweenness centrality (0.094) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `devDependencies` connect `devDependencies` to `package.json`?",
-      "why": "High betweenness centrality (0.084) - this node is a cross-community bridge."
-    },
-    {
-      "type": "isolated_nodes",
-      "question": "What connects `Bootstrap`, `Manager`, `Replacement` to the rest of the system?",
-      "why": "62 weakly-connected nodes found - possible documentation gaps or missing edges."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `suggestions.ts` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.1422924901185771 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `package.json` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `compilerOptions` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected."
-    }
-  ]
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
 }
