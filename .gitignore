@@ -1,3 +1,4 @@
 .env
 graphify-out/cache/
 .venv/
+node_modules/

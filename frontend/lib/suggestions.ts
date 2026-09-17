@@ -1,5 +1,6 @@
 import type { TeamRow } from "./fpl";
 import type { PlayerRow, PredictionRow } from "./db";
+import solver from "javascript-lp-solver";
 
 export type StatsRow = {
   web_name: string;
@@ -245,17 +246,7 @@ export type Dream15Result = {
   remainingBudget: number;
 };
 
-type DreamOption = {
-  players: SquadPlayer[];
-  starters: SquadPlayer[];
-  starterPred: number;
-  benchPred: number;
-  spent: number;
-  clubCounts: Record<string, number>;
-};
-
 const DREAM_POOL_SIZE = 28;
-const DREAM_BEAM_SIZE = 5000;
 
 function dreamPlayers(players: PlayerRow[], predictions: PredictionRow[]): SquadPlayer[] {
   const predictionById = new Map(predictions.map((prediction) => [prediction.player_id, prediction]));
@@ -283,69 +274,73 @@ function dreamPlayers(players: PlayerRow[], predictions: PredictionRow[]): Squad
 
 export function optimizeDream15(players: PlayerRow[], predictions: PredictionRow[], budget = 100): Dream15Result | null {
   const candidates = dreamPlayers(players, predictions);
-  const squadRequirements: Record<string, number> = { GKP: 2, DEF: 5, MID: 5, FWD: 3 };
-  const positionOrder = ["GKP", "DEF", "MID", "FWD"];
-  let states: DreamOption[] = [{ players: [], starters: [], starterPred: 0, benchPred: 0, spent: 0, clubCounts: {} }];
+  if (!candidates.length) return null;
 
-  for (const position of positionOrder) {
-    const positionCandidates = candidates.filter((player) => player.pos === position);
-    const required = squadRequirements[position];
-    const positionStates: DreamOption[] = [{ players: [], starters: [], starterPred: 0, benchPred: 0, spent: 0, clubCounts: {} }];
-    for (const candidate of positionCandidates) {
-      const next = [...positionStates];
-      for (const state of positionStates) {
-        if (state.players.length >= required || state.spent + candidate.nowPrice > budget) continue;
-        const clubCount = state.clubCounts[candidate.club] ?? 0;
-        if (clubCount >= 3) continue;
-        next.push({
-          players: [...state.players, candidate],
-          starters: [],
-          starterPred: 0,
-          benchPred: state.benchPred + (candidate.pred ?? 0),
-          spent: state.spent + candidate.nowPrice,
-          clubCounts: { ...state.clubCounts, [candidate.club]: clubCount + 1 },
-        });
-      }
-      const bestByKey = new Map<string, DreamOption>();
-      for (const state of next) {
-        const key = `${state.players.length}|${Math.round(state.spent * 10)}|${Object.entries(state.clubCounts).sort().map(([club, count]) => `${club}:${count}`).join(",")}`;
-        const previous = bestByKey.get(key);
-        if (!previous || state.benchPred > previous.benchPred) bestByKey.set(key, state);
-      }
-      positionStates.splice(0, positionStates.length, ...[...bestByKey.values()].sort((a, b) => b.benchPred - a.benchPred).slice(0, DREAM_BEAM_SIZE));
-    }
-    const completed = positionStates.filter((state) => state.players.length === required);
-    if (!completed.length) return null;
-    const next: DreamOption[] = [];
-    for (const combination of states) {
-      for (const option of completed) {
-        if (combination.spent + option.spent > budget) continue;
-        const clubCounts = { ...combination.clubCounts };
-        let valid = true;
-        for (const [club, count] of Object.entries(option.clubCounts)) {
-          clubCounts[club] = (clubCounts[club] ?? 0) + count;
-          if (clubCounts[club] > 3) { valid = false; break; }
-        }
-        if (valid) next.push({ players: [...combination.players, ...option.players], starters: [], starterPred: 0, benchPred: combination.benchPred + option.benchPred, spent: combination.spent + option.spent, clubCounts });
-      }
-    }
-    states = next.sort((a, b) => b.benchPred - a.benchPred).slice(0, DREAM_BEAM_SIZE);
-    if (!states.length) return null;
+  // Exact MILP (binary x_i per player):
+  //   maximize sum(pred_i * x_i)
+  //   s.t. sum(x_i) = 15; per-position exact counts (GKP 2, DEF 5, MID 5, FWD 3);
+  //        sum(price_i * x_i) <= budget; max 3 players per club.
+  const requirements: Record<string, number> = { GKP: 2, DEF: 5, MID: 5, FWD: 3 };
+  const clubNames = [...new Set(candidates.map((player) => player.club))];
+
+  const constraints: Record<string, { equal?: number; max?: number }> = { squad: { equal: 15 }, spent: { max: budget } };
+  for (const [position, required] of Object.entries(requirements)) constraints[`pos_${position}`] = { equal: required };
+  for (const club of clubNames) constraints[`club_${club}`] = { max: 3 };
+
+  const variables: Record<string, Record<string, number>> = {};
+  const upperBounds: Record<string, { max: number }> = {};
+  for (const player of candidates) {
+    const key = `${player.name} (${player.club})`;
+    variables[key] = {
+      squadPred: player.pred ?? 0,
+      squad: 1,
+      spent: player.nowPrice,
+      [`pos_${player.pos}`]: 1,
+      [`club_${player.club}`]: 1,
+      [`ub_${key}`]: 1,
+    };
+    // Explicit x <= 1 + integrality = binary. The library's `ints` alone has no
+    // default upper bound, so it can otherwise "select" a player multiple times.
+    upperBounds[`ub_${key}`] = { max: 1 };
   }
 
-  let best: DreamOption | null = null;
-  let bestXi: OptimizeResult | null = null;
-  for (const state of states) {
-    const xi = optimizeStartingEleven(state.players);
-    if (xi && (!bestXi || xi.totalPred * 1000000 + state.benchPred > bestXi.totalPred * 1000000 + (best?.benchPred ?? 0))) {
-      best = state;
-      bestXi = xi;
-    }
+  const solution = solver.Solve({
+    optimize: "squadPred",
+    opType: "max",
+    constraints: { ...constraints, ...upperBounds },
+    variables,
+    ints: Object.fromEntries(Object.keys(variables).map((name) => [name, 1])),
+  } as never) as Record<string, number | string>;
+
+  const squad = candidates.filter((player) => solution[`${player.name} (${player.club})`] === 1);
+  if (squad.length !== 15) {
+    // Diagnostics to surface solver/model issues instead of failing silently.
+    const values = candidates
+      .map((player) => [player, solution[`${player.name} (${player.club})`]] as const)
+      .filter(([, value]) => typeof value === "number" && value > 0)
+      .sort((a, b) => (b[1] as number) - (a[1] as number));
+    console.error("optimizeDream15: solver returned non-squad solution", { feasible: solution.feasible, picked: values.slice(0, 20) });
+    return null;
   }
-  if (!best || !bestXi || bestXi.xi.length !== 11) return null;
-  const xi = bestXi!.xi;
-  const bench = bestXi!.bench;
-  return { squad: best.players, xi, bench, captain: bestXi!.captain!, viceCaptain: bestXi!.viceCaptain!, formation: bestXi!.formation, totalPred: bestXi!.totalPred, benchPred: bench.reduce((sum, player) => sum + (player.pred ?? 0), 0), squadPred: bestXi!.totalPred + bench.reduce((sum, player) => sum + (player.pred ?? 0), 0), spent: best.spent, remainingBudget: budget - best.spent };
+
+  const spent = squad.reduce((sum, player) => sum + player.nowPrice, 0);
+  const bestXi = optimizeStartingEleven(squad);
+  if (!bestXi || bestXi.xi.length !== 11) return null;
+  const xi = bestXi.xi;
+  const bench = bestXi.bench;
+  return {
+    squad,
+    xi,
+    bench,
+    captain: bestXi.captain!,
+    viceCaptain: bestXi.viceCaptain!,
+    formation: bestXi.formation,
+    totalPred: bestXi.totalPred,
+    benchPred: bench.reduce((sum, player) => sum + (player.pred ?? 0), 0),
+    squadPred: bestXi!.totalPred + bench.reduce((sum, player) => sum + (player.pred ?? 0), 0),
+    spent,
+    remainingBudget: budget - spent,
+  };
 }
 
 const VALID_FORMATIONS: [number, number, number][] = [];
