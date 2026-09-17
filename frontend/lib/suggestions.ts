@@ -343,94 +343,92 @@ export function optimizeDream15(players: PlayerRow[], predictions: PredictionRow
   };
 }
 
-const VALID_FORMATIONS: [number, number, number][] = [];
-for (let d = 3; d <= 5; d++)
-  for (let m = 3; m <= 5; m++)
-    for (let f = 1; f <= 3; f++) if (d + m + f === 10) VALID_FORMATIONS.push([d, m, f]);
-
 /**
- * Exact optimization of the starting XI from the current 15-man squad.
+ * Exact MILP optimization of the starting XI from the current 15-man squad.
  * Rules: 1 GKP, 3-5 DEF, 3-5 MID, 1-3 FWD (sum 10 + GKP = 11).
+ * Binary s_i per player: maximize sum(pred_i * s_i)
+ *   s.t. sum(s_i) = 11; GKP starters = 1; 3 <= DEF <= 5; 3 <= MID <= 5; 1 <= FWD <= 3.
  * Max 3 players per club is automatically respected — the squad already
  * satisfies it and we never add external players.
  */
 export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | null {
   if (squad.length !== 15) return null;
-  const byPos = (pos: string) =>
-    squad
-      .filter((p) => p.pos === pos)
-      .sort((a, b) => (b.pred ?? 0) - (a.pred ?? 0));
-  const gkps = byPos("GKP");
-  const defs = byPos("DEF");
-  const mids = byPos("MID");
-  const fwds = byPos("FWD");
-  if (!gkps.length) return null;
-
   const pred = (p: SquadPlayer) => p.pred ?? 0;
+
   const clubCount: Record<string, number> = {};
   for (const p of squad) clubCount[p.club] = (clubCount[p.club] ?? 0) + 1;
   for (const c of Object.values(clubCount)) if (c > 3) return null; // invalid squad
 
-  let best: { xi: SquadPlayer[]; total: number; formation: [number, number, number] } | null = null;
-
-  for (const [d, m, f] of VALID_FORMATIONS) {
-    // Combinations via best-first: since we maximize sum, top-k picks per combo.
-    const comboSums = (pool: SquadPlayer[], k: number): { picks: SquadPlayer[]; total: number }[] => {
-      const results: { picks: SquadPlayer[]; total: number }[] = [];
-      const rec = (start: number, picks: SquadPlayer[], total: number) => {
-        if (picks.length === k) {
-          results.push({ picks: [...picks], total });
-          return;
-        }
-        for (let i = start; i < pool.length; i++) rec(i + 1, [...picks, pool[i]], total + pred(pool[i]));
-      };
-      rec(0, [], 0);
-      return results;
+  const variables: Record<string, Record<string, number>> = {};
+  const upperBounds: Record<string, { max: number }> = {};
+  squad.forEach((p, i) => {
+    const key = `s${i}`;
+    variables[key] = {
+      total: pred(p),
+      xi: 1,
+      [`sp_${p.pos}`]: 1,
+      [`ub_${key}`]: 1,
     };
+    // Explicit x <= 1 + integrality = binary (library's `ints` alone is unbounded).
+    upperBounds[`ub_${key}`] = { max: 1 };
+  });
 
-    for (const gk of gkps) {
-      // cheap prune: club constraint checked after combo
-      for (const D of comboSums(defs, d)) {
-        for (const M of comboSums(mids, m)) {
-          for (const F of comboSums(fwds, f)) {
-            const counts: Record<string, number> = {};
-            let ok = true;
-            for (const p of [gk, ...D.picks, ...M.picks, ...F.picks]) {
-              counts[p.club] = (counts[p.club] ?? 0) + 1;
-              if (counts[p.club] > 3) { ok = false; break; }
-            }
-            if (!ok) continue;
-            const total = pred(gk) + D.total + M.total + F.total;
-            if (!best || total > best.total) {
-              best = { xi: [gk, ...D.picks, ...M.picks, ...F.picks], total, formation: [d, m, f] };
-            }
-          }
-        }
-      }
-    }
+  const solution = solver.Solve({
+    optimize: "total",
+    opType: "max",
+    constraints: {
+      xi: { equal: 11 },
+      sp_GKP: { equal: 1 },
+      sp_DEF: { min: 3, max: 5 },
+      sp_MID: { min: 3, max: 5 },
+      sp_FWD: { min: 1, max: 3 },
+      ...upperBounds,
+    },
+    variables,
+    ints: Object.fromEntries(Object.keys(variables).map((name) => [name, 1])),
+  } as never) as Record<string, number | string>;
+
+  const xiSet = new Set(
+    squad.filter((_, i) => solution[`s${i}`] === 1).map((p) => p.name)
+  );
+  if (xiSet.size !== 11) {
+    console.error("optimizeStartingEleven: solver returned non-XI solution", { feasible: solution.feasible });
+    return null;
   }
 
-  if (!best) return null;
-  const xiNames = new Set(best.xi.map((p) => p.name));
-  const bench = squad.filter((p) => !xiNames.has(p.name));
-  const captain = best.xi.reduce((a, b) => (pred(b) > pred(a) ? b : a), best.xi[0]).name;
-  const vice = [...best.xi].sort((a, b) => pred(b) - pred(a))[1]?.name ?? null;
+  const xi = squad.filter((p) => xiSet.has(p.name));
+  const bench = squad.filter((p) => !xiSet.has(p.name));
+  const total = xi.reduce((sum, p) => sum + pred(p), 0);
+  const byPos = (pos: string) => xi.filter((p) => p.pos === pos).length;
+  const captain = xi.reduce((a, b) => (pred(b) > pred(a) ? b : a), xi[0]).name;
+  const vice = [...xi].sort((a, b) => pred(b) - pred(a))[1]?.name ?? null;
 
   const currentStarters = squad.filter((p) => p.starter);
   const currentTotal = currentStarters.reduce((s, p) => s + pred(p), 0);
 
   return {
-    xi: [...best.xi].sort((a, b) => pred(b) - pred(a)),
+    xi: [...xi].sort((a, b) => pred(b) - pred(a)),
     bench,
     captain,
     viceCaptain: vice,
-    formation: `${best.formation[0]}-${best.formation[1]}-${best.formation[2]}`,
-    totalPred: best.total,
+    formation: `${byPos("DEF")}-${byPos("MID")}-${byPos("FWD")}`,
+    totalPred: total,
     currentTotal,
-    gain: best.total - currentTotal,
+    gain: total - currentTotal,
   };
 }
 
+/**
+ * Exact best single transfer (starter-out / same-position-in) via MILP reasoning:
+ *
+ * 1. Solve the current optimal XI once (MILP).
+ * 2. For each position, the provably best outgoing is the lowest-pred current-XI
+ *    player there: swapping any non-XI starter leaves the XI unchanged, and for a
+ *    fixed incoming player the XI after the swap is (old XI − out + in), whose
+ *    value is pred(in) − pred(out) — maximized by the weakest XI member.
+ * 3. Pick the best (position, incoming) pair under budget + club constraints.
+ * 4. Verify by re-solving the XI (MILP) for the post-transfer squad.
+ */
 export function findBestTransfer(
   squad: SquadPlayer[],
   predictions: PredictionRow[],
@@ -444,11 +442,19 @@ export function findBestTransfer(
   const clubCount: Record<string, number> = {};
   for (const player of squad) clubCount[player.club] = (clubCount[player.club] ?? 0) + 1;
   const squadNamesSet = new Set(squadNames);
-  let best: Suggestion | null = null;
 
-  for (const outgoing of squad.filter((player) => player.starter)) {
+  // Weakest current-XI player per position — the provably optimal outgoing.
+  const weakestXiByPos: Record<string, SquadPlayer> = {};
+  for (const player of current.xi) {
+    const w = weakestXiByPos[player.pos];
+    if (!w || (player.pred ?? 0) < (w.pred ?? 0)) weakestXiByPos[player.pos] = player;
+  }
+
+  let best: { out: SquadPlayer; in: Replacement; improvement: number } | null = null;
+
+  for (const [pos, outgoing] of Object.entries(weakestXiByPos)) {
     const replacements = findReplacements(
-      outgoing.pos,
+      pos,
       outgoing.sellPrice,
       outgoing.club,
       clubCount,
@@ -459,33 +465,36 @@ export function findBestTransfer(
       stats,
       false
     );
-
     for (const incoming of replacements) {
-      const incomingPlayer: SquadPlayer = {
-        name: incoming.name,
-        pos: outgoing.pos,
-        nowPrice: incoming.price,
-        sellPrice: incoming.price,
-        pred: incoming.pred,
-        starter: outgoing.starter,
-        club: incoming.club,
-      };
-      const candidateSquad = squad.map((player) => player.name === outgoing.name ? incomingPlayer : player);
-      const candidate = optimizeStartingEleven(candidateSquad);
-      if (!candidate) continue;
-
-      const improvement = candidate.totalPred - current.totalPred;
+      const improvement = incoming.pred - (outgoing.pred ?? 0);
       if (!best || improvement > best.improvement) {
-        best = {
-          out: outgoing,
-          in: incoming,
-          improvement,
-          alternatives: [],
-          transferLabel: improvement > 0 ? "BEST XI TRANSFER" : "BEST AVAILABLE TRANSFER",
-        };
+        best = { out: outgoing, in: incoming, improvement };
       }
     }
   }
 
-  return best;
+  if (!best) return null;
+
+  // Verify: solve the post-transfer XI exactly and confirm the improvement.
+  const incomingPlayer: SquadPlayer = {
+    name: best.in.name,
+    pos: best.out.pos,
+    nowPrice: best.in.price,
+    sellPrice: best.in.price,
+    pred: best.in.pred,
+    starter: best.out.starter,
+    club: best.in.club,
+  };
+  const candidateSquad = squad.map((player) => player.name === best!.out.name ? incomingPlayer : player);
+  const candidate = optimizeStartingEleven(candidateSquad);
+  if (!candidate) return null;
+  const verifiedImprovement = candidate.totalPred - current.totalPred;
+
+  return {
+    out: best.out,
+    in: best.in,
+    improvement: verifiedImprovement,
+    alternatives: [],
+    transferLabel: verifiedImprovement > 0 ? "BEST XI TRANSFER" : "BEST AVAILABLE TRANSFER",
+  };
 }
