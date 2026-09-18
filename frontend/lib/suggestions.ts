@@ -2,20 +2,17 @@ import type { TeamRow } from "./fpl";
 import type { PlayerRow, PredictionRow } from "./db";
 import solver from "javascript-lp-solver";
 
-export type StatsRow = {
-  web_name: string;
-  position: string;
-  price: number;
-  team_name: string;
-  status: string;
-  news: string;
-  total_points: number;
-  form: number;
-  points_per_game: number;
-  selected_by_percent: number;
-};
+export type StatsRow = PlayerRow;
+
+/** Stats lookup keyed by FPL player id — never match players by name. */
+export function statsByPlayerId(players: PlayerRow[]): Record<number, StatsRow> {
+  const map: Record<number, StatsRow> = {};
+  for (const p of players) map[p.player_id] = p;
+  return map;
+}
 
 export type SquadPlayer = {
+  player_id?: number;
   name: string;
   pos: string;
   nowPrice: number;
@@ -27,6 +24,7 @@ export type SquadPlayer = {
 };
 
 export type Replacement = {
+  player_id: number;
   name: string;
   price: number;
   pred: number;
@@ -46,25 +44,6 @@ export type Suggestion = {
 };
 
 const POS_BY_ELEMENT: Record<number, string> = { 1: "GKP", 2: "DEF", 3: "MID", 4: "FWD" };
-
-export function statsByPlayerName(players: any[]): Record<string, StatsRow> {
-  const map: Record<string, StatsRow> = {};
-  for (const p of players) {
-    map[p.web_name] = {
-      web_name: p.web_name,
-      position: p.position ?? POS_BY_ELEMENT[p.element_type] ?? "Unknown",
-      price: p.now_cost != null ? p.now_cost / 10 : p.price ?? 0,
-      team_name: p.team_name ?? p.club ?? "Unknown",
-      status: p.status ?? "?",
-      news: p.news ?? "",
-      total_points: p.total_points ?? 0,
-      form: parseFloat(p.form ?? 0) || 0,
-      points_per_game: parseFloat(p.points_per_game ?? 0) || 0,
-      selected_by_percent: parseFloat(p.selected_by_percent ?? 0) || 0,
-    };
-  }
-  return map;
-}
 
 export type TransferRecord = { event: number; element_in: number; element_out: number; element_in_cost: number };
 
@@ -107,23 +86,14 @@ export function buildSquadWithPred(
 }
 
 /**
- * Resolve a prediction's (possibly full) player name to a stats entry keyed by
- * web_name. Matches exact, prefix/suffix, and last-token equality.
+ * Resolve a prediction to a stats entry by FPL player id (authoritative —
+ * web_name matching is ambiguous, e.g. two players named "Fernandes").
  */
-export function resolveStats(
-  predName: string,
-  stats: Record<string, StatsRow>
+export function resolveStatsById(
+  prediction: PredictionRow,
+  stats: Record<number, StatsRow>
 ): StatsRow | undefined {
-  if (stats[predName]) return stats[predName];
-  const norm = (s: string) => s.toLowerCase().replace(/[^a-z ]/g, "").trim();
-  const p = norm(predName);
-  for (const s of Object.keys(stats)) {
-    const w = norm(s);
-    if (p.endsWith(w) || w.endsWith(p) || p.split(" ").pop() === w || w.split(" ").pop() === p) {
-      return stats[s];
-    }
-  }
-  return undefined;
+  return stats[prediction.player_id];
 }
 
 function findReplacements(
@@ -133,19 +103,19 @@ function findReplacements(
   clubCount: Record<string, number>,
   budgetAvailable: number,
   predictions: PredictionRow[],
-  squadNames: Set<string>,
-  usedIncoming: Set<string>,
-  stats: Record<string, StatsRow>,
+  squadIds: Set<number>,
+  usedIds: Set<number>,
+  stats: Record<number, StatsRow>,
   preferReinvest: boolean,
-  excludedIncoming: Set<string> = new Set()
+  excludedIds: Set<number> = new Set()
 ): Replacement[] {
   const candidates: Replacement[] = [];
   for (const pred of predictions) {
     if (pred.position !== outPos) continue;
-    if (squadNames.has(pred.player_name) || usedIncoming.has(pred.player_name)) continue;
-    const s = resolveStats(pred.player_name, stats);
+    // Match stats by player_id — names are ambiguous.
+    const s = stats[pred.player_id];
     if (!s || (s.status !== "a" && s.status !== "d")) continue;
-    if (squadNames.has(s.web_name) || usedIncoming.has(s.web_name) || excludedIncoming.has(s.web_name)) continue;
+    if (squadIds.has(s.player_id) || usedIds.has(s.player_id) || excludedIds.has(s.player_id)) continue;
     const targetClub = s.team_name;
     const tempCount = { ...clubCount };
     if (outClub === targetClub) tempCount[outClub] = (tempCount[outClub] ?? 0) - 1;
@@ -153,6 +123,7 @@ function findReplacements(
     const costDiff = s.price - outPrice;
     if (costDiff > budgetAvailable) continue;
     candidates.push({
+      player_id: s.player_id,
       name: s.web_name,
       price: s.price,
       pred: pred.avg_prob_gt_6,
@@ -172,12 +143,11 @@ function findReplacements(
 export function generateSuggestions(
   squad: SquadPlayer[],
   predictions: PredictionRow[],
-  stats: Record<string, StatsRow>,
-  bank: number,
-  squadNames: string[]
+  stats: Record<number, StatsRow>,
+  bank: number
 ): { suggestions: Suggestion[]; remainingBank: number; clubCount: Record<string, number> } {
-  const squadNamesSet = new Set(squadNames);
-  const usedIncoming = new Set<string>();
+  const squadIds = new Set(squad.map((p) => p.player_id).filter((id): id is number => id != null));
+  const usedIds = new Set<number>();
   const clubCount: Record<string, number> = {};
   for (const p of squad) clubCount[p.club] = (clubCount[p.club] ?? 0) + 1;
 
@@ -198,11 +168,11 @@ export function generateSuggestions(
     const budget1 = remainingBank;
     const repls = findReplacements(
       first.pos, first.sellPrice, first.club, clubCount, budget1,
-      predictions, squadNamesSet, usedIncoming, stats, false
+      predictions, squadIds, usedIds, stats, false
     );
     if (repls.length) {
       const best = repls[0];
-      usedIncoming.add(best.name);
+      usedIds.add(best.player_id);
       remainingBank -= best.costDiff;
       suggestions.push({
         out: first, in: best,
@@ -216,27 +186,27 @@ export function generateSuggestions(
   // Phase 2: reinvest freed budget into next weakest starters (skip >50% owned)
   const remainingStarters = startersSorted
     .slice(1)
-    .filter((p) => p.name !== first?.name && (stats[p.name]?.selected_by_percent ?? 0) < 50);
+    .filter((p) => p.name !== first?.name && (stats[p.player_id ?? -1]?.selected_by_percent ?? 0) < 50);
 
   for (const player of remainingStarters) {
     if (suggestions.length >= 3) break;
     const preferReinvest = remainingBank > 3.0;
     const repls = findReplacements(
       player.pos, player.sellPrice, player.club, clubCount, remainingBank,
-      predictions, squadNamesSet, usedIncoming, stats, preferReinvest
+      predictions, squadIds, usedIds, stats, preferReinvest
     );
     if (!repls.length) continue;
     const best = repls[0];
     const improvement = best.pred - (player.pred ?? 0);
     if (improvement <= 0 && player.pred !== null) continue;
-    usedIncoming.add(best.name);
+    usedIds.add(best.player_id);
     remainingBank -= best.costDiff;
     // alternatives (computed against pre-cost bank for display)
     const allRepls = findReplacements(
       player.pos, player.sellPrice, player.club, clubCount,
-      remainingBank + best.costDiff, predictions, squadNamesSet, usedIncoming, stats, preferReinvest
+      remainingBank + best.costDiff, predictions, squadIds, usedIds, stats, preferReinvest
     );
-    const alts = allRepls.filter((r) => r.name !== best.name && !usedIncoming.has(r.name)).slice(0, 2);
+    const alts = allRepls.filter((r) => r.player_id !== best.player_id && !usedIds.has(r.player_id)).slice(0, 2);
     suggestions.push({ out: player, in: best, improvement, alternatives: alts, transferLabel: `Transfer ${suggestions.length + 1} (-4 pts)` });
   }
 
@@ -454,18 +424,17 @@ export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | n
 export function findBestTransfer(
   squad: SquadPlayer[],
   predictions: PredictionRow[],
-  stats: Record<string, StatsRow>,
+  stats: Record<number, StatsRow>,
   bank: number,
-  squadNames: string[],
-  declinedNames: string[] = []
+  declinedIds: number[] = []
 ): Suggestion | null {
   const current = optimizeStartingEleven(squad);
   if (!current) return null;
 
   const clubCount: Record<string, number> = {};
   for (const player of squad) clubCount[player.club] = (clubCount[player.club] ?? 0) + 1;
-  const squadNamesSet = new Set(squadNames);
-  const declined = new Set(Array.isArray(declinedNames) ? declinedNames : []);
+  const squadIds = new Set(squad.map((p) => p.player_id).filter((id): id is number => id != null));
+  const declined = new Set(Array.isArray(declinedIds) ? declinedIds : []);
 
   // Weakest current-XI player per position — the provably optimal outgoing.
   const weakestXiByPos: Record<string, SquadPlayer> = {};
@@ -484,8 +453,8 @@ export function findBestTransfer(
       clubCount,
       bank,
       predictions,
-      squadNamesSet,
-      new Set<string>(),
+      squadIds,
+      new Set<number>(),
       stats,
       false,
       declined
@@ -534,10 +503,11 @@ export function listTransferOptions(
   out: SquadPlayer,
   squad: SquadPlayer[],
   predictions: PredictionRow[],
-  stats: Record<string, StatsRow>,
+  stats: Record<number, StatsRow>,
   bank: number
 ): Replacement[] {
   const squadNames = new Set(squad.map((p) => p.name));
+  const squadIds = new Set(squad.map((p) => p.player_id).filter((id): id is number => id != null));
   const clubCount: Record<string, number> = {};
   for (const p of squad) clubCount[p.club] = (clubCount[p.club] ?? 0) + 1;
 
@@ -545,9 +515,10 @@ export function listTransferOptions(
   const candidates: Replacement[] = [];
   for (const pred of predictions) {
     if (pred.position !== out.pos) continue;
-    const s = resolveStats(pred.player_name, stats);
+    // Match stats by player_id — names are ambiguous.
+    const s = stats[pred.player_id];
     if (!s || (s.status !== "a" && s.status !== "d")) continue;
-    if (squadNames.has(s.web_name)) continue;
+    if (squadIds.has(s.player_id)) continue;
     const targetClub = s.team_name;
     const tempCount = { ...clubCount };
     if (out.club === targetClub) tempCount[out.club] = (tempCount[out.club] ?? 0) - 1;
@@ -555,6 +526,7 @@ export function listTransferOptions(
     const costDiff = s.price - out.sellPrice;
     if (costDiff > budgetAvailable) continue;
     candidates.push({
+      player_id: s.player_id,
       name: s.web_name,
       price: s.price,
       pred: pred.avg_prob_gt_6,

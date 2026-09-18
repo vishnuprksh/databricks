@@ -6,7 +6,6 @@ import {
   findBestTransfer,
   listTransferOptions,
   optimizeStartingEleven,
-  resolveStats,
 } from "@/lib/suggestions";
 import type {
   SquadPlayer,
@@ -46,7 +45,7 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [bank, setBank] = useState(0);
   const [clubCount, setClubCount] = useState<Record<string, number>>({});
-  const [stats, setStats] = useState<Record<string, StatsRow>>({});
+  const [stats, setStats] = useState<Record<number, StatsRow>>({});
   const [predictions, setPredictions] = useState<PredictionRow[]>([]);
   const [noPred, setNoPred] = useState<string[]>([]);
   const [optimizing, setOptimizing] = useState(false);
@@ -74,8 +73,7 @@ export default function Home() {
     try {
       const best = findBestTransfer(
         squad, predictions, stats, bank,
-        teamRows.map((r) => r.player_name),
-        skippedSuggestions.map((s) => s.in.name)
+        skippedSuggestions.map((s) => s.in.player_id)
       );
       setSuggestions(best ? [best] : []);
       const nextClubCount: Record<string, number> = {};
@@ -94,21 +92,17 @@ export default function Home() {
 
   const approveTransfer = (suggestion: Suggestion) => {
     const outgoing = teamRows.find((r) => r.player_name === suggestion.out.name);
-    // Predictions store full names; the suggestion uses web_name — resolve via stats.
-    const incomingPrediction = predictions.find(
-      (p) => resolveStats(p.player_name, stats)?.web_name === suggestion.in.name
-    );
-    if (!outgoing || !incomingPrediction) return;
-
-    const incomingStats = stats[suggestion.in.name];
+    if (!outgoing) return;
+    // The replacement carries its FPL player_id — use it directly (names are ambiguous).
+    const incomingStats = stats[suggestion.in.player_id];
     if (!incomingStats) return;
     setSkipped((prev) => prev.filter((s) => s.in.name !== suggestion.in.name));
 
     const incomingRow: TeamRow = {
       ...outgoing,
-      player_id: incomingPrediction.player_id,
+      player_id: incomingStats.player_id,
       player_name: suggestion.in.name,
-      full_name: suggestion.in.name,
+      full_name: `${incomingStats.first_name} ${incomingStats.second_name}`.trim() || suggestion.in.name,
       club: suggestion.in.club,
       price: suggestion.in.price,
       selected_by_percent: incomingStats.selected_by_percent,
@@ -116,6 +110,7 @@ export default function Home() {
       form: incomingStats.form,
     };
     const incomingSquadPlayer: SquadPlayer = {
+      player_id: incomingStats.player_id,
       name: suggestion.in.name,
       pos: suggestion.out.pos,
       nowPrice: suggestion.in.price,
@@ -129,8 +124,7 @@ export default function Home() {
     const nextBank = bank - suggestion.in.costDiff;
     const bestNextTransfer = findBestTransfer(
       nextSquad, predictions, stats, nextBank,
-      nextRows.map((r) => r.player_name),
-      skipped.map((s) => s.in.name)
+      skipped.map((s) => s.in.player_id)
     );
     const nextSuggestions = bestNextTransfer ? [bestNextTransfer] : [];
 
@@ -217,20 +211,10 @@ export default function Home() {
       const data = await dataRes.json();
       if (!dataRes.ok) throw new Error(data.error);
 
-      const statsMap: Record<string, StatsRow> = {};
+      const statsMap: Record<number, StatsRow> = {};
       for (const p of data.players) {
-        statsMap[p.web_name] = {
-          web_name: p.web_name,
-          position: p.position,
-          price: p.price,
-          team_name: p.team_name,
-          status: p.status,
-          news: p.news,
-          total_points: p.total_points,
-          form: p.form,
-          points_per_game: p.points_per_game,
-          selected_by_percent: p.selected_by_percent,
-        };
+        // Key stats by FPL player_id — web_name is not unique (e.g. two Fernandes).
+        statsMap[p.player_id] = p;
       }
       setStats(statsMap);
 
@@ -252,6 +236,7 @@ export default function Home() {
       }
 
       const squadPlayers: SquadPlayer[] = rows.map((r) => ({
+        player_id: r.player_id,
         name: r.player_name,
         pos: r.position,
         nowPrice: r.price,
@@ -272,8 +257,7 @@ export default function Home() {
         squadPlayers,
         data.predictions,
         statsMap,
-        bankVal,
-        rows.map((r) => r.player_name)
+        bankVal
       );
       setSuggestions(best ? [best] : []);
       setSkipped([]);
