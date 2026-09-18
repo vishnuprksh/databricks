@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { PlayerRow, PredictionRow } from "@/lib/db";
 
-type SortKey = "web_name" | "total_points" | "form" | "price" | "avg_prob_gt_6";
+type SortKey = "web_name" | "total_points" | "form" | "price" | "agg_pred_prob";
 
 const POS_COLORS: Record<string, string> = {
   GKP: "bg-amber-500/20 text-amber-300",
@@ -55,10 +55,10 @@ export default function PlayersPage() {
         return matchesPosition && matchesQuery;
       })
       .sort((a, b) => {
-        const aPrediction = predictionById.get(a.player_id)?.avg_prob_gt_6 ?? -1;
-        const bPrediction = predictionById.get(b.player_id)?.avg_prob_gt_6 ?? -1;
-        const aValue = sortKey === "avg_prob_gt_6" ? aPrediction : a[sortKey];
-        const bValue = sortKey === "avg_prob_gt_6" ? bPrediction : b[sortKey];
+        const aPrediction = predictionById.get(a.player_id)?.agg_pred_prob ?? -1;
+        const bPrediction = predictionById.get(b.player_id)?.agg_pred_prob ?? -1;
+        const aValue = sortKey === "agg_pred_prob" ? aPrediction : a[sortKey];
+        const bValue = sortKey === "agg_pred_prob" ? bPrediction : b[sortKey];
         const comparison = typeof aValue === "string" && typeof bValue === "string"
           ? aValue.localeCompare(bValue)
           : Number(aValue) - Number(bValue);
@@ -78,11 +78,6 @@ export default function PlayersPage() {
     <main className="max-w-7xl mx-auto px-4 py-10">
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <nav className="text-sm text-[var(--muted)] mb-4">
-            <a href="/" className="hover:text-[var(--accent)]">Team Manager</a>
-            <span className="mx-2">/</span>
-            <span className="text-[var(--text)]">Players</span>
-          </nav>
           <h1 className="text-3xl font-extrabold tracking-tight">
             Player <span className="text-[var(--accent)]">Market</span>
           </h1>
@@ -134,7 +129,7 @@ export default function PlayersPage() {
                   <th><button onClick={() => changeSort("total_points")} className="hover:text-[var(--accent)]">Total</button></th>
                   <th><button onClick={() => changeSort("form")} className="hover:text-[var(--accent)]">Form</button></th>
                   <th>PPG</th><th>Own %</th>
-                  <th><button onClick={() => changeSort("avg_prob_gt_6")} className="hover:text-[var(--accent)]">Prediction</button></th>
+                  <th><button onClick={() => changeSort("agg_pred_prob")} className="hover:text-[var(--accent)]">Prediction</button></th>
                 </tr>
               </thead>
               <tbody>
@@ -154,7 +149,7 @@ export default function PlayersPage() {
                       <td>{player.form.toFixed(1)}</td>
                       <td>{player.points_per_game.toFixed(1)}</td>
                       <td>{player.selected_by_percent.toFixed(1)}%</td>
-                      <td className="font-semibold text-[var(--accent)]">{prediction ? prediction.avg_prob_gt_6.toFixed(3) : "N/A"}</td>
+                      <td className="font-semibold text-[var(--accent)]">{prediction ? prediction.agg_pred_prob.toFixed(3) : "N/A"}</td>
                     </tr>
                   );
                 })}

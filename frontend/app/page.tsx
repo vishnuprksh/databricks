@@ -1,9 +1,19 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { TeamRow } from "@/lib/fpl";
-import { findBestTransfer, generateSuggestions, optimizeStartingEleven } from "@/lib/suggestions";
-import type { SquadPlayer, Suggestion, StatsRow, OptimizeResult } from "@/lib/suggestions";
+import {
+  findBestTransferPlan,
+  listTransferOptions,
+  optimizeStartingEleven,
+} from "@/lib/suggestions";
+import type {
+  SquadPlayer,
+  Suggestion,
+  StatsRow,
+  OptimizeResult,
+  Replacement,
+} from "@/lib/suggestions";
 import type { PredictionRow } from "@/lib/db";
 
 type Manager = any;
@@ -35,12 +45,16 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [bank, setBank] = useState(0);
   const [clubCount, setClubCount] = useState<Record<string, number>>({});
-  const [stats, setStats] = useState<Record<string, StatsRow>>({});
+  const [stats, setStats] = useState<Record<number, StatsRow>>({});
   const [predictions, setPredictions] = useState<PredictionRow[]>([]);
   const [noPred, setNoPred] = useState<string[]>([]);
   const [optimizing, setOptimizing] = useState(false);
   const [suggestingTransfer, setSuggestingTransfer] = useState(false);
+  const [transferLimit, setTransferLimit] = useState<1 | 2 | 3>(1);
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
+  const [transferModal, setTransferModal] = useState<{ out: SquadPlayer; options: Replacement[] } | null>(null);
+  const [skipped, setSkipped] = useState<Suggestion[]>([]);
+  const [pinnedIds, setPinnedIds] = useState<number[]>([]);
 
   const optimize = async () => {
     if (squad.length !== 15) {
@@ -49,18 +63,35 @@ export default function Home() {
     }
     setOptimizing(true);
     try {
-      setOptResult(optimizeStartingEleven(squad));
+      setOptResult(optimizeStartingEleven(squad, pinnedIds));
     } finally {
       setOptimizing(false);
     }
   };
 
-  const suggestBestTransfer = async () => {
+  const buildTransferPlan = (
+    startingSquad: SquadPlayer[],
+    startingBank: number,
+    limit: 1 | 2 | 3,
+    skippedSuggestions: Suggestion[],
+    pinnedOverride = pinnedIds
+  ) => {
+    return findBestTransferPlan(
+      startingSquad,
+      predictions,
+      stats,
+      startingBank,
+      limit,
+      skippedSuggestions.map((suggestion) => suggestion.in.player_id),
+      pinnedOverride
+    );
+  };
+
+  const suggestBestTransfer = async (skippedSuggestions: Suggestion[] = skipped) => {
     setSuggestingTransfer(true);
     await new Promise<void>((resolve) => setTimeout(resolve, 0));
     try {
-      const best = findBestTransfer(squad, predictions, stats, bank, teamRows.map((r) => r.player_name));
-      setSuggestions(best ? [best] : []);
+      setSuggestions(buildTransferPlan(squad, bank, transferLimit, skippedSuggestions));
       const nextClubCount: Record<string, number> = {};
       for (const player of squad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
       setClubCount(nextClubCount);
@@ -69,19 +100,25 @@ export default function Home() {
     }
   };
 
+  const skipTransfer = (suggestion: Suggestion) => {
+    const nextSkipped = [...skipped, suggestion];
+    setSkipped(nextSkipped);
+    suggestBestTransfer(nextSkipped);
+  };
+
   const approveTransfer = (suggestion: Suggestion) => {
     const outgoing = teamRows.find((r) => r.player_name === suggestion.out.name);
-    const incomingPrediction = predictions.find((p) => p.player_name === suggestion.in.name);
-    if (!outgoing || !incomingPrediction) return;
-
-    const incomingStats = stats[suggestion.in.name];
+    if (!outgoing) return;
+    // The replacement carries its FPL player_id — use it directly (names are ambiguous).
+    const incomingStats = stats[suggestion.in.player_id];
     if (!incomingStats) return;
+    setSkipped((prev) => prev.filter((s) => s.in.name !== suggestion.in.name));
 
     const incomingRow: TeamRow = {
       ...outgoing,
-      player_id: incomingPrediction.player_id,
+      player_id: incomingStats.player_id,
       player_name: suggestion.in.name,
-      full_name: suggestion.in.name,
+      full_name: `${incomingStats.first_name} ${incomingStats.second_name}`.trim() || suggestion.in.name,
       club: suggestion.in.club,
       price: suggestion.in.price,
       selected_by_percent: incomingStats.selected_by_percent,
@@ -89,6 +126,7 @@ export default function Home() {
       form: incomingStats.form,
     };
     const incomingSquadPlayer: SquadPlayer = {
+      player_id: incomingStats.player_id,
       name: suggestion.in.name,
       pos: suggestion.out.pos,
       nowPrice: suggestion.in.price,
@@ -100,18 +138,50 @@ export default function Home() {
     const nextRows = teamRows.map((r) => (r.player_name === suggestion.out.name ? incomingRow : r));
     const nextSquad = squad.map((p) => (p.name === suggestion.out.name ? incomingSquadPlayer : p));
     const nextBank = bank - suggestion.in.costDiff;
-    const bestNextTransfer = findBestTransfer(nextSquad, predictions, stats, nextBank, nextRows.map((r) => r.player_name));
-    const nextSuggestions = bestNextTransfer ? [bestNextTransfer] : [];
+    const nextSkipped = skipped.filter((s) => s.in.name !== suggestion.in.name);
+    const nextSuggestions = buildTransferPlan(nextSquad, nextBank, transferLimit, nextSkipped);
 
     setTeamRows(nextRows);
     setSquad(nextSquad);
     setBank(nextBank);
     setSuggestions(nextSuggestions);
+    setSkipped(nextSkipped);
     const nextClubCount: Record<string, number> = {};
     for (const player of nextSquad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
     setClubCount(nextClubCount);
     setNoPred(nextSquad.filter((p) => p.pred === null).map((p) => p.name));
-    setOptResult(optimizeStartingEleven(nextSquad));
+    setOptResult(optimizeStartingEleven(nextSquad, pinnedIds));
+  };
+
+  const openTransferModal = (playerName: string) => {
+    const out = squad.find((p) => p.name === playerName);
+    if (!out || !predictions.length) return;
+    const options = listTransferOptions(out, squad, predictions, stats, bank);
+    setTransferModal({ out, options });
+  };
+
+  const togglePin = (playerId: number | undefined) => {
+    if (playerId == null) return;
+    const nextPinned = pinnedIds.includes(playerId) ? pinnedIds.filter((id) => id !== playerId) : [...pinnedIds, playerId];
+    setPinnedIds(nextPinned);
+    setSuggestions(buildTransferPlan(squad, bank, transferLimit, skipped, nextPinned));
+    setOptResult(null);
+  };
+
+  const substitutePlayer = (starterName: string, benchName: string) => {
+    const nextSquad = squad.map((player) => {
+      if (player.name === starterName) return { ...player, starter: false };
+      if (player.name === benchName) return { ...player, starter: true };
+      return player;
+    });
+    setSquad(nextSquad);
+    setTeamRows((current) => current.map((row) => {
+      if (row.player_name === starterName) return { ...row, is_starter: false };
+      if (row.player_name === benchName) return { ...row, is_starter: true };
+      return row;
+    }));
+    setSuggestions(buildTransferPlan(nextSquad, bank, transferLimit, skipped));
+    setOptResult(null);
   };
 
   const load = useCallback(async () => {
@@ -179,20 +249,10 @@ export default function Home() {
       const data = await dataRes.json();
       if (!dataRes.ok) throw new Error(data.error);
 
-      const statsMap: Record<string, StatsRow> = {};
+      const statsMap: Record<number, StatsRow> = {};
       for (const p of data.players) {
-        statsMap[p.web_name] = {
-          web_name: p.web_name,
-          position: p.position,
-          price: p.price,
-          team_name: p.team_name,
-          status: p.status,
-          news: p.news,
-          total_points: p.total_points,
-          form: p.form,
-          points_per_game: p.points_per_game,
-          selected_by_percent: p.selected_by_percent,
-        };
+        // Key stats by FPL player_id — web_name is not unique (e.g. two Fernandes).
+        statsMap[p.player_id] = p;
       }
       setStats(statsMap);
 
@@ -214,11 +274,12 @@ export default function Home() {
       }
 
       const squadPlayers: SquadPlayer[] = rows.map((r) => ({
+        player_id: r.player_id,
         name: r.player_name,
         pos: r.position,
         nowPrice: r.price,
         sellPrice: sell[r.player_name] ?? r.price,
-        pred: predById[r.player_id]?.avg_prob_gt_6 ?? null,
+        pred: predById[r.player_id]?.agg_pred_prob ?? null,
         starter: r.is_starter,
         club: r.club,
         photo: (r as any).photo,
@@ -229,24 +290,20 @@ export default function Home() {
       const bankVal = (md.manager.last_deadline_bank ?? 0) / 10;
       setBank(bankVal);
 
-      // 5. Generate suggestions (client-side port of notebook logic)
-      const { generateSuggestions } = await import("@/lib/suggestions");
-      const result = generateSuggestions(
-        squadPlayers,
-        data.predictions,
-        statsMap,
-        bankVal,
-        rows.map((r) => r.player_name)
-      );
-      setSuggestions(result.suggestions);
-      setClubCount(result.clubCount);
+      // 5. Transfer suggestions (declines reset on fresh load)
+      setSuggestions(findBestTransferPlan(squadPlayers, data.predictions, statsMap, bankVal, transferLimit, [], []));
+      setSkipped([]);
+      const nextClubCount: Record<string, number> = {};
+      for (const player of squadPlayers) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
+      setClubCount(nextClubCount);
       setOptResult(null);
+      setPinnedIds([]);
     } catch (e: any) {
       setError(e.message);
     } finally {
       setLoading(false);
     }
-  }, [teamId, gwInput]);
+  }, [teamId, gwInput, transferLimit]);
 
   const totalValue = teamRows.reduce((s, r) => s + r.price, 0);
   const squadSellValue = squad.reduce((s, p) => s + p.sellPrice, 0);
@@ -260,11 +317,6 @@ export default function Home() {
   return (
     <main className="max-w-6xl mx-auto px-4 py-10">
       <header className="mb-8">
-        <nav className="text-sm text-[var(--muted)] mb-4">
-          <span className="text-[var(--text)]">Team Manager</span>
-          <span className="mx-2">/</span>
-          <a href="/players" className="hover:text-[var(--accent)]">Players</a>
-        </nav>
         <h1 className="text-3xl font-extrabold tracking-tight">
           ⚽ <span className="text-[var(--accent)]">offside</span>
         </h1>
@@ -356,7 +408,16 @@ export default function Home() {
                 {optimizing ? "Optimizing…" : optResult ? "Re-optimize" : "⚡ Optimize Team"}
               </button>
             </div>
-            <Pitch teamRows={teamRows} optResult={optResult} gameweek={gameweek} squad={squad} />
+            <Pitch
+              teamRows={teamRows}
+              optResult={optResult}
+              gameweek={gameweek}
+              squad={squad}
+              pinnedIds={pinnedIds}
+              onPlayerTransfer={openTransferModal}
+              onTogglePin={togglePin}
+              onSubstitute={substitutePlayer}
+            />
             {noPred.length > 0 && (
               <p className="mt-3 text-xs text-[var(--muted)]">
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
@@ -367,29 +428,59 @@ export default function Home() {
           {/* Transfer suggestions */}
           <section className="card p-5 mb-8">
             <div className="flex items-center justify-between gap-4 flex-wrap mb-1">
-              <h2 className="text-lg font-bold">🔮 Transfer Suggestions (ML-Powered)</h2>
-              <button
-                onClick={suggestBestTransfer}
-                disabled={!predictions.length || suggestingTransfer}
-                className="bg-[var(--accent)] text-[#04140b] font-bold px-4 py-2 rounded-lg hover:brightness-110 disabled:opacity-50"
-              >
-                {suggestingTransfer ? "Finding best transfer..." : "Suggest Best Transfer"}
-              </button>
+              <h2 className="text-lg font-bold">🔮 Transfer Suggestion (ML-Powered)</h2>
+              <div className="flex items-center gap-2 text-sm">
+                <button
+                  onClick={() => suggestBestTransfer()}
+                  disabled={suggestingTransfer}
+                  aria-label="Refresh transfer suggestions"
+                  title="Refresh transfer suggestions"
+                  className="h-8 w-8 rounded-lg border border-[var(--border)] text-lg leading-none text-[var(--muted)] hover:text-white hover:border-[var(--accent)] disabled:opacity-50"
+                >
+                  ↻
+                </button>
+                <span className="text-[var(--muted)]">Plan:</span>
+                <div className="flex rounded-lg border border-[var(--border)] overflow-hidden">
+                  {([1, 2, 3] as const).map((limit) => (
+                    <button
+                      key={limit}
+                      onClick={() => {
+                        setTransferLimit(limit);
+                        setSuggestingTransfer(true);
+                        setTimeout(() => {
+                          setSuggestions(buildTransferPlan(squad, bank, limit, skipped));
+                          setSuggestingTransfer(false);
+                        }, 0);
+                      }}
+                      className={`px-3 py-1.5 ${transferLimit === limit ? "bg-[var(--accent)] text-[#04140b] font-semibold" : "text-[var(--muted)] hover:text-white"}`}
+                    >
+                      {limit}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
             <p className="text-xs text-[var(--muted)] mb-4">
-              Maximises model probability of scoring &gt;6 pts, respecting budget, 3-per-club limit and position limits.
+              Maximises model probability of scoring &gt;6 pts, respecting budget, 3-per-club limit and position limits. Multiple transfers reinvest the remaining bank after each planned swap.
               Clubs at 3-player limit: {Object.entries(clubCount).filter(([, n]) => n >= 3).map(([c]) => c).join(", ") || "none"}
             </p>
             {suggestingTransfer ? (
-              <p className="text-sm text-[var(--muted)]">Checking every valid starting XI and transfer option...</p>
+              <div className="flex items-center gap-3 text-sm text-[var(--muted)]" role="status" aria-live="polite">
+                <span className="h-4 w-4 rounded-full border-2 border-[var(--border)] border-t-[var(--accent)] animate-spin" aria-hidden="true" />
+                <span>Optimizing independent {transferLimit}-transfer plan...</span>
+              </div>
             ) : suggestions.length === 0 ? (
-              <p className="text-sm text-[var(--muted)]">No transfers suggested — squad looks optimal for the budget.</p>
+              <p className="text-sm text-[var(--muted)]">
+                No transfer suggested — squad looks optimal for the budget.
+                {skipped.length > 0 && <> Skipped players excluded: {skipped.map((s) => s.in.name).join(", ")}.</>}
+              </p>
             ) : (
-              <div className="space-y-4">
-                {suggestions.map((s, i) => (
-                  <div key={i} className="border border-[var(--border)] rounded-xl p-4 bg-[#0d1526]">
+                suggestions.map((s, index) => (
+                  <div key={s.in.name} className="border border-[var(--border)] rounded-xl p-4 bg-[#0d1526]">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="badge bg-[var(--accent)]/15 text-[var(--accent)]">{s.transferLabel}</span>
+                      <span className="badge bg-[var(--accent)]/15 text-[var(--accent)]">
+                        {index === 0 ? (s.improvement > 0 ? "BEST FREE TRANSFER" : "BEST AVAILABLE TRANSFER") : `PLAN TRANSFER ${index + 1}`}
+                      </span>
                       <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
                     <div className="grid md:grid-cols-[minmax(0,2fr)_auto_minmax(0,3fr)] gap-3 items-stretch">
@@ -414,37 +505,84 @@ export default function Home() {
                     </div>
                     <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
                       <div className="text-xs text-[var(--muted)]">
-                        GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6.toFixed(2)}`).join("  ")}
+                        GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6?.toFixed(2) ?? "N/A"}`).join("  ")}
                       </div>
-                      <button
-                        onClick={() => approveTransfer(s)}
-                        className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/30"
-                      >
-                        Approve Transfer
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => approveTransfer(s)}
+                          disabled={index !== 0}
+                          className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/30"
+                        >
+                          {index === 0 ? "✓ Approve" : "Approve in order"}
+                        </button>
+                        <button
+                          onClick={() => skipTransfer(s)}
+                          disabled={index !== 0}
+                          className="bg-rose-500/10 text-rose-300 border border-rose-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-rose-500/20"
+                        >
+                          ✕ Skip
+                        </button>
+                      </div>
                     </div>
                     {s.improvement <= 0 && (
                       <p className="mt-3 text-xs text-rose-300">No affordable transfer improves the optimized XI; this is the best available alternative.</p>
                     )}
-                    {s.alternatives.length > 0 && (
-                      <div className="mt-3 text-xs text-[var(--muted)]">
-                        Alternatives:{" "}
-                        {s.alternatives.map((a) => `${a.name} £${a.price.toFixed(1)}m (pred ${a.pred.toFixed(3)}, ${a.costDiff >= 0 ? "+" : ""}£${a.costDiff.toFixed(1)}m)`).join("  •  ")}
-                      </div>
-                    )}
                   </div>
-                ))}
-              </div>
+              ))
             )}
             {suggestions.length > 0 && (
               <div className="mt-4 p-4 rounded-xl bg-[#0d1526] border border-[var(--border)] text-sm">
-                <strong>Summary:</strong> {suggestions.length} transfer(s) · Total cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Total prediction gain {totalGain >= 0 ? "+" : ""}{totalGain.toFixed(3)}
-                {finalBank < 0 && <p className="text-rose-400 mt-1">⚠ Insufficient budget — these transfers cannot all be made.</p>}
-                {suggestions.length > 1 && <p className="text-[var(--muted)] mt-1">Point hits: -{(suggestions.length - 1) * 4}</p>}
-                {finalBank > 4.0 && <p className="text-[var(--muted)] mt-1">£{finalBank.toFixed(1)}m surplus — consider upgrading bench or saving for next week.</p>}
+                <strong>Summary:</strong> {suggestions.length} planned transfer{suggestions.length === 1 ? "" : "s"} ({suggestions.length === 1 ? "free" : "first free, later transfers cost -4 points each"}) · Cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Prediction gain {totalGain >= 0 ? "+" : ""}{totalGain.toFixed(3)}
+                {finalBank < 0 && <p className="text-rose-400 mt-1">⚠ Insufficient budget — this transfer cannot be made.</p>}
+              </div>
+            )}
+
+            {/* Skipped transfers — user can approve later */}
+            {skipped.length > 0 && (
+              <div className="mt-4">
+                <h3 className="text-sm font-bold mb-2 text-[var(--muted)]">⤵ Skipped ({skipped.length})</h3>
+                <div className="space-y-2">
+                  {skipped.map((s) => (
+                    <div key={s.in.name} className="flex items-center justify-between gap-3 flex-wrap border border-[var(--border)] rounded-lg px-3 py-2 bg-[#0d1526] text-sm">
+                      <div>
+                        <span className="font-semibold">{s.in.name}</span> <PosBadge pos={s.out.pos} />
+                        <span className="text-xs text-[var(--muted)] ml-2">
+                          {s.in.club} · £{s.in.price.toFixed(1)}m · pred {s.in.pred.toFixed(3)} · in for {s.out.name}
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => approveTransfer(s)}
+                        className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1 rounded-lg hover:bg-emerald-500/30 text-xs"
+                      >
+                        ✓ Approve
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </section>
+
+          {/* Player transfer options modal */}
+          {transferModal && (
+            <TransferModal
+              out={transferModal.out}
+              options={transferModal.options}
+              bank={bank}
+              onClose={() => setTransferModal(null)}
+              onApprove={(opt) => {
+                const s: Suggestion = {
+                  out: transferModal.out,
+                  in: opt,
+                  improvement: opt.pred - (transferModal.out.pred ?? 0),
+                  alternatives: [],
+                  transferLabel: "MANUAL TRANSFER",
+                };
+                approveTransfer(s);
+                setTransferModal(null);
+              }}
+            />
+          )}
         </>
       )}
 
@@ -473,11 +611,37 @@ const ROW_BG: Record<string, string> = {
   FWD: "bg-[#1f0a14]/70 border-rose-900/40",
 };
 
-function Pitch({ teamRows, optResult, gameweek, squad }: {
+function isLegalFplSubstitution(
+  startingPlayer: SquadPlayer,
+  benchPlayer: SquadPlayer,
+  startingPlayers: SquadPlayer[]
+) {
+  if (startingPlayer.pos === "GKP" || benchPlayer.pos === "GKP") {
+    return startingPlayer.pos === "GKP" && benchPlayer.pos === "GKP";
+  }
+  if (startingPlayer.pos === benchPlayer.pos) return true;
+
+  const nextCounts = startingPlayers.reduce<Record<string, number>>((counts, player) => {
+    const nextPosition = player.player_id === startingPlayer.player_id ? benchPlayer.pos : player.pos;
+    counts[nextPosition] = (counts[nextPosition] ?? 0) + 1;
+    return counts;
+  }, {});
+  return (
+    nextCounts.DEF >= 3 && nextCounts.DEF <= 5 &&
+    nextCounts.MID >= 3 && nextCounts.MID <= 5 &&
+    nextCounts.FWD >= 1 && nextCounts.FWD <= 3
+  );
+}
+
+function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransfer, onTogglePin, onSubstitute }: {
   teamRows: TeamRow[];
   optResult: OptimizeResult | null;
   gameweek: number | null;
   squad: SquadPlayer[];
+  pinnedIds: number[];
+  onPlayerTransfer: (name: string) => void;
+  onTogglePin: (playerId: number | undefined) => void;
+  onSubstitute: (starterName: string, benchName: string) => void;
 }) {
   // When an optimization result exists, rearrange the pitch to show the
   // optimal XI grouped by position (per the new formation), with subbed-out
@@ -497,10 +661,17 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
         .map((p) => teamRows.find((r) => r.player_name === p.name))
         .filter((r): r is TeamRow => !!r)
     : teamRows.filter((r) => !r.is_starter);
+  const benchPlayers = bench
+    .map((row) => squad.find((player) => player.player_id === row.player_id))
+    .filter((player): player is SquadPlayer => !!player);
+  const startingPlayers = displayRows
+    .flatMap(({ players }) => players)
+    .map((row) => squad.find((player) => player.player_id === row.player_id))
+    .filter((player): player is SquadPlayer => !!player);
 
   return (
     <div
-      className="rounded-xl overflow-hidden border border-[var(--border)]"
+      className="relative rounded-xl overflow-visible border border-[var(--border)]"
       style={{
         background:
           "repeating-linear-gradient(0deg, #0c2a18 0px, #0c2a18 44px, #0e3120 44px, #0e3120 88px)",
@@ -525,6 +696,15 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
                     isOptXI={true}
                     isCaptain={optResult ? optResult.captain === r.player_name : r.is_captain}
                     isVice={optResult ? optResult.viceCaptain === r.player_name : r.is_vice_captain}
+                    isPinned={pinnedIds.includes(r.player_id)}
+                    substitutePlayers={benchPlayers.filter((benchPlayer) => {
+                      const startingPlayer = squad.find((player) => player.player_id === r.player_id);
+                      return startingPlayer && isLegalFplSubstitution(startingPlayer, benchPlayer, startingPlayers);
+                    })}
+                    substituteLabel="Sub"
+                    onTransfer={onPlayerTransfer}
+                    onTogglePin={onTogglePin}
+                    onSubstitute={onSubstitute}
                   />
                 ))
               )}
@@ -544,6 +724,15 @@ function Pitch({ teamRows, optResult, gameweek, squad }: {
                 dimmed={!!optResult}
                 isCaptain={false}
                 isVice={false}
+                isPinned={pinnedIds.includes(r.player_id)}
+                substitutePlayers={startingPlayers.filter((startingPlayer) => {
+                  const benchPlayer = squad.find((player) => player.player_id === r.player_id);
+                  return benchPlayer && isLegalFplSubstitution(startingPlayer, benchPlayer, startingPlayers);
+                })}
+                substituteLabel="Sub out"
+                onTransfer={onPlayerTransfer}
+                onTogglePin={onTogglePin}
+                onSubstitute={onSubstitute}
               />
             ))}
           </div>
@@ -561,6 +750,12 @@ function PlayerCard({
   isCaptain,
   isVice,
   dimmed,
+  isPinned,
+  substitutePlayers = [],
+  substituteLabel,
+  onTransfer,
+  onTogglePin,
+  onSubstitute,
 }: {
   row: TeamRow;
   squad: SquadPlayer[];
@@ -569,13 +764,43 @@ function PlayerCard({
   isCaptain: boolean;
   isVice: boolean;
   dimmed?: boolean;
+  isPinned?: boolean;
+  substitutePlayers?: SquadPlayer[];
+  substituteLabel: string;
+  onTransfer?: (name: string) => void;
+  onTogglePin?: (playerId: number | undefined) => void;
+  onSubstitute?: (starterName: string, benchName: string) => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [substituteOpen, setSubstituteOpen] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const photo = (row as any).photo as string | undefined;
   const sp = squad.find((s) => s.name === row.player_name);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!cardRef.current?.contains(event.target as Node)) {
+        setMenuOpen(false);
+        setSubstituteOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [menuOpen]);
+
   return (
     <div
-      className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition
+      ref={cardRef}
+      onContextMenu={(event) => {
+        event.preventDefault();
+        setMenuOpen(true);
+        setSubstituteOpen(false);
+      }}
+      title="Right-click for player actions"
+      className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition cursor-context-menu hover:ring-2 hover:ring-[var(--accent)]
         ${isOptXI ? "bg-emerald-500/20 ring-2 ring-emerald-400" : "bg-black/40 ring-1 ring-white/10"}
+        ${isPinned ? "ring-2 ring-amber-300" : ""}
         ${dimmed ? "opacity-60" : ""}`}
     >
       {isCaptain && (
@@ -609,6 +834,148 @@ function PlayerCard({
       <div className="text-[9px] text-[var(--muted)]">
         GW {row.gameweek_points} · <span className="text-[var(--accent)]">{sp?.pred != null ? sp.pred.toFixed(2) : "N/A"}</span>
         {onBench && <span className="ml-1">🪑</span>}
+      </div>
+      {isPinned && <span className="absolute bottom-1 right-1 text-[10px]" aria-label="Pinned">📌</span>}
+      {menuOpen && (
+        <div
+          className="absolute left-1/2 top-full z-[100] mt-1 min-w-[150px] -translate-x-1/2 rounded-lg border border-[var(--border)] bg-[#111a2e] p-1 text-left shadow-xl"
+          onContextMenu={(event) => event.preventDefault()}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <button
+            className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+            onClick={() => { onTransfer?.(row.player_name); setMenuOpen(false); }}
+          >
+            ↔ Transfer
+          </button>
+          <button
+            className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+            onClick={() => { onTogglePin?.(row.player_id); setMenuOpen(false); }}
+          >
+            📌 {isPinned ? "Unpin" : "Pin"}
+          </button>
+          {substitutePlayers.length > 0 && (
+            <div className="relative">
+              <button
+                className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+                onClick={() => setSubstituteOpen((open) => !open)}
+              >
+                ⇄ {substituteLabel}
+              </button>
+              {substituteOpen && (
+                <div className="absolute left-full top-0 ml-1 min-w-[150px] rounded-lg border border-[var(--border)] bg-[#111a2e] p-1 shadow-xl">
+                  {substitutePlayers.map((substitutePlayer) => (
+                    <button
+                      key={substitutePlayer.player_id ?? substitutePlayer.name}
+                      className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+                      onClick={() => { onSubstitute?.(onBench ? substitutePlayer.name : row.player_name, onBench ? row.player_name : substitutePlayer.name); setMenuOpen(false); }}
+                    >
+                      {substitutePlayer.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TransferModal({
+  out,
+  options,
+  bank,
+  onClose,
+  onApprove,
+}: {
+  out: SquadPlayer;
+  options: Replacement[];
+  bank: number;
+  onClose: () => void;
+  onApprove: (opt: Replacement) => void;
+}) {
+  const budget = bank + out.sellPrice;
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="card p-5 w-full max-w-3xl max-h-[85vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-lg font-bold">Possible Transfers — Out: {out.name}</h3>
+            <p className="text-xs text-[var(--muted)] mt-1">
+              <PosBadge pos={out.pos} /> · Sell £{out.sellPrice.toFixed(1)}m · Budget £{budget.toFixed(1)}m (bank £{bank.toFixed(1)}m + sell) · Max 3 per club · Sorted by prediction
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-[var(--muted)] hover:text-[var(--text)] text-xl leading-none px-2"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        {options.length === 0 ? (
+          <p className="text-sm text-[var(--muted)]">
+            No valid replacements found — budget or 3-per-club limits exclude every {out.pos}.
+          </p>
+        ) : (
+          <div className="overflow-x-auto rounded-lg border border-[var(--border)]">
+            <table className="w-full text-sm">
+              <thead className="bg-[#0d1526] text-[10px] uppercase tracking-wide text-[var(--muted)]">
+                <tr>
+                  <th className="text-left px-3 py-2">Player</th>
+                  <th className="text-left px-3 py-2">Club</th>
+                  <th className="text-right px-3 py-2">Price</th>
+                  <th className="text-right px-3 py-2">Cost Δ</th>
+                  <th className="text-right px-3 py-2">Pred</th>
+                  <th className="text-right px-3 py-2">Gain</th>
+                  <th className="text-right px-3 py-2">Form</th>
+                  <th className="text-right px-3 py-2">PPG</th>
+                  <th className="px-3 py-2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {options.map((o) => {
+                  const gain = o.pred - (out.pred ?? 0);
+                  return (
+                    <tr key={o.name} className="border-t border-[var(--border)] hover:bg-[#0d1526]">
+                      <td className="px-3 py-2 font-semibold">{o.name} <PosBadge pos={out.pos} /></td>
+                      <td className="px-3 py-2 text-[var(--muted)]">{o.club}</td>
+                      <td className="px-3 py-2 text-right">£{o.price.toFixed(1)}m</td>
+                      <td className={`px-3 py-2 text-right ${o.costDiff > 0 ? "text-rose-400" : o.costDiff < 0 ? "text-emerald-400" : ""}`}>
+                        {o.costDiff >= 0 ? "+" : ""}£{o.costDiff.toFixed(1)}m
+                      </td>
+                      <td className="px-3 py-2 text-right font-bold text-[var(--accent)]">{o.pred.toFixed(3)}</td>
+                      <td className={`px-3 py-2 text-right font-semibold ${gain > 0 ? "text-emerald-400" : gain < 0 ? "text-rose-400" : ""}`}>
+                        {gain >= 0 ? "+" : ""}{gain.toFixed(3)}
+                      </td>
+                      <td className="px-3 py-2 text-right text-[var(--muted)]">{o.form.toFixed(1)}</td>
+                      <td className="px-3 py-2 text-right text-[var(--muted)]">{o.ppg.toFixed(1)}</td>
+                      <td className="px-3 py-2 text-right">
+                        <button
+                          onClick={() => onApprove(o)}
+                          className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-semibold px-2.5 py-1 rounded-lg hover:bg-emerald-500/30 whitespace-nowrap"
+                        >
+                          Transfer
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <p className="mt-3 text-[10px] text-[var(--muted)]">
+          Constraints applied: same position ({out.pos}), budget ≤ £{budget.toFixed(1)}m, max 3 players per club, player not in squad, available to play.
+        </p>
       </div>
     </div>
   );

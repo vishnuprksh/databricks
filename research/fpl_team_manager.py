@@ -240,7 +240,7 @@ import json as _json
 from pyspark.sql import functions as F
 
 # ── 1. Load model predictions from gold layer ──────────────────────────────
-_pred_rows = spark.sql("SELECT player_id, player_name, position, gw_predictions, avg_prob_gt_6 FROM fplgeek.gold.predictions").collect()
+_pred_rows = spark.sql("SELECT player_id, player_name, position, gw_predictions, agg_pred_prob FROM fplgeek.gold.predictions").collect()
 all_predictions = []
 for _row in _pred_rows:
     _gws = _json.loads(_row['gw_predictions'])
@@ -248,7 +248,7 @@ for _row in _pred_rows:
         'position': _row['position'],
         'player_id': _row['player_id'],
         'player_name': _row['player_name'],
-        'avg_prob_gt_6': _row['avg_prob_gt_6'],
+        'agg_pred_prob': _row['agg_pred_prob'],
         'gw_predictions': _gws
     })
 
@@ -319,7 +319,7 @@ print("-" * 72)
 squad_with_pred = []
 for name in sorted(squad_names, key=lambda n: squad_starter[n], reverse=True):
     pred = pred_by_name.get(name)
-    avg_p = pred['avg_prob_gt_6'] if pred else None
+    avg_p = pred['agg_pred_prob'] if pred else None
     s = stats_by_name.get(name, {})
     status = s.get('status', '?')
     pred_str = f"{avg_p:.3f}" if avg_p is not None else "  N/A"
@@ -367,7 +367,7 @@ def find_replacements(out_name, out_price, out_pos, out_club, budget_available, 
         candidates.append({
             'name': pred['player_name'],
             'price': stats['price'],
-            'pred': pred['avg_prob_gt_6'],
+            'pred': pred['agg_pred_prob'],
             'club': target_club,
             'form': stats['form'],
             'ppg': stats['points_per_game'],
@@ -455,7 +455,7 @@ for i, s in enumerate(suggestions):
 # ── Note about players the model undervalues ────────────────────────────────
 haaland_stats = stats_by_name.get('Haaland', {})
 if haaland_stats and haaland_stats.get('selected_by_percent', 0) > 50:
-    haaland_pred = pred_by_name.get('Haaland', {}).get('avg_prob_gt_6')
+    haaland_pred = pred_by_name.get('Haaland', {}).get('agg_pred_prob')
     if haaland_pred and haaland_pred < 0.40:
         print(f"\n{'─' * 90}")
         print(f"  NOTE: Haaland (pred={haaland_pred:.3f}, {haaland_stats['selected_by_percent']:.1f}% ownership)")

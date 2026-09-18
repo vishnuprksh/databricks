@@ -13,7 +13,7 @@
       "file_type": "code",
       "norm_label": "bootstrap",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L20"
+      "source_location": "L10"
     },
     {
       "id": "frontend_app_page_manager",
@@ -25,7 +25,19 @@
       "file_type": "code",
       "norm_label": "manager",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L19"
+      "source_location": "L9"
+    },
+    {
+      "id": "frontend_lib_suggestions_dreamoption",
+      "label": "DreamOption",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "dreamoption",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L248"
     },
     {
       "id": "frontend_lib_suggestions_optimizeresult",
@@ -37,7 +49,7 @@
       "file_type": "code",
       "norm_label": "optimizeresult",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L216"
+      "source_location": "L223"
     },
     {
       "id": "frontend_lib_suggestions_replacement",
@@ -49,7 +61,7 @@
       "file_type": "code",
       "norm_label": "replacement",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L26"
+      "source_location": "L28"
     },
     {
       "id": "frontend_lib_suggestions_statsrow",
@@ -61,7 +73,7 @@
       "file_type": "code",
       "norm_label": "statsrow",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L5"
+      "source_location": "L4"
     },
     {
       "id": "frontend_lib_suggestions_suggestion",
@@ -73,7 +85,7 @@
       "file_type": "code",
       "norm_label": "suggestion",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L38"
+      "source_location": "L39"
     },
     {
       "id": "frontend_lib_suggestions_transferrecord",
@@ -85,19 +97,7 @@
       "file_type": "code",
       "norm_label": "transferrecord",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L48"
-    },
-    {
-      "id": "frontend_types_javascript_lp_solver_d_lpmodel",
-      "label": "LpModel",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 10,
-      "file_type": "code",
-      "norm_label": "lpmodel",
-      "source_file": "frontend/types/javascript-lp-solver.d.ts",
-      "source_location": "L2"
+      "source_location": "L68"
     },
     {
       "id": "frontend_app_players_page_sortkey",
@@ -105,11 +105,23 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "file_type": "code",
       "norm_label": "sortkey",
       "source_file": "frontend/app/players/page.tsx",
       "source_location": "L6"
+    },
+    {
+      "id": "frontend_lib_db_gwprediction",
+      "label": "GwPrediction",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "gwprediction",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L40"
     },
     {
       "id": "frontend_lib_db_playerrow",
@@ -117,7 +129,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "file_type": "code",
       "norm_label": "playerrow",
       "source_file": "frontend/lib/db.ts",
@@ -129,7 +141,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "file_type": "code",
       "norm_label": "predictionrow",
       "source_file": "frontend/lib/db.ts",
@@ -141,11 +153,11 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 4,
       "file_type": "code",
       "norm_label": "dream15result",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L227"
+      "source_location": "L234"
     },
     {
       "id": "frontend_lib_suggestions_squadplayer",
@@ -153,11 +165,11 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 4,
       "file_type": "code",
       "norm_label": "squadplayer",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L14"
+      "source_location": "L17"
     },
     {
       "id": "frontend_lib_fpl_teamrow",
@@ -165,24 +177,12 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "teamrow",
       "source_file": "frontend/lib/fpl.ts",
       "source_location": "L36"
-    },
-    {
-      "id": "frontend_lib_db_gwprediction",
-      "label": "GwPrediction",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "gwprediction",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L40"
     },
     {
       "id": "frontend_app_page_home",
@@ -193,7 +193,7 @@
       "file_type": "code",
       "norm_label": "home()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L33"
+      "source_location": "L23"
     },
     {
       "id": "frontend_app_page_pitch",
@@ -204,7 +204,7 @@
       "file_type": "code",
       "norm_label": "pitch()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L568"
+      "source_location": "L476"
     },
     {
       "id": "frontend_app_page_playercard",
@@ -215,7 +215,7 @@
       "file_type": "code",
       "norm_label": "playercard()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L651"
+      "source_location": "L556"
     },
     {
       "id": "frontend_app_page_posbadge",
@@ -226,7 +226,7 @@
       "file_type": "code",
       "norm_label": "posbadge()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L29"
+      "source_location": "L19"
     },
     {
       "id": "frontend_app_page_stat",
@@ -237,18 +237,7 @@
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L550"
-    },
-    {
-      "id": "frontend_app_page_transfermodal",
-      "label": "TransferModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "transfermodal()",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L716"
+      "source_location": "L458"
     },
     {
       "id": "frontend_lib_suggestions_buildsquadwithpred",
@@ -259,7 +248,7 @@
       "file_type": "code",
       "norm_label": "buildsquadwithpred()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L69"
+      "source_location": "L89"
     },
     {
       "id": "frontend_lib_suggestions_computesellprices",
@@ -270,7 +259,7 @@
       "file_type": "code",
       "norm_label": "computesellprices()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L51"
+      "source_location": "L71"
     },
     {
       "id": "frontend_lib_suggestions_findbesttransfer",
@@ -281,18 +270,7 @@
       "file_type": "code",
       "norm_label": "findbesttransfer()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L424"
-    },
-    {
-      "id": "frontend_lib_suggestions_findbesttransferplan",
-      "label": "findBestTransferPlan()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "findbesttransferplan()",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L498"
+      "source_location": "L428"
     },
     {
       "id": "frontend_lib_suggestions_findreplacements",
@@ -303,7 +281,7 @@
       "file_type": "code",
       "norm_label": "findreplacements()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L99"
+      "source_location": "L108"
     },
     {
       "id": "frontend_lib_suggestions_generatesuggestions",
@@ -314,18 +292,7 @@
       "file_type": "code",
       "norm_label": "generatesuggestions()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L143"
-    },
-    {
-      "id": "frontend_lib_suggestions_listtransferoptions",
-      "label": "listTransferOptions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "listtransferoptions()",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L581"
+      "source_location": "L149"
     },
     {
       "id": "frontend_lib_suggestions_optimizestartingeleven",
@@ -336,29 +303,40 @@
       "file_type": "code",
       "norm_label": "optimizestartingeleven()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L346"
+      "source_location": "L351"
     },
     {
-      "id": "frontend_lib_suggestions_resolvestatsbyid",
-      "label": "resolveStatsById()",
+      "id": "frontend_lib_suggestions_statsbyplayername",
+      "label": "statsByPlayerName()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
       "file_type": "code",
-      "norm_label": "resolvestatsbyid()",
+      "norm_label": "statsbyplayername()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L92"
+      "source_location": "L49"
     },
     {
-      "id": "frontend_lib_suggestions_statsbyplayerid",
-      "label": "statsByPlayerId()",
+      "id": "frontend_app_layout_rootlayout",
+      "label": "RootLayout()",
       "_callable": true,
       "_origin": "ast",
-      "community": 0,
+      "community": 1,
       "file_type": "code",
-      "norm_label": "statsbyplayerid()",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L8"
+      "norm_label": "rootlayout()",
+      "source_file": "frontend/app/layout.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "frontend_components_siteheader_siteheader",
+      "label": "SiteHeader()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "siteheader()",
+      "source_file": "frontend/components/SiteHeader.tsx",
+      "source_location": "L6"
     },
     {
       "id": "research_create_table_main",
@@ -383,66 +361,23 @@
       "source_location": "L3"
     },
     {
-      "id": "frontend_app_dream15_page_dream15page",
-      "label": "Dream15Page()",
+      "id": "frontend_app_api_data_route_get",
+      "label": "GET()",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
+      "community_name": "Database Layer",
       "file_type": "code",
-      "norm_label": "dream15page()",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L21"
-    },
-    {
-      "id": "frontend_app_dream15_page_dreampitch",
-      "label": "DreamPitch()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "dreampitch()",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L99"
-    },
-    {
-      "id": "frontend_app_dream15_page_dreamplayercard",
-      "label": "DreamPlayerCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "dreamplayercard()",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L121"
-    },
-    {
-      "id": "frontend_app_dream15_page_dreamview",
-      "label": "DreamView()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "dreamview()",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L59"
-    },
-    {
-      "id": "frontend_app_dream15_page_stat",
-      "label": "Stat()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "stat()",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L138"
+      "norm_label": "get()",
+      "source_file": "frontend/app/api/data/route.ts",
+      "source_location": "L4"
     },
     {
       "id": "frontend_app_players_page_playerspage",
       "label": "PlayersPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "file_type": "code",
       "norm_label": "playerspage()",
       "source_file": "frontend/app/players/page.tsx",
@@ -453,40 +388,139 @@
       "label": "PosBadge()",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "file_type": "code",
       "norm_label": "posbadge()",
       "source_file": "frontend/app/players/page.tsx",
       "source_location": "L15"
     },
     {
+      "id": "frontend_lib_db_fetchplayers",
+      "label": "fetchPlayers()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "fetchplayers()",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L67"
+    },
+    {
+      "id": "frontend_lib_db_fetchpredictions",
+      "label": "fetchPredictions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "fetchpredictions()",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L52"
+    },
+    {
+      "id": "frontend_lib_db_getpool",
+      "label": "getPool()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "getpool()",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "frontend_app_dream15_page_dream15page",
+      "label": "Dream15Page()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "dream15page()",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "frontend_app_dream15_page_dreampitch",
+      "label": "DreamPitch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "dreampitch()",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L104"
+    },
+    {
+      "id": "frontend_app_dream15_page_dreamplayercard",
+      "label": "DreamPlayerCard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "dreamplayercard()",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L126"
+    },
+    {
+      "id": "frontend_app_dream15_page_dreamview",
+      "label": "DreamView()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "dreamview()",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L64"
+    },
+    {
+      "id": "frontend_app_dream15_page_stat",
+      "label": "Stat()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "stat()",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L143"
+    },
+    {
+      "id": "frontend_lib_suggestions_builddreamoptions",
+      "label": "buildDreamOptions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "builddreamoptions()",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L285"
+    },
+    {
       "id": "frontend_lib_suggestions_dreamplayers",
       "label": "dreamPlayers()",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 4,
       "file_type": "code",
       "norm_label": "dreamplayers()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L243"
+      "source_location": "L261"
     },
     {
       "id": "frontend_lib_suggestions_optimizedream15",
       "label": "optimizeDream15()",
       "_callable": true,
       "_origin": "ast",
-      "community": 2,
+      "community": 4,
       "file_type": "code",
       "norm_label": "optimizedream15()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L267"
+      "source_location": "L310"
     },
     {
       "id": "frontend_app_api_bootstrap_route_get",
       "label": "GET()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "get()",
@@ -498,7 +532,7 @@
       "label": "GET()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "get()",
@@ -510,7 +544,7 @@
       "label": "GET()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "get()",
@@ -522,7 +556,7 @@
       "label": "buildTeamRows()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "buildteamrows()",
@@ -534,7 +568,7 @@
       "label": "chooseGameweek()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "choosegameweek()",
@@ -546,7 +580,7 @@
       "label": "fetchFplJson()",
       "_callable": true,
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "fetchfpljson()",
@@ -554,56 +588,12 @@
       "source_location": "L10"
     },
     {
-      "id": "frontend_app_api_data_route_get",
-      "label": "GET()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "Database Layer",
-      "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "frontend/app/api/data/route.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "frontend_lib_db_fetchplayers",
-      "label": "fetchPlayers()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "fetchplayers()",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L72"
-    },
-    {
-      "id": "frontend_lib_db_fetchpredictions",
-      "label": "fetchPredictions()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "fetchpredictions()",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L52"
-    },
-    {
-      "id": "frontend_lib_db_getpool",
-      "label": "getPool()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "getpool()",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L8"
-    },
-    {
       "id": "research_fpl_team_manager_build_team_rows",
       "label": "build_team_rows()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "build_team_rows()",
       "source_file": "research/fpl_team_manager.py",
@@ -615,6 +605,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "choose_gameweek()",
       "source_file": "research/fpl_team_manager.py",
@@ -626,6 +617,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "fetch_fpl_json()",
       "source_file": "research/fpl_team_manager.py",
@@ -637,39 +629,18 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "find_replacements()",
       "source_file": "research/fpl_team_manager.py",
       "source_location": "L347"
     },
     {
-      "id": "frontend_app_layout_rootlayout",
-      "label": "RootLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "code",
-      "norm_label": "rootlayout()",
-      "source_file": "frontend/app/layout.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "frontend_components_siteheader_siteheader",
-      "label": "SiteHeader()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "code",
-      "norm_label": "siteheader()",
-      "source_file": "frontend/components/SiteHeader.tsx",
-      "source_location": "L5"
-    },
-    {
       "id": "research_connect_database_main",
       "label": "main()",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
+      "community": 8,
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "research/connect_database.py",
@@ -680,7 +651,7 @@
       "label": "redact_url()",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
+      "community": 8,
       "file_type": "code",
       "norm_label": "redact_url()",
       "source_file": "research/connect_database.py",
@@ -704,7 +675,7 @@
       "file_type": "code",
       "norm_label": "pos_colors",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L22"
+      "source_location": "L12"
     },
     {
       "id": "frontend_app_page_row_bg",
@@ -714,7 +685,7 @@
       "file_type": "code",
       "norm_label": "row_bg",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L561"
+      "source_location": "L469"
     },
     {
       "id": "frontend_app_page_row_order",
@@ -724,7 +695,7 @@
       "file_type": "code",
       "norm_label": "row_order",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L560"
+      "source_location": "L468"
     },
     {
       "id": "frontend_lib_suggestions",
@@ -744,15 +715,55 @@
       "file_type": "code",
       "norm_label": "pos_by_element",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L46"
+      "source_location": "L47"
     },
     {
-      "id": "frontend_package",
-      "label": "frontend/package.json",
+      "id": "frontend_lib_suggestions_valid_formations",
+      "label": "VALID_FORMATIONS",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "valid_formations",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L340"
+    },
+    {
+      "id": "frontend_app_layout",
+      "label": "layout.tsx",
       "_origin": "ast",
       "community": 1,
       "file_type": "code",
-      "norm_label": "frontend/package.json",
+      "norm_label": "layout.tsx",
+      "source_file": "frontend/app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_layout_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "frontend/app/layout.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "frontend_components_siteheader",
+      "label": "SiteHeader.tsx",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "siteheader.tsx",
+      "source_file": "frontend/components/SiteHeader.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_package",
+      "label": "package.json",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "norm_label": "package.json",
       "source_file": "frontend/package.json",
       "source_location": "L1"
     },
@@ -767,16 +778,6 @@
       "source_location": "L10"
     },
     {
-      "id": "frontend_package_dependencies_javascript_lp_solver",
-      "label": "javascript-lp-solver",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "javascript-lp-solver",
-      "source_file": "frontend/package.json",
-      "source_location": "L11"
-    },
-    {
       "id": "frontend_package_dependencies_next",
       "label": "next",
       "_origin": "ast",
@@ -784,7 +785,7 @@
       "file_type": "code",
       "norm_label": "next",
       "source_file": "frontend/package.json",
-      "source_location": "L12"
+      "source_location": "L11"
     },
     {
       "id": "frontend_package_dependencies_pg",
@@ -794,7 +795,7 @@
       "file_type": "code",
       "norm_label": "pg",
       "source_file": "frontend/package.json",
-      "source_location": "L13"
+      "source_location": "L12"
     },
     {
       "id": "frontend_package_dependencies_react",
@@ -804,7 +805,7 @@
       "file_type": "code",
       "norm_label": "react",
       "source_file": "frontend/package.json",
-      "source_location": "L14"
+      "source_location": "L13"
     },
     {
       "id": "frontend_package_dependencies_react_dom",
@@ -814,7 +815,7 @@
       "file_type": "code",
       "norm_label": "react-dom",
       "source_file": "frontend/package.json",
-      "source_location": "L15"
+      "source_location": "L14"
     },
     {
       "id": "frontend_package_name",
@@ -837,46 +838,6 @@
       "source_location": "L4"
     },
     {
-      "id": "frontend_package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "frontend/package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "frontend_package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "frontend/package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "frontend_package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "frontend/package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "frontend_package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "frontend/package.json",
-      "source_location": "L8"
-    },
-    {
       "id": "frontend_package_version",
       "label": "version",
       "_origin": "ast",
@@ -887,46 +848,6 @@
       "source_location": "L3"
     },
     {
-      "id": "package",
-      "label": "package.json",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "package.json",
-      "source_file": "package.json",
-      "source_location": "L1"
-    },
-    {
-      "id": "package_dependencies",
-      "label": "dependencies",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "dependencies",
-      "source_file": "package.json",
-      "source_location": "L2"
-    },
-    {
-      "id": "package_dependencies_javascript_lp_solver",
-      "label": "javascript-lp-solver",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "javascript-lp-solver",
-      "source_file": "package.json",
-      "source_location": "L3"
-    },
-    {
-      "id": "package_json_ref_javascript_lp_solver",
-      "label": "javascript-lp-solver",
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "concept",
-      "norm_label": "javascript-lp-solver",
-      "source_file": "package.json",
-      "source_location": "L3"
-    },
-    {
       "id": "ref_autoprefixer",
       "label": "autoprefixer",
       "_origin": "ast",
@@ -934,7 +855,17 @@
       "file_type": "concept",
       "norm_label": "autoprefixer",
       "source_file": "frontend/package.json",
-      "source_location": "L21"
+      "source_location": "L20"
+    },
+    {
+      "id": "ref_next",
+      "label": "next",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "concept",
+      "norm_label": "next",
+      "source_file": "frontend/package.json",
+      "source_location": "L11"
     },
     {
       "id": "ref_postcss",
@@ -944,7 +875,17 @@
       "file_type": "concept",
       "norm_label": "postcss",
       "source_file": "frontend/package.json",
-      "source_location": "L22"
+      "source_location": "L21"
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "frontend/package.json",
+      "source_location": "L13"
     },
     {
       "id": "ref_react_dom",
@@ -954,7 +895,7 @@
       "file_type": "concept",
       "norm_label": "react-dom",
       "source_file": "frontend/package.json",
-      "source_location": "L15"
+      "source_location": "L14"
     },
     {
       "id": "ref_tailwindcss",
@@ -964,7 +905,7 @@
       "file_type": "concept",
       "norm_label": "tailwindcss",
       "source_file": "frontend/package.json",
-      "source_location": "L23"
+      "source_location": "L22"
     },
     {
       "id": "ref_types_node",
@@ -974,7 +915,7 @@
       "file_type": "concept",
       "norm_label": "@types/node",
       "source_file": "frontend/package.json",
-      "source_location": "L18"
+      "source_location": "L17"
     },
     {
       "id": "ref_types_pg",
@@ -984,7 +925,7 @@
       "file_type": "concept",
       "norm_label": "@types/pg",
       "source_file": "frontend/package.json",
-      "source_location": "L19"
+      "source_location": "L18"
     },
     {
       "id": "ref_types_react",
@@ -994,7 +935,7 @@
       "file_type": "concept",
       "norm_label": "@types/react",
       "source_file": "frontend/package.json",
-      "source_location": "L20"
+      "source_location": "L19"
     },
     {
       "id": "ref_typescript",
@@ -1004,27 +945,47 @@
       "file_type": "concept",
       "norm_label": "typescript",
       "source_file": "frontend/package.json",
-      "source_location": "L24"
+      "source_location": "L23"
     },
     {
-      "id": "frontend_types_javascript_lp_solver_d",
-      "label": "javascript-lp-solver.d.ts",
+      "id": "frontend_package_scripts",
+      "label": "scripts",
       "_origin": "ast",
       "community": 10,
       "file_type": "code",
-      "norm_label": "javascript-lp-solver.d.ts",
-      "source_file": "frontend/types/javascript-lp-solver.d.ts",
-      "source_location": "L1"
+      "norm_label": "scripts",
+      "source_file": "frontend/package.json",
+      "source_location": "L5"
     },
     {
-      "id": "frontend_types_javascript_lp_solver_d_javascript_lp_solver",
-      "label": "javascript-lp-solver",
+      "id": "frontend_package_scripts_build",
+      "label": "build",
       "_origin": "ast",
       "community": 10,
       "file_type": "code",
-      "norm_label": "javascript-lp-solver",
-      "source_file": "frontend/types/javascript-lp-solver.d.ts",
-      "source_location": "L1"
+      "norm_label": "build",
+      "source_file": "frontend/package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "frontend_package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 10,
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "frontend/package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "frontend_package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 10,
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "frontend/package.json",
+      "source_location": "L8"
     },
     {
       "id": "research_create_table",
@@ -1101,10 +1062,30 @@
       "source_location": "L4"
     },
     {
+      "id": "tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 15,
+      "confidence": "EXTRACTED",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "tailwindcss"
+    },
+    {
+      "id": "frontend_tailwind_config",
+      "label": "tailwind.config.js",
+      "_origin": "ast",
+      "community": 15,
+      "file_type": "code",
+      "norm_label": "tailwind.config.js",
+      "source_file": "frontend/tailwind.config.js",
+      "source_location": "L1"
+    },
+    {
       "id": "research_test_static_creds",
       "label": "test_static_creds.py",
       "_origin": "ast",
-      "community": 15,
+      "community": 16,
       "community_name": "Tailwind Config",
       "file_type": "code",
       "norm_label": "test_static_creds.py",
@@ -1115,7 +1096,7 @@
       "id": "research_test_static_creds_rationale_1",
       "label": "Test non-expiring username/password credentials against Databricks Postgres.",
       "_origin": "ast",
-      "community": 15,
+      "community": 16,
       "community_name": "Tailwind Config",
       "file_type": "rationale",
       "norm_label": "test non-expiring username/password credentials against databricks postgres.",
@@ -1126,21 +1107,11 @@
       "id": "frontend_postcss_config",
       "label": "postcss.config.js",
       "_origin": "ast",
-      "community": 16,
+      "community": 17,
       "community_name": "Credential Tests",
       "file_type": "code",
       "norm_label": "postcss.config.js",
       "source_file": "frontend/postcss.config.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_tailwind_config",
-      "label": "tailwind.config.js",
-      "_origin": "ast",
-      "community": 17,
-      "file_type": "code",
-      "norm_label": "tailwind.config.js",
-      "source_file": "frontend/tailwind.config.js",
       "source_location": "L1"
     },
     {
@@ -1155,80 +1126,10 @@
       "source_location": "L1"
     },
     {
-      "id": "frontend_app_dream15_page",
-      "label": "dream15/page.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "dream15/page.tsx",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_app_dream15_page_pos_colors",
-      "label": "POS_COLORS",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "pos_colors",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "frontend_app_dream15_page_row_bg",
-      "label": "ROW_BG",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "row_bg",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "frontend_app_dream15_page_row_order",
-      "label": "ROW_ORDER",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "row_order",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "frontend_app_players_page",
-      "label": "players/page.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "players/page.tsx",
-      "source_file": "frontend/app/players/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_app_players_page_pos_colors",
-      "label": "POS_COLORS",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "code",
-      "norm_label": "pos_colors",
-      "source_file": "frontend/app/players/page.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "ref_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 2,
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "frontend/package.json",
-      "source_location": "L14"
-    },
-    {
       "id": "frontend_tsconfig",
       "label": "tsconfig.json",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "tsconfig.json",
@@ -1239,7 +1140,7 @@
       "id": "frontend_tsconfig_compileroptions",
       "label": "compilerOptions",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "compileroptions",
@@ -1250,7 +1151,7 @@
       "id": "frontend_tsconfig_compileroptions_allowjs",
       "label": "allowJs",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "allowjs",
@@ -1261,7 +1162,7 @@
       "id": "frontend_tsconfig_compileroptions_esmoduleinterop",
       "label": "esModuleInterop",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "esmoduleinterop",
@@ -1272,7 +1173,7 @@
       "id": "frontend_tsconfig_compileroptions_incremental",
       "label": "incremental",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "incremental",
@@ -1283,7 +1184,7 @@
       "id": "frontend_tsconfig_compileroptions_isolatedmodules",
       "label": "isolatedModules",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "isolatedmodules",
@@ -1294,7 +1195,7 @@
       "id": "frontend_tsconfig_compileroptions_jsx",
       "label": "jsx",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "jsx",
@@ -1305,7 +1206,7 @@
       "id": "frontend_tsconfig_compileroptions_lib",
       "label": "lib",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "lib",
@@ -1316,7 +1217,7 @@
       "id": "frontend_tsconfig_compileroptions_module",
       "label": "module",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "module",
@@ -1327,7 +1228,7 @@
       "id": "frontend_tsconfig_compileroptions_moduleresolution",
       "label": "moduleResolution",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "moduleresolution",
@@ -1338,7 +1239,7 @@
       "id": "frontend_tsconfig_compileroptions_noemit",
       "label": "noEmit",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "noemit",
@@ -1349,7 +1250,7 @@
       "id": "frontend_tsconfig_compileroptions_paths",
       "label": "paths",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "paths",
@@ -1360,7 +1261,7 @@
       "id": "frontend_tsconfig_compileroptions_plugins",
       "label": "plugins",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "plugins",
@@ -1371,7 +1272,7 @@
       "id": "frontend_tsconfig_compileroptions_resolvejsonmodule",
       "label": "resolveJsonModule",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "resolvejsonmodule",
@@ -1382,7 +1283,7 @@
       "id": "frontend_tsconfig_compileroptions_skiplibcheck",
       "label": "skipLibCheck",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "skiplibcheck",
@@ -1393,7 +1294,7 @@
       "id": "frontend_tsconfig_compileroptions_strict",
       "label": "strict",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "strict",
@@ -1404,7 +1305,7 @@
       "id": "frontend_tsconfig_compileroptions_target",
       "label": "target",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "target",
@@ -1415,7 +1316,7 @@
       "id": "frontend_tsconfig_exclude",
       "label": "exclude",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "exclude",
@@ -1426,7 +1327,7 @@
       "id": "frontend_tsconfig_include",
       "label": "include",
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "include",
@@ -1434,10 +1335,91 @@
       "source_location": "L31"
     },
     {
+      "id": "frontend_app_api_data_route",
+      "label": "data/route.ts",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "Database Layer",
+      "file_type": "code",
+      "norm_label": "data/route.ts",
+      "source_file": "frontend/app/api/data/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_players_page",
+      "label": "players/page.tsx",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "players/page.tsx",
+      "source_file": "frontend/app/players/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_players_page_pos_colors",
+      "label": "POS_COLORS",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "pos_colors",
+      "source_file": "frontend/app/players/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "frontend_lib_db",
+      "label": "db.ts",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "norm_label": "db.ts",
+      "source_file": "frontend/lib/db.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_dream15_page",
+      "label": "dream15/page.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "dream15/page.tsx",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_dream15_page_pos_colors",
+      "label": "POS_COLORS",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "pos_colors",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "frontend_app_dream15_page_row_bg",
+      "label": "ROW_BG",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "row_bg",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "frontend_app_dream15_page_row_order",
+      "label": "ROW_ORDER",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "norm_label": "row_order",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L13"
+    },
+    {
       "id": "frontend_app_api_bootstrap_route",
       "label": "bootstrap/route.ts",
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "bootstrap/route.ts",
@@ -1448,7 +1430,7 @@
       "id": "frontend_app_api_manager_route",
       "label": "manager/route.ts",
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "manager/route.ts",
@@ -1459,7 +1441,7 @@
       "id": "frontend_app_api_picks_route",
       "label": "picks/route.ts",
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "picks/route.ts",
@@ -1470,7 +1452,7 @@
       "id": "frontend_lib_fpl",
       "label": "fpl.ts",
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "fpl.ts",
@@ -1481,7 +1463,7 @@
       "id": "frontend_lib_fpl_base_url",
       "label": "BASE_URL",
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "base_url",
@@ -1492,7 +1474,7 @@
       "id": "frontend_lib_fpl_headers",
       "label": "HEADERS",
       "_origin": "ast",
-      "community": 4,
+      "community": 5,
       "community_name": "FPL API Routes",
       "file_type": "code",
       "norm_label": "headers",
@@ -1500,74 +1482,11 @@
       "source_location": "L5"
     },
     {
-      "id": "frontend_app_api_data_route",
-      "label": "data/route.ts",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "Database Layer",
-      "file_type": "code",
-      "norm_label": "data/route.ts",
-      "source_file": "frontend/app/api/data/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_dbtest",
-      "label": "_dbtest.js",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "Database Layer",
-      "file_type": "code",
-      "norm_label": "_dbtest.js",
-      "source_file": "frontend/_dbtest.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_dbtest_fs",
-      "label": "fs",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "Database Layer",
-      "file_type": "code",
-      "norm_label": "fs",
-      "source_file": "frontend/_dbtest.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_dbtest_pool",
-      "label": "{ Pool }",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "Database Layer",
-      "file_type": "code",
-      "norm_label": "{ pool }",
-      "source_file": "frontend/_dbtest.js",
-      "source_location": "L9"
-    },
-    {
-      "id": "frontend_lib_db",
-      "label": "db.ts",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "code",
-      "norm_label": "db.ts",
-      "source_file": "frontend/lib/db.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_pg",
-      "label": "pg",
-      "_origin": "ast",
-      "community": 5,
-      "file_type": "concept",
-      "norm_label": "pg",
-      "source_file": "frontend/package.json",
-      "source_location": "L13"
-    },
-    {
       "id": "research_fpl_team_manager",
       "label": "fpl_team_manager.py",
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "fpl_team_manager.py",
       "source_file": "research/fpl_team_manager.py",
@@ -1578,6 +1497,7 @@
       "label": "Fetch and decode one FPL API endpoint.",
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "fetch and decode one fpl api endpoint.",
       "source_file": "research/fpl_team_manager.py",
@@ -1588,6 +1508,7 @@
       "label": "Find replacement candidates, optionally preferring ones that reinvest budget.",
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "find replacement candidates, optionally preferring ones that reinvest budget.",
       "source_file": "research/fpl_team_manager.py",
@@ -1598,6 +1519,7 @@
       "label": "Use the requested GW, otherwise current GW, then most recently finished GW.",
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "use the requested gw, otherwise current gw, then most recently finished gw.",
       "source_file": "research/fpl_team_manager.py",
@@ -1608,6 +1530,7 @@
       "label": "Join pick records to readable player, club, and position information.",
       "_origin": "ast",
       "community": 6,
+      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "join pick records to readable player, club, and position information.",
       "source_file": "research/fpl_team_manager.py",
@@ -1621,7 +1544,7 @@
       "file_type": "code",
       "norm_label": "devdependencies",
       "source_file": "frontend/package.json",
-      "source_location": "L17"
+      "source_location": "L16"
     },
     {
       "id": "frontend_package_devdependencies_autoprefixer",
@@ -1631,7 +1554,7 @@
       "file_type": "code",
       "norm_label": "autoprefixer",
       "source_file": "frontend/package.json",
-      "source_location": "L21"
+      "source_location": "L20"
     },
     {
       "id": "frontend_package_devdependencies_postcss",
@@ -1641,7 +1564,7 @@
       "file_type": "code",
       "norm_label": "postcss",
       "source_file": "frontend/package.json",
-      "source_location": "L22"
+      "source_location": "L21"
     },
     {
       "id": "frontend_package_devdependencies_tailwindcss",
@@ -1651,7 +1574,7 @@
       "file_type": "code",
       "norm_label": "tailwindcss",
       "source_file": "frontend/package.json",
-      "source_location": "L23"
+      "source_location": "L22"
     },
     {
       "id": "frontend_package_devdependencies_types_node",
@@ -1661,7 +1584,7 @@
       "file_type": "code",
       "norm_label": "@types/node",
       "source_file": "frontend/package.json",
-      "source_location": "L18"
+      "source_location": "L17"
     },
     {
       "id": "frontend_package_devdependencies_types_pg",
@@ -1671,7 +1594,7 @@
       "file_type": "code",
       "norm_label": "@types/pg",
       "source_file": "frontend/package.json",
-      "source_location": "L19"
+      "source_location": "L18"
     },
     {
       "id": "frontend_package_devdependencies_types_react",
@@ -1681,7 +1604,7 @@
       "file_type": "code",
       "norm_label": "@types/react",
       "source_file": "frontend/package.json",
-      "source_location": "L20"
+      "source_location": "L19"
     },
     {
       "id": "frontend_package_devdependencies_typescript",
@@ -1691,53 +1614,13 @@
       "file_type": "code",
       "norm_label": "typescript",
       "source_file": "frontend/package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "frontend_app_layout",
-      "label": "layout.tsx",
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "code",
-      "norm_label": "layout.tsx",
-      "source_file": "frontend/app/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_app_layout_metadata",
-      "label": "metadata",
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "frontend/app/layout.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "frontend_components_siteheader",
-      "label": "SiteHeader.tsx",
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "code",
-      "norm_label": "siteheader.tsx",
-      "source_file": "frontend/components/SiteHeader.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_next",
-      "label": "next",
-      "_origin": "ast",
-      "community": 8,
-      "file_type": "concept",
-      "norm_label": "next",
-      "source_file": "frontend/package.json",
-      "source_location": "L12"
+      "source_location": "L23"
     },
     {
       "id": "research_connect_database",
       "label": "connect_database.py",
       "_origin": "ast",
-      "community": 9,
+      "community": 8,
       "file_type": "code",
       "norm_label": "connect_database.py",
       "source_file": "research/connect_database.py",
@@ -1747,7 +1630,7 @@
       "id": "research_connect_database_rationale_1",
       "label": "Check connectivity to a PostgreSQL-compatible database.",
       "_origin": "ast",
-      "community": 9,
+      "community": 8,
       "file_type": "rationale",
       "norm_label": "check connectivity to a postgresql-compatible database.",
       "source_file": "research/connect_database.py",
@@ -1757,10 +1640,53 @@
       "id": "research_connect_database_rationale_12",
       "label": "Return a connection URL with credentials and sensitive query values hidden.",
       "_origin": "ast",
-      "community": 9,
+      "community": 8,
       "file_type": "rationale",
       "norm_label": "return a connection url with credentials and sensitive query values hidden.",
       "source_file": "research/connect_database.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "frontend_dbtest",
+      "label": "_dbtest.js",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "Database Layer",
+      "file_type": "code",
+      "norm_label": "_dbtest.js",
+      "source_file": "frontend/_dbtest.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_dbtest_fs",
+      "label": "fs",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "Database Layer",
+      "file_type": "code",
+      "norm_label": "fs",
+      "source_file": "frontend/_dbtest.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_dbtest_pool",
+      "label": "{ Pool }",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "Database Layer",
+      "file_type": "code",
+      "norm_label": "{ pool }",
+      "source_file": "frontend/_dbtest.js",
+      "source_location": "L9"
+    },
+    {
+      "id": "ref_pg",
+      "label": "pg",
+      "_origin": "ast",
+      "community": 9,
+      "file_type": "concept",
+      "norm_label": "pg",
+      "source_file": "frontend/package.json",
       "source_location": "L12"
     }
   ],
@@ -1851,14 +1777,14 @@
     },
     {
       "source": "frontend_app_page_home",
-      "target": "frontend_lib_suggestions_listtransferoptions",
+      "target": "frontend_lib_suggestions_generatesuggestions",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L156",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -1870,19 +1796,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L65",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
       "source": "frontend_app_page_home",
-      "target": "frontend_lib_suggestions_findbesttransferplan",
+      "target": "frontend_lib_suggestions_findbesttransfer",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L77",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -1894,7 +1820,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L73",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -1918,7 +1844,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L431",
+      "source_location": "L435",
       "weight": 1.0
     },
     {
@@ -1930,31 +1856,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L449",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions_findbesttransferplan",
-      "target": "frontend_lib_suggestions_optimizestartingeleven",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L520",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions_findbesttransferplan",
-      "target": "frontend_lib_suggestions_findreplacements",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L532",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -1966,7 +1868,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L169",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -1978,19 +1880,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L268",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
       "source": "frontend_lib_suggestions_optimizedream15",
-      "target": "frontend_lib_suggestions_optimizestartingeleven",
+      "target": "frontend_lib_suggestions_builddreamoptions",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L319",
+      "source_location": "L315",
       "weight": 1.0
     },
     {
@@ -2003,6 +1905,19 @@
       "context": "call",
       "source_file": "research/connect_database.py",
       "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page_home",
+      "target": "frontend_lib_suggestions",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "deferred": true,
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -2151,78 +2066,6 @@
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_optimizeresult",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_replacement",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_squadplayer",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_statsrow",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_suggestion",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
-      "target": "frontend_lib_db_predictionrow",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L17",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
       "target": "frontend_lib_fpl_teamrow",
       "relation": "imports",
       "_origin": "ast",
@@ -2235,7 +2078,7 @@
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_findbesttransferplan",
+      "target": "frontend_lib_suggestions_findbesttransfer",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2247,7 +2090,7 @@
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_listtransferoptions",
+      "target": "frontend_lib_suggestions_generatesuggestions",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2267,6 +2110,66 @@
       "context": "import",
       "source_file": "frontend/app/page.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_suggestions_optimizeresult",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_suggestions_squadplayer",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_suggestions_statsrow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_suggestions_suggestion",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_db_predictionrow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -2331,7 +2234,7 @@
     },
     {
       "source": "frontend_package",
-      "target": "package_json_ref_javascript_lp_solver",
+      "target": "ref_next",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2343,7 +2246,7 @@
     },
     {
       "source": "frontend_package",
-      "target": "ref_next",
+      "target": "ref_pg",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2355,7 +2258,7 @@
     },
     {
       "source": "frontend_package",
-      "target": "ref_pg",
+      "target": "ref_react",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2367,7 +2270,7 @@
     },
     {
       "source": "frontend_package",
-      "target": "ref_react",
+      "target": "ref_react_dom",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2379,18 +2282,6 @@
     },
     {
       "source": "frontend_package",
-      "target": "ref_react_dom",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/package.json",
-      "source_location": "L15",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_package",
       "target": "ref_types_node",
       "relation": "imports",
       "_origin": "ast",
@@ -2398,7 +2289,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L18",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -2410,7 +2301,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L19",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -2422,7 +2313,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -2434,7 +2325,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L21",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -2446,7 +2337,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -2458,7 +2349,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -2470,19 +2361,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "frontend/package.json",
-      "source_location": "L24",
-      "weight": 1.0
-    },
-    {
-      "source": "package",
-      "target": "package_json_ref_javascript_lp_solver",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "package.json",
-      "source_location": "L3",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -2597,32 +2476,6 @@
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L10",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
-      "target": "frontend_lib_db",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L17",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
       "target": "ref_react",
       "relation": "imports_from",
       "_origin": "ast",
@@ -2647,6 +2500,32 @@
       "weight": 1.0
     },
     {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_suggestions",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L6",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_page",
+      "target": "frontend_lib_db",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/app/page.tsx",
+      "source_location": "L7",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
       "source": "frontend_app_players_page",
       "target": "ref_react",
       "relation": "imports_from",
@@ -2669,6 +2548,18 @@
       "source_file": "frontend/app/players/page.tsx",
       "source_location": "L4",
       "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_components_siteheader",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "frontend/components/SiteHeader.tsx",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -2778,13 +2669,24 @@
     },
     {
       "source": "frontend_app_dream15_page",
+      "target": "frontend_app_dream15_page_dreampitch",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_dream15_page",
       "target": "frontend_app_dream15_page_dreamplayercard",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L121",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -2800,17 +2702,6 @@
     },
     {
       "source": "frontend_app_dream15_page",
-      "target": "frontend_app_dream15_page_stat",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L138",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_dream15_page",
       "target": "frontend_app_dream15_page_row_bg",
       "relation": "contains",
       "_origin": "ast",
@@ -2818,6 +2709,17 @@
       "confidence_score": 1.0,
       "source_file": "frontend/app/dream15/page.tsx",
       "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_app_dream15_page",
+      "target": "frontend_app_dream15_page_stat",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -2839,7 +2741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L59",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -2851,17 +2753,6 @@
       "confidence_score": 1.0,
       "source_file": "frontend/app/dream15/page.tsx",
       "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_dream15_page",
-      "target": "frontend_app_dream15_page_dreampitch",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -2888,24 +2779,13 @@
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_app_page_manager",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/app/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_app_page",
       "target": "frontend_app_page_bootstrap",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L20",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -2916,7 +2796,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L22",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -2927,7 +2807,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L29",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -2938,7 +2818,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L33",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -2949,7 +2829,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L550",
+      "source_location": "L458",
       "weight": 1.0
     },
     {
@@ -2960,7 +2840,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L560",
+      "source_location": "L468",
       "weight": 1.0
     },
     {
@@ -2971,7 +2851,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L561",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
@@ -2982,7 +2862,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L568",
+      "source_location": "L476",
       "weight": 1.0
     },
     {
@@ -2993,18 +2873,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L651",
+      "source_location": "L556",
       "weight": 1.0
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_app_page_transfermodal",
+      "target": "frontend_app_page_manager",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L716",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -3059,7 +2939,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/components/SiteHeader.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -3136,7 +3016,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L72",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -3218,13 +3098,13 @@
     },
     {
       "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_squadplayer",
+      "target": "frontend_lib_suggestions_findreplacements",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L14",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -3235,7 +3115,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L143",
+      "source_location": "L149",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_squadplayer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -3246,7 +3137,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L216",
+      "source_location": "L223",
       "weight": 1.0
     },
     {
@@ -3257,7 +3148,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L227",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_dreamoption",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L248",
       "weight": 1.0
     },
     {
@@ -3268,7 +3170,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L243",
+      "source_location": "L261",
       "weight": 1.0
     },
     {
@@ -3279,7 +3181,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L26",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_builddreamoptions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L285",
       "weight": 1.0
     },
     {
@@ -3290,7 +3203,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L267",
+      "source_location": "L310",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_valid_formations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -3301,7 +3225,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L346",
+      "source_location": "L351",
       "weight": 1.0
     },
     {
@@ -3312,51 +3236,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L38",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_findbesttransfer",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L424",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_pos_by_element",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L46",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_transferrecord",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L48",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_findbesttransferplan",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L498",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -3367,7 +3247,51 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L5",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_findbesttransfer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L428",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_pos_by_element",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_statsbyplayername",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_transferrecord",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -3378,18 +3302,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_listtransferoptions",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L581",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -3400,40 +3313,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L69",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_statsbyplayerid",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_resolvestatsbyid",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L92",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_findreplacements",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L99",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -3466,7 +3346,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -3515,7 +3395,7 @@
     },
     {
       "source": "frontend_package_dependencies",
-      "target": "frontend_package_dependencies_javascript_lp_solver",
+      "target": "frontend_package_dependencies_next",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3526,7 +3406,7 @@
     },
     {
       "source": "frontend_package_dependencies",
-      "target": "frontend_package_dependencies_next",
+      "target": "frontend_package_dependencies_pg",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3537,7 +3417,7 @@
     },
     {
       "source": "frontend_package_dependencies",
-      "target": "frontend_package_dependencies_pg",
+      "target": "frontend_package_dependencies_react",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3548,24 +3428,13 @@
     },
     {
       "source": "frontend_package_dependencies",
-      "target": "frontend_package_dependencies_react",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/package.json",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_package_dependencies",
       "target": "frontend_package_dependencies_react_dom",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -3576,7 +3445,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L18",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -3587,7 +3456,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L19",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -3598,7 +3467,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -3609,7 +3478,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L21",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -3620,7 +3489,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -3631,7 +3500,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -3642,7 +3511,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/package.json",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -3877,50 +3746,6 @@
       "weight": 1.0
     },
     {
-      "source": "frontend_types_javascript_lp_solver_d",
-      "target": "frontend_types_javascript_lp_solver_d_javascript_lp_solver",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/types/javascript-lp-solver.d.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_types_javascript_lp_solver_d",
-      "target": "frontend_types_javascript_lp_solver_d_lpmodel",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/types/javascript-lp-solver.d.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "package",
-      "target": "package_dependencies",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "package.json",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "package_dependencies",
-      "target": "package_dependencies_javascript_lp_solver",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "package.json",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
       "source": "research_connect_database",
       "target": "research_connect_database_redact_url",
       "relation": "contains",
@@ -3996,6 +3821,15 @@
       "source_file": "research/fpl_team_manager.py",
       "source_location": "L80",
       "weight": 1.0
+    },
+    {
+      "source": "frontend_tailwind_config",
+      "target": "tailwindcss",
+      "relation": "dynamic_import",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/tailwind.config.js"
     },
     {
       "source": "frontend_next_env_d_rationale_4",
@@ -4098,5 +3932,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "80aee558bfc4970beb7afad59396c1e01850fa9d"
+  "built_at_commit": "0723441b37d4c0d7647a913abc7432d9dcfa4813"
 }
