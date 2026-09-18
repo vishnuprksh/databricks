@@ -88,12 +88,24 @@
       "source_location": "L48"
     },
     {
+      "id": "types_javascript_lp_solver_d_lpmodel",
+      "label": "LpModel",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 10,
+      "file_type": "code",
+      "norm_label": "lpmodel",
+      "source_file": "types/javascript-lp-solver.d.ts",
+      "source_location": "L2"
+    },
+    {
       "id": "app_players_page_sortkey",
       "label": "SortKey",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "sortkey",
       "source_file": "app/players/page.tsx",
@@ -105,7 +117,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "playerrow",
       "source_file": "lib/db.ts",
@@ -117,7 +129,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "predictionrow",
       "source_file": "lib/db.ts",
@@ -129,7 +141,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dream15result",
       "source_file": "lib/suggestions.ts",
@@ -141,23 +153,11 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "squadplayer",
       "source_file": "lib/suggestions.ts",
       "source_location": "L14"
-    },
-    {
-      "id": "types_javascript_lp_solver_d_lpmodel",
-      "label": "LpModel",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 10,
-      "file_type": "code",
-      "norm_label": "lpmodel",
-      "source_file": "types/javascript-lp-solver.d.ts",
-      "source_location": "L2"
     },
     {
       "id": "lib_fpl_teamrow",
@@ -185,6 +185,17 @@
       "source_location": "L40"
     },
     {
+      "id": "app_dream15_page_dream15page",
+      "label": "Dream15Page()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "dream15page()",
+      "source_file": "app/dream15/page.tsx",
+      "source_location": "L21"
+    },
+    {
       "id": "app_page_home",
       "label": "Home()",
       "_callable": true,
@@ -196,6 +207,17 @@
       "source_location": "L33"
     },
     {
+      "id": "app_page_islegalfplsubstitution",
+      "label": "isLegalFplSubstitution()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "islegalfplsubstitution()",
+      "source_file": "app/page.tsx",
+      "source_location": "L614"
+    },
+    {
       "id": "app_page_pitch",
       "label": "Pitch()",
       "_callable": true,
@@ -204,7 +226,7 @@
       "file_type": "code",
       "norm_label": "pitch()",
       "source_file": "app/page.tsx",
-      "source_location": "L605"
+      "source_location": "L636"
     },
     {
       "id": "app_page_playercard",
@@ -215,7 +237,7 @@
       "file_type": "code",
       "norm_label": "playercard()",
       "source_file": "app/page.tsx",
-      "source_location": "L708"
+      "source_location": "L745"
     },
     {
       "id": "app_page_posbadge",
@@ -237,7 +259,7 @@
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/page.tsx",
-      "source_location": "L587"
+      "source_location": "L596"
     },
     {
       "id": "app_page_transfermodal",
@@ -248,7 +270,7 @@
       "file_type": "code",
       "norm_label": "transfermodal()",
       "source_file": "app/page.tsx",
-      "source_location": "L849"
+      "source_location": "L886"
     },
     {
       "id": "lib_suggestions_buildsquadwithpred",
@@ -271,6 +293,17 @@
       "norm_label": "computesellprices()",
       "source_file": "lib/suggestions.ts",
       "source_location": "L51"
+    },
+    {
+      "id": "lib_suggestions_dreamplayers",
+      "label": "dreamPlayers()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "dreamplayers()",
+      "source_file": "lib/suggestions.ts",
+      "source_location": "L243"
     },
     {
       "id": "lib_suggestions_findbesttransfer",
@@ -328,6 +361,17 @@
       "source_location": "L590"
     },
     {
+      "id": "lib_suggestions_optimizedream15",
+      "label": "optimizeDream15()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "optimizedream15()",
+      "source_file": "lib/suggestions.ts",
+      "source_location": "L267"
+    },
+    {
       "id": "lib_suggestions_optimizestartingeleven",
       "label": "optimizeStartingEleven()",
       "_callable": true,
@@ -361,22 +405,22 @@
       "source_location": "L8"
     },
     {
-      "id": "app_dream15_page_dream15page",
-      "label": "Dream15Page()",
+      "id": "app_about_page_aboutpage",
+      "label": "AboutPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 11,
       "file_type": "code",
-      "norm_label": "dream15page()",
-      "source_file": "app/dream15/page.tsx",
-      "source_location": "L21"
+      "norm_label": "aboutpage()",
+      "source_file": "app/about/page.tsx",
+      "source_location": "L3"
     },
     {
       "id": "app_dream15_page_dreampitch",
       "label": "DreamPitch()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dreampitch()",
       "source_file": "app/dream15/page.tsx",
@@ -387,7 +431,7 @@
       "label": "DreamPlayerCard()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dreamplayercard()",
       "source_file": "app/dream15/page.tsx",
@@ -398,7 +442,7 @@
       "label": "DreamView()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dreamview()",
       "source_file": "app/dream15/page.tsx",
@@ -409,7 +453,7 @@
       "label": "Stat()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "app/dream15/page.tsx",
@@ -420,7 +464,7 @@
       "label": "PlayersPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "playerspage()",
       "source_file": "app/players/page.tsx",
@@ -431,44 +475,11 @@
       "label": "PosBadge()",
       "_callable": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 2,
       "file_type": "code",
       "norm_label": "posbadge()",
       "source_file": "app/players/page.tsx",
       "source_location": "L15"
-    },
-    {
-      "id": "lib_suggestions_dreamplayers",
-      "label": "dreamPlayers()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "dreamplayers()",
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L243"
-    },
-    {
-      "id": "lib_suggestions_optimizedream15",
-      "label": "optimizeDream15()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "file_type": "code",
-      "norm_label": "optimizedream15()",
-      "source_file": "lib/suggestions.ts",
-      "source_location": "L267"
-    },
-    {
-      "id": "app_about_page_aboutpage",
-      "label": "AboutPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 11,
-      "file_type": "code",
-      "norm_label": "aboutpage()",
-      "source_file": "app/about/page.tsx",
-      "source_location": "L3"
     },
     {
       "id": "app_api_bootstrap_route_get",
@@ -637,7 +648,7 @@
       "file_type": "code",
       "norm_label": "row_bg",
       "source_file": "app/page.tsx",
-      "source_location": "L598"
+      "source_location": "L607"
     },
     {
       "id": "app_page_row_order",
@@ -647,7 +658,7 @@
       "file_type": "code",
       "norm_label": "row_order",
       "source_file": "app/page.tsx",
-      "source_location": "L597"
+      "source_location": "L606"
     },
     {
       "id": "lib_suggestions",
@@ -670,74 +681,213 @@
       "source_location": "L46"
     },
     {
-      "id": "app_dream15_page",
-      "label": "dream15/page.tsx",
+      "id": "tsconfig",
+      "label": "tsconfig.json",
       "_origin": "ast",
       "community": 1,
+      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "dream15/page.tsx",
-      "source_file": "app/dream15/page.tsx",
+      "norm_label": "tsconfig.json",
+      "source_file": "tsconfig.json",
       "source_location": "L1"
     },
     {
-      "id": "app_dream15_page_pos_colors",
-      "label": "POS_COLORS",
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
       "_origin": "ast",
       "community": 1,
+      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "pos_colors",
-      "source_file": "app/dream15/page.tsx",
-      "source_location": "L7"
+      "norm_label": "compileroptions",
+      "source_file": "tsconfig.json",
+      "source_location": "L2"
     },
     {
-      "id": "app_dream15_page_row_bg",
-      "label": "ROW_BG",
+      "id": "tsconfig_compileroptions_allowjs",
+      "label": "allowJs",
       "_origin": "ast",
       "community": 1,
+      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "row_bg",
-      "source_file": "app/dream15/page.tsx",
-      "source_location": "L14"
+      "norm_label": "allowjs",
+      "source_file": "tsconfig.json",
+      "source_location": "L9"
     },
     {
-      "id": "app_dream15_page_row_order",
-      "label": "ROW_ORDER",
+      "id": "tsconfig_compileroptions_esmoduleinterop",
+      "label": "esModuleInterop",
       "_origin": "ast",
       "community": 1,
+      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "row_order",
-      "source_file": "app/dream15/page.tsx",
+      "norm_label": "esmoduleinterop",
+      "source_file": "tsconfig.json",
       "source_location": "L13"
     },
     {
-      "id": "app_players_page",
-      "label": "players/page.tsx",
+      "id": "tsconfig_compileroptions_incremental",
+      "label": "incremental",
       "_origin": "ast",
       "community": 1,
+      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "players/page.tsx",
-      "source_file": "app/players/page.tsx",
-      "source_location": "L1"
+      "norm_label": "incremental",
+      "source_file": "tsconfig.json",
+      "source_location": "L19"
     },
     {
-      "id": "app_players_page_pos_colors",
-      "label": "POS_COLORS",
+      "id": "tsconfig_compileroptions_isolatedmodules",
+      "label": "isolatedModules",
       "_origin": "ast",
       "community": 1,
+      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "pos_colors",
-      "source_file": "app/players/page.tsx",
-      "source_location": "L8"
+      "norm_label": "isolatedmodules",
+      "source_file": "tsconfig.json",
+      "source_location": "L17"
     },
     {
-      "id": "ref_react",
-      "label": "react",
+      "id": "tsconfig_compileroptions_jsx",
+      "label": "jsx",
       "_origin": "ast",
       "community": 1,
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "package.json",
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "jsx",
+      "source_file": "tsconfig.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "tsconfig_compileroptions_lib",
+      "label": "lib",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "lib",
+      "source_file": "tsconfig.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "tsconfig_compileroptions_module",
+      "label": "module",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "module",
+      "source_file": "tsconfig.json",
       "source_location": "L14"
+    },
+    {
+      "id": "tsconfig_compileroptions_moduleresolution",
+      "label": "moduleResolution",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "moduleresolution",
+      "source_file": "tsconfig.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "tsconfig_compileroptions_noemit",
+      "label": "noEmit",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "noemit",
+      "source_file": "tsconfig.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "tsconfig_compileroptions_paths",
+      "label": "paths",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "paths",
+      "source_file": "tsconfig.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "tsconfig_compileroptions_plugins",
+      "label": "plugins",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "plugins",
+      "source_file": "tsconfig.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "tsconfig_compileroptions_resolvejsonmodule",
+      "label": "resolveJsonModule",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "resolvejsonmodule",
+      "source_file": "tsconfig.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "tsconfig_compileroptions_skiplibcheck",
+      "label": "skipLibCheck",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "skiplibcheck",
+      "source_file": "tsconfig.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "tsconfig_compileroptions_strict",
+      "label": "strict",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "strict",
+      "source_file": "tsconfig.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "tsconfig_compileroptions_target",
+      "label": "target",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "target",
+      "source_file": "tsconfig.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "tsconfig_exclude",
+      "label": "exclude",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "exclude",
+      "source_file": "tsconfig.json",
+      "source_location": "L37"
+    },
+    {
+      "id": "tsconfig_include",
+      "label": "include",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "compilerOptions",
+      "file_type": "code",
+      "norm_label": "include",
+      "source_file": "tsconfig.json",
+      "source_location": "L31"
     },
     {
       "id": "types_javascript_lp_solver_d",
@@ -836,213 +986,74 @@
       "source_location": "L1"
     },
     {
-      "id": "tsconfig",
-      "label": "tsconfig.json",
+      "id": "app_dream15_page",
+      "label": "dream15/page.tsx",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "tsconfig.json",
-      "source_file": "tsconfig.json",
+      "norm_label": "dream15/page.tsx",
+      "source_file": "app/dream15/page.tsx",
       "source_location": "L1"
     },
     {
-      "id": "tsconfig_compileroptions",
-      "label": "compilerOptions",
+      "id": "app_dream15_page_pos_colors",
+      "label": "POS_COLORS",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "compileroptions",
-      "source_file": "tsconfig.json",
-      "source_location": "L2"
+      "norm_label": "pos_colors",
+      "source_file": "app/dream15/page.tsx",
+      "source_location": "L7"
     },
     {
-      "id": "tsconfig_compileroptions_allowjs",
-      "label": "allowJs",
+      "id": "app_dream15_page_row_bg",
+      "label": "ROW_BG",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "allowjs",
-      "source_file": "tsconfig.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "tsconfig_compileroptions_esmoduleinterop",
-      "label": "esModuleInterop",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "esmoduleinterop",
-      "source_file": "tsconfig.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "tsconfig_compileroptions_incremental",
-      "label": "incremental",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "incremental",
-      "source_file": "tsconfig.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "tsconfig_compileroptions_isolatedmodules",
-      "label": "isolatedModules",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "isolatedmodules",
-      "source_file": "tsconfig.json",
-      "source_location": "L17"
-    },
-    {
-      "id": "tsconfig_compileroptions_jsx",
-      "label": "jsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "jsx",
-      "source_file": "tsconfig.json",
-      "source_location": "L18"
-    },
-    {
-      "id": "tsconfig_compileroptions_lib",
-      "label": "lib",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "lib",
-      "source_file": "tsconfig.json",
-      "source_location": "L4"
-    },
-    {
-      "id": "tsconfig_compileroptions_module",
-      "label": "module",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "module",
-      "source_file": "tsconfig.json",
+      "norm_label": "row_bg",
+      "source_file": "app/dream15/page.tsx",
       "source_location": "L14"
     },
     {
-      "id": "tsconfig_compileroptions_moduleresolution",
-      "label": "moduleResolution",
+      "id": "app_dream15_page_row_order",
+      "label": "ROW_ORDER",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "moduleresolution",
-      "source_file": "tsconfig.json",
-      "source_location": "L15"
+      "norm_label": "row_order",
+      "source_file": "app/dream15/page.tsx",
+      "source_location": "L13"
     },
     {
-      "id": "tsconfig_compileroptions_noemit",
-      "label": "noEmit",
+      "id": "app_players_page",
+      "label": "players/page.tsx",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "noemit",
-      "source_file": "tsconfig.json",
-      "source_location": "L12"
+      "norm_label": "players/page.tsx",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L1"
     },
     {
-      "id": "tsconfig_compileroptions_paths",
-      "label": "paths",
+      "id": "app_players_page_pos_colors",
+      "label": "POS_COLORS",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
       "file_type": "code",
-      "norm_label": "paths",
-      "source_file": "tsconfig.json",
-      "source_location": "L25"
+      "norm_label": "pos_colors",
+      "source_file": "app/players/page.tsx",
+      "source_location": "L8"
     },
     {
-      "id": "tsconfig_compileroptions_plugins",
-      "label": "plugins",
+      "id": "ref_react",
+      "label": "react",
       "_origin": "ast",
       "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "plugins",
-      "source_file": "tsconfig.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "tsconfig_compileroptions_resolvejsonmodule",
-      "label": "resolveJsonModule",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "resolvejsonmodule",
-      "source_file": "tsconfig.json",
-      "source_location": "L16"
-    },
-    {
-      "id": "tsconfig_compileroptions_skiplibcheck",
-      "label": "skipLibCheck",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "skiplibcheck",
-      "source_file": "tsconfig.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "tsconfig_compileroptions_strict",
-      "label": "strict",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "strict",
-      "source_file": "tsconfig.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "tsconfig_compileroptions_target",
-      "label": "target",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "target",
-      "source_file": "tsconfig.json",
-      "source_location": "L3"
-    },
-    {
-      "id": "tsconfig_exclude",
-      "label": "exclude",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "exclude",
-      "source_file": "tsconfig.json",
-      "source_location": "L37"
-    },
-    {
-      "id": "tsconfig_include",
-      "label": "include",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "compilerOptions",
-      "file_type": "code",
-      "norm_label": "include",
-      "source_file": "tsconfig.json",
-      "source_location": "L31"
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "package.json",
+      "source_location": "L14"
     },
     {
       "id": "package",
@@ -1728,6 +1739,18 @@
       "context": "call",
       "source_file": "app/page.tsx",
       "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_pitch",
+      "target": "app_page_islegalfplsubstitution",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/page.tsx",
+      "source_location": "L702",
       "weight": 1.0
     },
     {
@@ -2782,7 +2805,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L587",
+      "source_location": "L596",
       "weight": 1.0
     },
     {
@@ -2793,7 +2816,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L597",
+      "source_location": "L606",
       "weight": 1.0
     },
     {
@@ -2804,7 +2827,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L598",
+      "source_location": "L607",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page",
+      "target": "app_page_islegalfplsubstitution",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/page.tsx",
+      "source_location": "L614",
       "weight": 1.0
     },
     {
@@ -2815,7 +2849,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L605",
+      "source_location": "L636",
       "weight": 1.0
     },
     {
@@ -2826,7 +2860,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L708",
+      "source_location": "L745",
       "weight": 1.0
     },
     {
@@ -2837,7 +2871,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/page.tsx",
-      "source_location": "L849",
+      "source_location": "L886",
       "weight": 1.0
     },
     {
@@ -3810,5 +3844,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6197d3751b9f4d4dbbb26ac06a405c13084e762b"
+  "built_at_commit": "f505b74d130e5aa502c921efa34ba97654741e4e"
 }

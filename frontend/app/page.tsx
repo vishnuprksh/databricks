@@ -430,6 +430,15 @@ export default function Home() {
             <div className="flex items-center justify-between gap-4 flex-wrap mb-1">
               <h2 className="text-lg font-bold">🔮 Transfer Suggestion (ML-Powered)</h2>
               <div className="flex items-center gap-2 text-sm">
+                <button
+                  onClick={() => suggestBestTransfer()}
+                  disabled={suggestingTransfer}
+                  aria-label="Refresh transfer suggestions"
+                  title="Refresh transfer suggestions"
+                  className="h-8 w-8 rounded-lg border border-[var(--border)] text-lg leading-none text-[var(--muted)] hover:text-white hover:border-[var(--accent)] disabled:opacity-50"
+                >
+                  ↻
+                </button>
                 <span className="text-[var(--muted)]">Plan:</span>
                 <div className="flex rounded-lg border border-[var(--border)] overflow-hidden">
                   {([1, 2, 3] as const).map((limit) => (
