@@ -1,26 +1,20 @@
 {
   "communities": {
     "0": [
+      "app_dream15_page",
       "app_dream15_page_dream15page",
-      "app_page",
-      "app_page_bootstrap",
-      "app_page_fixturesmodal",
+      "app_dream15_page_dreampitch",
+      "app_dream15_page_dreamplayercard",
+      "app_dream15_page_dreamview",
+      "app_dream15_page_pos_colors",
+      "app_dream15_page_row_bg",
+      "app_dream15_page_row_order",
+      "app_dream15_page_stat",
       "app_page_home",
-      "app_page_injurycardclass",
-      "app_page_islegalfplsubstitution",
-      "app_page_manager",
-      "app_page_pitch",
-      "app_page_playercard",
-      "app_page_pos_colors",
-      "app_page_posbadge",
-      "app_page_row_bg",
-      "app_page_row_order",
-      "app_page_stat",
-      "app_page_transfermodal",
-      "lib_db_playermatchrow",
       "lib_suggestions",
       "lib_suggestions_buildsquadwithpred",
       "lib_suggestions_computesellprices",
+      "lib_suggestions_dream15result",
       "lib_suggestions_dreamplayers",
       "lib_suggestions_findbesttransfer",
       "lib_suggestions_findbesttransferplan",
@@ -33,6 +27,7 @@
       "lib_suggestions_pos_by_element",
       "lib_suggestions_replacement",
       "lib_suggestions_resolvestatsbyid",
+      "lib_suggestions_squadplayer",
       "lib_suggestions_statsbyplayerid",
       "lib_suggestions_statsrow",
       "lib_suggestions_suggestion",
@@ -43,6 +38,12 @@
       "dbtest_fs",
       "dbtest_pool",
       "package",
+      "package_dependencies",
+      "package_dependencies_javascript_lp_solver",
+      "package_dependencies_next",
+      "package_dependencies_pg",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
       "package_name",
       "package_private",
       "package_scripts",
@@ -83,26 +84,44 @@
       "tsconfig_include"
     ],
     "3": [
-      "app_dream15_page",
-      "app_dream15_page_dreampitch",
-      "app_dream15_page_dreamplayercard",
-      "app_dream15_page_dreamview",
-      "app_dream15_page_pos_colors",
-      "app_dream15_page_row_bg",
-      "app_dream15_page_row_order",
-      "app_dream15_page_stat",
-      "app_players_page",
-      "app_players_page_playerspage",
-      "app_players_page_pos_colors",
-      "app_players_page_posbadge",
-      "app_players_page_sortkey",
-      "lib_db_playerrow",
-      "lib_db_predictionrow",
-      "lib_suggestions_dream15result",
-      "lib_suggestions_squadplayer",
-      "ref_react"
+      "app_api_data_route",
+      "app_api_data_route_get",
+      "app_api_fixture_matrix_route",
+      "app_api_fixture_matrix_route_dynamic",
+      "app_api_fixture_matrix_route_fixturematrixrow",
+      "app_api_fixture_matrix_route_get",
+      "app_api_fixtures_route",
+      "app_api_fixtures_route_dynamic",
+      "app_api_fixtures_route_get",
+      "lib_db",
+      "lib_db_fetchplayermatchdetails",
+      "lib_db_fetchplayers",
+      "lib_db_fetchpredictions",
+      "lib_db_fixturedifficultyrow",
+      "lib_db_getpool",
+      "lib_db_gwprediction",
+      "lib_db_numornull",
+      "lib_db_playermatchrow"
     ],
     "4": [
+      "app_page",
+      "app_page_bootstrap",
+      "app_page_fixturesmodal",
+      "app_page_injurycardclass",
+      "app_page_islegalfplsubstitution",
+      "app_page_manager",
+      "app_page_mini_card_tone",
+      "app_page_miniplayercard",
+      "app_page_pitch",
+      "app_page_playercard",
+      "app_page_pos_colors",
+      "app_page_posbadge",
+      "app_page_row_bg",
+      "app_page_row_order",
+      "app_page_stat",
+      "app_page_transfermodal"
+    ],
+    "5": [
       "app_api_bootstrap_route",
       "app_api_bootstrap_route_get",
       "app_api_manager_route",
@@ -117,22 +136,22 @@
       "lib_fpl_headers",
       "lib_fpl_teamrow"
     ],
-    "5": [
-      "app_api_data_route",
-      "app_api_data_route_get",
-      "app_api_fixtures_route",
-      "app_api_fixtures_route_dynamic",
-      "app_api_fixtures_route_get",
-      "lib_db",
-      "lib_db_fetchplayermatchdetails",
-      "lib_db_fetchplayers",
-      "lib_db_fetchpredictions",
-      "lib_db_fixturedifficultyrow",
-      "lib_db_getpool",
-      "lib_db_gwprediction",
-      "lib_db_numornull"
-    ],
     "6": [
+      "app_fixtures_page",
+      "app_fixtures_page_fixturerow",
+      "app_fixtures_page_fixturespage",
+      "app_fixtures_page_fmtkickoff",
+      "app_fixtures_page_probcolor",
+      "app_players_page",
+      "app_players_page_playerspage",
+      "app_players_page_pos_colors",
+      "app_players_page_posbadge",
+      "app_players_page_sortkey",
+      "lib_db_playerrow",
+      "lib_db_predictionrow",
+      "ref_react"
+    ],
+    "7": [
       "package_devdependencies",
       "package_devdependencies_autoprefixer",
       "package_devdependencies_postcss",
@@ -142,7 +161,7 @@
       "package_devdependencies_types_react",
       "package_devdependencies_typescript"
     ],
-    "7": [
+    "8": [
       "readme",
       "readme_api_routes",
       "readme_deploy_to_vercel",
@@ -151,21 +170,13 @@
       "readme_pages",
       "readme_setup_local_dev"
     ],
-    "8": [
+    "9": [
       "app_layout",
       "app_layout_metadata",
       "app_layout_rootlayout",
       "components_siteheader",
       "components_siteheader_siteheader",
       "ref_next"
-    ],
-    "9": [
-      "package_dependencies",
-      "package_dependencies_javascript_lp_solver",
-      "package_dependencies_next",
-      "package_dependencies_pg",
-      "package_dependencies_react",
-      "package_dependencies_react_dom"
     ],
     "10": [
       "types_javascript_lp_solver_d",
@@ -192,16 +203,16 @@
     ]
   },
   "cohesion": {
-    "0": 0.08571428571428572,
-    "1": 0.09523809523809523,
+    "0": 0.09247311827956989,
+    "1": 0.07407407407407407,
     "2": 0.10526315789473684,
-    "3": 0.12418300653594772,
-    "4": 0.2564102564102564,
-    "5": 0.28205128205128205,
-    "6": 0.25,
-    "7": 0.2857142857142857,
-    "8": 0.4,
-    "9": 0.3333333333333333,
+    "3": 0.1895424836601307,
+    "4": 0.14166666666666666,
+    "5": 0.2564102564102564,
+    "6": 0.1794871794871795,
+    "7": 0.25,
+    "8": 0.2857142857142857,
+    "9": 0.4,
     "10": 0.6666666666666666,
     "11": 1.0,
     "12": 1.0,
@@ -226,9 +237,19 @@
       "degree": 6
     },
     {
+      "id": "lib_db_getpool",
+      "label": "getPool()",
+      "degree": 6
+    },
+    {
       "id": "readme_fpl_team_manager_vercel_frontend",
       "label": "FPL Team Manager \u2014 Vercel Frontend",
       "degree": 6
+    },
+    {
+      "id": "lib_db_predictionrow",
+      "label": "PredictionRow",
+      "degree": 5
     },
     {
       "id": "lib_suggestions_findbesttransferplan",
@@ -241,24 +262,14 @@
       "degree": 5
     },
     {
-      "id": "lib_db_predictionrow",
-      "label": "PredictionRow",
-      "degree": 5
-    },
-    {
       "id": "lib_db_fetchplayermatchdetails",
       "label": "fetchPlayerMatchDetails()",
       "degree": 5
     },
     {
-      "id": "lib_suggestions_findreplacements",
-      "label": "findReplacements()",
-      "degree": 4
-    },
-    {
       "id": "ref_react",
       "label": "react",
-      "degree": 4
+      "degree": 5
     }
   ],
   "surprises": [
@@ -277,34 +288,23 @@
       "source": "GET()",
       "target": "fetchFplJson()",
       "source_files": [
-        "app/api/manager/route.ts",
-        "lib/fpl.ts"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
-    },
-    {
-      "source": "GET()",
-      "target": "fetchFplJson()",
-      "source_files": [
-        "app/api/picks/route.ts",
-        "lib/fpl.ts"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
-    },
-    {
-      "source": "GET()",
-      "target": "fetchFplJson()",
-      "source_files": [
         "app/api/data/route.ts",
         "lib/fpl.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "GET()",
+      "target": "getPool()",
+      "source_files": [
+        "app/api/fixture-matrix/route.ts",
+        "lib/db.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `getPool()`"
     },
     {
       "source": "GET()",
@@ -316,6 +316,17 @@
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchPlayerMatchDetails()`"
+    },
+    {
+      "source": "GET()",
+      "target": "fetchFplJson()",
+      "source_files": [
+        "app/api/manager/route.ts",
+        "lib/fpl.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
     }
   ],
   "tokens": {

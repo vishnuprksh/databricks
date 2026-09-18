@@ -56,6 +56,7 @@ export default function Home() {
   const [fixturesModal, setFixturesModal] = useState<{ playerId: number; playerName: string } | null>(null);
   const [skipped, setSkipped] = useState<Suggestion[]>([]);
   const [pinnedIds, setPinnedIds] = useState<number[]>([]);
+  const [photoById, setPhotoById] = useState<Record<number, string>>({});
 
   const optimize = async () => {
     if (squad.length !== 15) {
@@ -215,6 +216,11 @@ export default function Home() {
       const playerById = new Map<number, any>(bootstrap.elements.map((p: any) => [p.id, p]));
       const teamById = new Map<number, string>(bootstrap.teams.map((t: any) => [t.id, t.name]));
       const posById = new Map<number, string>(bootstrap.element_types.map((p: any) => [p.id, p.singular_name_short]));
+      const photos: Record<number, string> = {};
+      for (const p of bootstrap.elements as any[]) {
+        photos[p.id] = (p.photo ?? "").replace(/\.jpg$/, "");
+      }
+      setPhotoById(photos);
       const rows = [...pk.picks.picks]
         .sort((a: any, b: any) => a.position - b.position)
         .map((pick: any) => {
@@ -486,24 +492,36 @@ export default function Home() {
                       </span>
                       <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
-                    <div className="grid md:grid-cols-[minmax(0,2fr)_auto_minmax(0,3fr)] gap-3 items-stretch">
-                      <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3 flex flex-col justify-center">
-                        <div className="text-xs uppercase text-rose-300 font-bold mb-1">Out</div>
-                        <div className="font-semibold">{s.out.name} <PosBadge pos={s.out.pos} /></div>
-                        <div className="text-xs text-[var(--muted)] mt-1">
-                          £{s.out.nowPrice.toFixed(1)}m{s.out.sellPrice !== s.out.nowPrice ? ` (sell £${s.out.sellPrice.toFixed(1)}m)` : ""} · pred {s.out.pred != null ? s.out.pred.toFixed(3) : "N/A"}
-                        </div>
+                    <div className="grid md:grid-cols-[auto_auto_auto] gap-3 items-stretch justify-center">
+                      <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3 flex flex-col items-center justify-center gap-2">
+                        <div className="self-stretch text-xs uppercase text-rose-300 font-bold mb-1">Out</div>
+                        <MiniPlayerCard
+                          name={s.out.name}
+                          pos={s.out.pos}
+                          club={s.out.club}
+                          price={s.out.nowPrice}
+                          priceSuffix={s.out.sellPrice !== s.out.nowPrice ? ` (sell £${s.out.sellPrice.toFixed(1)}m)` : ""}
+                          pred={s.out.pred}
+                          photo={s.out.player_id != null ? photoById[s.out.player_id] : undefined}
+                          tone="rose"
+                        />
                       </div>
                       <div className="flex items-center text-2xl text-[var(--muted)]">➜</div>
-                      <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-lg p-3">
-                        <div className="flex items-center justify-between gap-2 mb-1">
+                      <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-lg p-3 flex flex-col items-center gap-2">
+                        <div className="self-stretch flex items-center justify-between gap-2">
                           <div className="text-xs uppercase text-emerald-300 font-bold">In</div>
-                          <div className="text-xs text-[var(--muted)]">{s.in.club} · cost {s.in.costDiff >= 0 ? "+" : ""}£{s.in.costDiff.toFixed(1)}m</div>
+                          <div className="text-xs text-[var(--muted)]">cost {s.in.costDiff >= 0 ? "+" : ""}£{s.in.costDiff.toFixed(1)}m</div>
                         </div>
-                        <div className="font-semibold">{s.in.name} <PosBadge pos={s.out.pos} /></div>
-                        <div className="text-xs text-[var(--muted)] mt-1">
-                          £{s.in.price.toFixed(1)}m · pred {s.in.pred.toFixed(3)} · form {s.in.form.toFixed(1)} · ppg {s.in.ppg.toFixed(1)}
-                        </div>
+                        <MiniPlayerCard
+                          name={s.in.name}
+                          pos={s.out.pos}
+                          club={s.in.club}
+                          price={s.in.price}
+                          pred={s.in.pred}
+                          extra={`form ${s.in.form.toFixed(1)} · ppg ${s.in.ppg.toFixed(1)}`}
+                          photo={photoById[s.in.player_id]}
+                          tone="emerald"
+                        />
                       </div>
                     </div>
                     <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
@@ -908,6 +926,63 @@ function PlayerCard({
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+const MINI_CARD_TONE: Record<string, string> = {
+  rose: "bg-rose-500/10 ring-1 ring-rose-300/40",
+  emerald: "bg-emerald-500/10 ring-1 ring-emerald-300/40",
+};
+
+/** Compact photo card used in transfer suggestion Out/In panels. */
+function MiniPlayerCard({
+  name,
+  pos,
+  club,
+  price,
+  priceSuffix,
+  pred,
+  extra,
+  photo,
+  tone,
+}: {
+  name: string;
+  pos: string;
+  club: string;
+  price: number;
+  priceSuffix?: string;
+  pred: number | null;
+  extra?: string;
+  photo?: string;
+  tone: "rose" | "emerald";
+}) {
+  return (
+    <div
+      className={`flex flex-col items-center w-[92px] rounded-lg p-1.5 ${MINI_CARD_TONE[tone]}`}
+      title={`${name} · ${club} · £${price.toFixed(1)}m · pred ${pred != null ? pred.toFixed(3) : "N/A"}${extra ? ` · ${extra}` : ""}`}
+    >
+      {photo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`${PHOTO_BASE}/p${photo}.png`}
+          alt={name}
+          className="w-12 h-[60px] object-contain drop-shadow"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }}
+        />
+      ) : (
+        <div className="w-12 h-[60px] flex items-center justify-center text-2xl">👕</div>
+      )}
+      <div className="text-[11px] font-bold leading-tight text-center truncate w-full">{name}</div>
+      <div className="text-[9px] text-[var(--muted)] text-center truncate w-full">{club}</div>
+      <div className="flex items-center gap-1 mt-0.5">
+        <span className={`badge ${POS_COLORS[pos]} !text-[8px] !px-1 !py-0`}>{pos}</span>
+        <span className="text-[9px] font-semibold">£{price.toFixed(1)}m{priceSuffix ?? ""}</span>
+      </div>
+      <div className="text-[9px] text-[var(--muted)]">
+        pred <span className="text-[var(--accent)]">{pred != null ? pred.toFixed(2) : "N/A"}</span>
+      </div>
+      {extra && <div className="text-[9px] text-[var(--muted)] text-center truncate w-full">{extra}</div>}
     </div>
   );
 }

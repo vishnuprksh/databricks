@@ -15,6 +15,9 @@ export default function SiteHeader() {
         <Link href="/players" title="Players" className="rounded-md px-3 py-1.5 text-sm hover:bg-white/5 hover:text-[var(--accent)]">
           Players
         </Link>
+        <Link href="/fixtures" title="Fixtures" className="rounded-md px-3 py-1.5 text-sm hover:bg-white/5 hover:text-[var(--accent)]">
+          Fixtures
+        </Link>
         <Link href="/dream15" title="Dream 15" className="rounded-md px-3 py-1.5 text-sm hover:bg-white/5 hover:text-[var(--accent)]">
           Dream 15
         </Link>
