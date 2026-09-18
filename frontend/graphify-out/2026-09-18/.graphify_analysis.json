@@ -235,18 +235,18 @@
       "degree": 5
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "lib_db_playerrow",
+      "label": "PlayerRow",
       "degree": 4
     },
     {
-      "id": "ref_react",
-      "label": "react",
+      "id": "lib_db_fetchplayers",
+      "label": "fetchPlayers()",
       "degree": 4
     },
     {
-      "id": "app_page_home",
-      "label": "Home()",
+      "id": "lib_db_fetchpredictions",
+      "label": "fetchPredictions()",
       "degree": 4
     }
   ],

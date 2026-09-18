@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { TeamRow } from "@/lib/fpl";
 import {
-  findBestTransfer,
+  findBestTransferPlan,
   listTransferOptions,
   optimizeStartingEleven,
 } from "@/lib/suggestions";
@@ -50,6 +50,7 @@ export default function Home() {
   const [noPred, setNoPred] = useState<string[]>([]);
   const [optimizing, setOptimizing] = useState(false);
   const [suggestingTransfer, setSuggestingTransfer] = useState(false);
+  const [transferLimit, setTransferLimit] = useState<1 | 2 | 3>(1);
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
   const [transferModal, setTransferModal] = useState<{ out: SquadPlayer; options: Replacement[] } | null>(null);
   const [skipped, setSkipped] = useState<Suggestion[]>([]);
@@ -67,15 +68,27 @@ export default function Home() {
     }
   };
 
+  const buildTransferPlan = (
+    startingSquad: SquadPlayer[],
+    startingBank: number,
+    limit: 1 | 2 | 3,
+    skippedSuggestions: Suggestion[]
+  ) => {
+    return findBestTransferPlan(
+      startingSquad,
+      predictions,
+      stats,
+      startingBank,
+      limit,
+      skippedSuggestions.map((suggestion) => suggestion.in.player_id)
+    );
+  };
+
   const suggestBestTransfer = async (skippedSuggestions: Suggestion[] = skipped) => {
     setSuggestingTransfer(true);
     await new Promise<void>((resolve) => setTimeout(resolve, 0));
     try {
-      const best = findBestTransfer(
-        squad, predictions, stats, bank,
-        skippedSuggestions.map((s) => s.in.player_id)
-      );
-      setSuggestions(best ? [best] : []);
+      setSuggestions(buildTransferPlan(squad, bank, transferLimit, skippedSuggestions));
       const nextClubCount: Record<string, number> = {};
       for (const player of squad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
       setClubCount(nextClubCount);
@@ -122,16 +135,14 @@ export default function Home() {
     const nextRows = teamRows.map((r) => (r.player_name === suggestion.out.name ? incomingRow : r));
     const nextSquad = squad.map((p) => (p.name === suggestion.out.name ? incomingSquadPlayer : p));
     const nextBank = bank - suggestion.in.costDiff;
-    const bestNextTransfer = findBestTransfer(
-      nextSquad, predictions, stats, nextBank,
-      skipped.map((s) => s.in.player_id)
-    );
-    const nextSuggestions = bestNextTransfer ? [bestNextTransfer] : [];
+    const nextSkipped = skipped.filter((s) => s.in.name !== suggestion.in.name);
+    const nextSuggestions = buildTransferPlan(nextSquad, nextBank, transferLimit, nextSkipped);
 
     setTeamRows(nextRows);
     setSquad(nextSquad);
     setBank(nextBank);
     setSuggestions(nextSuggestions);
+    setSkipped(nextSkipped);
     const nextClubCount: Record<string, number> = {};
     for (const player of nextSquad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
     setClubCount(nextClubCount);
@@ -241,7 +252,7 @@ export default function Home() {
         pos: r.position,
         nowPrice: r.price,
         sellPrice: sell[r.player_name] ?? r.price,
-        pred: predById[r.player_id]?.avg_prob_gt_6 ?? null,
+        pred: predById[r.player_id]?.agg_pred_prob ?? null,
         starter: r.is_starter,
         club: r.club,
         photo: (r as any).photo,
@@ -252,14 +263,8 @@ export default function Home() {
       const bankVal = (md.manager.last_deadline_bank ?? 0) / 10;
       setBank(bankVal);
 
-      // 5. Single best free transfer suggestion (declines reset on fresh load)
-      const best = findBestTransfer(
-        squadPlayers,
-        data.predictions,
-        statsMap,
-        bankVal
-      );
-      setSuggestions(best ? [best] : []);
+      // 5. Transfer suggestions (declines reset on fresh load)
+      setSuggestions(buildTransferPlan(squadPlayers, bankVal, transferLimit, []));
       setSkipped([]);
       const nextClubCount: Record<string, number> = {};
       for (const player of squadPlayers) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
@@ -270,7 +275,7 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  }, [teamId, gwInput]);
+  }, [teamId, gwInput, transferLimit]);
 
   const totalValue = teamRows.reduce((s, r) => s + r.price, 0);
   const squadSellValue = squad.reduce((s, p) => s + p.sellPrice, 0);
@@ -387,24 +392,48 @@ export default function Home() {
           <section className="card p-5 mb-8">
             <div className="flex items-center justify-between gap-4 flex-wrap mb-1">
               <h2 className="text-lg font-bold">🔮 Transfer Suggestion (ML-Powered)</h2>
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-[var(--muted)]">Plan:</span>
+                <div className="flex rounded-lg border border-[var(--border)] overflow-hidden">
+                  {([1, 2, 3] as const).map((limit) => (
+                    <button
+                      key={limit}
+                      onClick={() => {
+                        setTransferLimit(limit);
+                        setSuggestingTransfer(true);
+                        setTimeout(() => {
+                          setSuggestions(buildTransferPlan(squad, bank, limit, skipped));
+                          setSuggestingTransfer(false);
+                        }, 0);
+                      }}
+                      className={`px-3 py-1.5 ${transferLimit === limit ? "bg-[var(--accent)] text-[#04140b] font-semibold" : "text-[var(--muted)] hover:text-white"}`}
+                    >
+                      {limit}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
             <p className="text-xs text-[var(--muted)] mb-4">
-              Maximises model probability of scoring &gt;6 pts, respecting budget, 3-per-club limit and position limits.
+              Maximises model probability of scoring &gt;6 pts, respecting budget, 3-per-club limit and position limits. Multiple transfers reinvest the remaining bank after each planned swap.
               Clubs at 3-player limit: {Object.entries(clubCount).filter(([, n]) => n >= 3).map(([c]) => c).join(", ") || "none"}
             </p>
             {suggestingTransfer ? (
-              <p className="text-sm text-[var(--muted)]">Checking every valid starting XI and transfer option...</p>
+              <div className="flex items-center gap-3 text-sm text-[var(--muted)]" role="status" aria-live="polite">
+                <span className="h-4 w-4 rounded-full border-2 border-[var(--border)] border-t-[var(--accent)] animate-spin" aria-hidden="true" />
+                <span>Optimizing independent {transferLimit}-transfer plan...</span>
+              </div>
             ) : suggestions.length === 0 ? (
               <p className="text-sm text-[var(--muted)]">
                 No transfer suggested — squad looks optimal for the budget.
                 {skipped.length > 0 && <> Skipped players excluded: {skipped.map((s) => s.in.name).join(", ")}.</>}
               </p>
             ) : (
-              suggestions.slice(0, 1).map((s) => (
+                suggestions.map((s, index) => (
                   <div key={s.in.name} className="border border-[var(--border)] rounded-xl p-4 bg-[#0d1526]">
                     <div className="flex items-center justify-between mb-3">
                       <span className="badge bg-[var(--accent)]/15 text-[var(--accent)]">
-                        {s.improvement > 0 ? "BEST FREE TRANSFER" : "BEST AVAILABLE TRANSFER"}
+                        {index === 0 ? (s.improvement > 0 ? "BEST FREE TRANSFER" : "BEST AVAILABLE TRANSFER") : `PLAN TRANSFER ${index + 1}`}
                       </span>
                       <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
@@ -430,17 +459,19 @@ export default function Home() {
                     </div>
                     <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
                       <div className="text-xs text-[var(--muted)]">
-                        GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6.toFixed(2)}`).join("  ")}
+                        GW forecasts: {s.in.gw_predictions.map((g) => `GW${g.gw}: ${g.prob_gt_6?.toFixed(2) ?? "N/A"}`).join("  ")}
                       </div>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => approveTransfer(s)}
+                          disabled={index !== 0}
                           className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-500/30"
                         >
-                          ✓ Approve
+                          {index === 0 ? "✓ Approve" : "Approve in order"}
                         </button>
                         <button
                           onClick={() => skipTransfer(s)}
+                          disabled={index !== 0}
                           className="bg-rose-500/10 text-rose-300 border border-rose-500/40 font-semibold px-3 py-1.5 rounded-lg hover:bg-rose-500/20"
                         >
                           ✕ Skip
@@ -455,7 +486,7 @@ export default function Home() {
             )}
             {suggestions.length > 0 && (
               <div className="mt-4 p-4 rounded-xl bg-[#0d1526] border border-[var(--border)] text-sm">
-                <strong>Summary:</strong> 1 free transfer · Cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Prediction gain {totalGain >= 0 ? "+" : ""}{totalGain.toFixed(3)}
+                <strong>Summary:</strong> {suggestions.length} planned transfer{suggestions.length === 1 ? "" : "s"} ({suggestions.length === 1 ? "free" : "first free, later transfers cost -4 points each"}) · Cost {totalCost >= 0 ? "+" : ""}£{totalCost.toFixed(1)}m · Bank after £{finalBank.toFixed(1)}m · Prediction gain {totalGain >= 0 ? "+" : ""}{totalGain.toFixed(3)}
                 {finalBank < 0 && <p className="text-rose-400 mt-1">⚠ Insufficient budget — this transfer cannot be made.</p>}
               </div>
             )}

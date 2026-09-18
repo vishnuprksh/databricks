@@ -37,7 +37,7 @@ export type PlayerRow = {
   team_short_name: string;
 };
 
-export type GwPrediction = { gw: number; prob_gt_6: number };
+export type GwPrediction = { gw: number; prob_gt_6: number | null };
 
 export type PredictionRow = {
   player_id: number;
@@ -46,12 +46,12 @@ export type PredictionRow = {
   price: number;
   team_name: string;
   gw_predictions: GwPrediction[];
-  avg_prob_gt_6: number;
+  agg_pred_prob: number;
 };
 
 export async function fetchPredictions(): Promise<PredictionRow[]> {
   const { rows } = await getPool().query(
-    "SELECT player_id, player_name, position, price, team_name, gw_predictions, avg_prob_gt_6 FROM fpl.predictions"
+    "SELECT player_id, player_name, position, price, team_name, gw_predictions, agg_pred_prob FROM fpl.predictions"
   );
   return rows.map((r) => ({
     player_id: Number(r.player_id),
@@ -59,8 +59,13 @@ export async function fetchPredictions(): Promise<PredictionRow[]> {
     position: r.position,
     price: Number(r.price),
     team_name: r.team_name,
-    gw_predictions: typeof r.gw_predictions === "string" ? JSON.parse(r.gw_predictions) : r.gw_predictions,
-    avg_prob_gt_6: Number(r.avg_prob_gt_6),
+    gw_predictions: (typeof r.gw_predictions === "string" ? JSON.parse(r.gw_predictions) : r.gw_predictions).map(
+      (forecast: { gw: number; prob_gt_6?: unknown }) => ({
+        gw: Number(forecast.gw),
+        prob_gt_6: typeof forecast.prob_gt_6 === "number" && Number.isFinite(forecast.prob_gt_6) ? forecast.prob_gt_6 : null,
+      })
+    ),
+    agg_pred_prob: Number(r.agg_pred_prob),
   }));
 }
 

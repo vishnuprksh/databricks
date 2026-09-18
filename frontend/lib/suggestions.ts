@@ -32,7 +32,7 @@ export type Replacement = {
   form: number;
   ppg: number;
   costDiff: number;
-  gw_predictions: { gw: number; prob_gt_6: number }[];
+  gw_predictions: { gw: number; prob_gt_6: number | null }[];
 };
 
 export type Suggestion = {
@@ -78,7 +78,7 @@ export function buildSquadWithPred(
       pos: r.position,
       nowPrice: r.price,
       sellPrice: sellPrices[r.player_name] ?? r.price,
-      pred: pred ? pred.avg_prob_gt_6 : null,
+      pred: pred ? pred.agg_pred_prob : null,
       starter: r.is_starter,
       club: r.club,
     };
@@ -126,7 +126,7 @@ function findReplacements(
       player_id: s.player_id,
       name: s.web_name,
       price: s.price,
-      pred: pred.avg_prob_gt_6,
+      pred: pred.agg_pred_prob,
       club: targetClub,
       form: s.form,
       ppg: s.points_per_game,
@@ -251,7 +251,7 @@ function dreamPlayers(players: PlayerRow[], predictions: PredictionRow[]): Squad
       pos: player.position,
       nowPrice: player.price,
       sellPrice: player.price,
-      pred: prediction.avg_prob_gt_6,
+      pred: prediction.agg_pred_prob,
       starter: false,
       club: player.team_name,
     };
@@ -471,6 +471,7 @@ export function findBestTransfer(
 
   // Verify: solve the post-transfer XI exactly and confirm the improvement.
   const incomingPlayer: SquadPlayer = {
+    player_id: best.in.player_id,
     name: best.in.name,
     pos: best.out.pos,
     nowPrice: best.in.price,
@@ -491,6 +492,84 @@ export function findBestTransfer(
     alternatives: [],
     transferLabel: verifiedImprovement > 0 ? "BEST XI TRANSFER" : "BEST AVAILABLE TRANSFER",
   };
+}
+
+/** Find the best complete plan instead of greedily chaining single transfers. */
+export function findBestTransferPlan(
+  squad: SquadPlayer[],
+  predictions: PredictionRow[],
+  stats: Record<number, StatsRow>,
+  bank: number,
+  limit: 1 | 2 | 3,
+  declinedIds: number[] = []
+): Suggestion[] {
+  const bestByDepth: Suggestion[][] = [];
+  const scoreByDepth: number[] = [];
+  const declined = new Set(declinedIds);
+
+  const search = (currentSquad: SquadPlayer[], currentBank: number, plan: Suggestion[]) => {
+    if (plan.length > 0) {
+      const score = plan.reduce((total, suggestion) => total + suggestion.improvement, 0);
+      if (!bestByDepth[plan.length] || score > scoreByDepth[plan.length]) {
+        bestByDepth[plan.length] = plan;
+        scoreByDepth[plan.length] = score;
+      }
+    }
+    if (plan.length >= limit) return;
+
+    const current = optimizeStartingEleven(currentSquad);
+    if (!current) return;
+    const clubCount: Record<string, number> = {};
+    for (const player of currentSquad) clubCount[player.club] = (clubCount[player.club] ?? 0) + 1;
+    const squadIds = new Set(currentSquad.map((player) => player.player_id).filter((id): id is number => id != null));
+    const weakestXiByPos: Record<string, SquadPlayer> = {};
+    for (const player of current.xi) {
+      const weakest = weakestXiByPos[player.pos];
+      if (!weakest || (player.pred ?? 0) < (weakest.pred ?? 0)) weakestXiByPos[player.pos] = player;
+    }
+
+    for (const outgoing of Object.values(weakestXiByPos)) {
+      const replacements = findReplacements(
+        outgoing.pos,
+        outgoing.sellPrice,
+        outgoing.club,
+        clubCount,
+        currentBank,
+        predictions,
+        squadIds,
+        new Set(plan.map((suggestion) => suggestion.in.player_id)),
+        stats,
+        false,
+        declined
+      );
+      for (const incoming of replacements) {
+        const incomingPlayer: SquadPlayer = {
+          player_id: incoming.player_id,
+          name: incoming.name,
+          pos: outgoing.pos,
+          nowPrice: incoming.price,
+          sellPrice: incoming.price,
+          pred: incoming.pred,
+          starter: outgoing.starter,
+          club: incoming.club,
+        };
+        const nextSquad = currentSquad.map((player) => player.name === outgoing.name ? incomingPlayer : player);
+        const nextResult = optimizeStartingEleven(nextSquad);
+        if (!nextResult) continue;
+        const suggestion: Suggestion = {
+          out: outgoing,
+          in: incoming,
+          improvement: nextResult.totalPred - current.totalPred,
+          alternatives: [],
+          transferLabel: plan.length === 0 ? "BEST XI TRANSFER" : `Transfer ${plan.length + 1} (-4 pts)`,
+        };
+        search(nextSquad, currentBank - incoming.costDiff, [...plan, suggestion]);
+      }
+    }
+  };
+
+  search(squad, bank, []);
+  return bestByDepth[limit] ?? bestByDepth[bestByDepth.length - 1] ?? [];
 }
 
 /**
@@ -529,7 +608,7 @@ export function listTransferOptions(
       player_id: s.player_id,
       name: s.web_name,
       price: s.price,
-      pred: pred.avg_prob_gt_6,
+      pred: pred.agg_pred_prob,
       club: targetClub,
       form: s.form,
       ppg: s.points_per_game,
