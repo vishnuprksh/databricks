@@ -27,6 +27,15 @@ const HEADER_BG = "bg-[#0d1526]";
 const PROB_MIN = 0.2;
 const PROB_MAX = 0.8;
 
+/** Grayscale for past (finished) fixtures: black (low win prob) → white (high). */
+function grayColor(p: number | null | undefined): string {
+  if (p == null || !Number.isFinite(p)) return "transparent";
+  const raw = Math.max(0, Math.min(1, p));
+  const pct = Math.max(0, Math.min(1, (raw - PROB_MIN) / (PROB_MAX - PROB_MIN)));
+  const v = Math.round(30 + pct * (255 - 30)); // 30 (near-black) -> 255 (white)
+  return `rgb(${v}, ${v}, ${v})`;
+}
+
 function probColor(p: number | null | undefined): string {
   if (p == null || !Number.isFinite(p)) return "transparent";
   const raw = Math.max(0, Math.min(1, p));
@@ -130,16 +139,16 @@ export default function FixturesPage() {
           <p className="mt-3 text-xs text-[var(--muted)]">
             {fixtures.length} fixtures · gameweeks {events.length ? `${events[0]}–${events[events.length - 1]}` : "—"}
           </p>
-          <div className="mt-3 overflow-x-auto rounded-lg border border-[var(--border)]">
-            <table className="w-full table-fixed border-collapse text-[11px]">
+          <div className="mt-3 max-h-[70vh] overflow-auto rounded-lg border border-[var(--border)]">
+            <table className="border-collapse text-[11px]" style={{ minWidth: "max-content" }}>
               <thead>
                 <tr>
                   <th className={`sticky left-0 z-10 ${HEADER_BG} px-3 py-2 text-left text-[10px] uppercase tracking-wide text-[var(--muted)]`}>
                     Team
                   </th>
                   {events.map((ev) => (
-                    <th key={ev} className={`${HEADER_BG} px-0.5 py-2 text-center font-semibold`}>
-                      <span className="text-[10px]">GW{ev}</span>
+                    <th key={ev} className={`${HEADER_BG} py-2 text-center font-semibold`}>
+                      <span className="block w-[92px] text-[10px]">GW{ev}</span>
                     </th>
                   ))}
                 </tr>
@@ -158,17 +167,19 @@ export default function FixturesPage() {
                       const p = home ? fixture.prob_home_win : fixture.prob_away_win;
                       const pct = p != null ? Math.round(p * 100) : null;
                       const opponent = home ? fixture.team_a_name : fixture.team_h_name;
+                      const isPast = fixture.finished;
+                      const bg = isPast ? grayColor(p) : probColor(p);
                       return (
                         <td key={ev} className="p-[2px]">
                           <div
                             title={`${fixture.team_h_name} ${fixture.home_score ?? "–"} : ${fixture.away_score ?? "–"} ${fixture.team_a_name}\nGW ${fixture.event ?? "?"} · ${fmtKickoff(fixture.kickoff_time)}\nWin ${pct ?? "?"}% / Draw ${(home ? fixture.prob_draw : fixture.prob_draw) != null ? Math.round((fixture.prob_draw ?? 0) * 100) : "?"}% / Lose ${(home ? fixture.prob_away_win : fixture.prob_home_win) != null ? Math.round((home ? fixture.prob_away_win : fixture.prob_home_win) ?? 0) * 100 : "?"}%`}
-                            className="flex h-10 w-full min-w-0 cursor-default flex-col items-center justify-center rounded"
-                            style={{ backgroundColor: probColor(p) }}
+                            className="flex h-12 w-[92px] min-w-0 cursor-default flex-col items-center justify-center rounded"
+                            style={{ backgroundColor: bg }}
                           >
-                            <span className="w-full truncate px-0.5 text-center text-[10px] font-semibold text-black/80">
+                            <span className={`w-full truncate px-0.5 text-center text-[10px] font-semibold ${isPast ? (p != null && p >= 0.5 ? "text-black/80" : "text-white/90") : "text-black/80"}`}>
                               {home ? "vs" : "@"} {opponent}
                             </span>
-                            <span className="text-[9px] font-bold text-black/70">
+                            <span className={`text-[9px] font-bold ${isPast ? (p != null && p >= 0.5 ? "text-black/70" : "text-white/80") : "text-black/70"}`}>
                               {pct != null ? `${pct}%` : "—"}
                             </span>
                           </div>
