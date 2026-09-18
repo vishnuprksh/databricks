@@ -105,7 +105,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "sortkey",
       "source_file": "frontend/app/players/page.tsx",
@@ -117,7 +117,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "playerrow",
       "source_file": "frontend/lib/db.ts",
@@ -129,7 +129,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "predictionrow",
       "source_file": "frontend/lib/db.ts",
@@ -141,7 +141,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dream15result",
       "source_file": "frontend/lib/suggestions.ts",
@@ -153,7 +153,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "squadplayer",
       "source_file": "frontend/lib/suggestions.ts",
@@ -185,17 +185,6 @@
       "source_location": "L40"
     },
     {
-      "id": "frontend_app_dream15_page_dream15page",
-      "label": "Dream15Page()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "dream15page()",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L21"
-    },
-    {
       "id": "frontend_app_page_home",
       "label": "Home()",
       "_callable": true,
@@ -215,7 +204,7 @@
       "file_type": "code",
       "norm_label": "pitch()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L537"
+      "source_location": "L568"
     },
     {
       "id": "frontend_app_page_playercard",
@@ -226,7 +215,7 @@
       "file_type": "code",
       "norm_label": "playercard()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L620"
+      "source_location": "L651"
     },
     {
       "id": "frontend_app_page_posbadge",
@@ -248,7 +237,7 @@
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L519"
+      "source_location": "L550"
     },
     {
       "id": "frontend_app_page_transfermodal",
@@ -259,7 +248,7 @@
       "file_type": "code",
       "norm_label": "transfermodal()",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L685"
+      "source_location": "L716"
     },
     {
       "id": "frontend_lib_suggestions_buildsquadwithpred",
@@ -284,17 +273,6 @@
       "source_location": "L51"
     },
     {
-      "id": "frontend_lib_suggestions_dreamplayers",
-      "label": "dreamPlayers()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "dreamplayers()",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L243"
-    },
-    {
       "id": "frontend_lib_suggestions_findbesttransfer",
       "label": "findBestTransfer()",
       "_callable": true,
@@ -304,6 +282,17 @@
       "norm_label": "findbesttransfer()",
       "source_file": "frontend/lib/suggestions.ts",
       "source_location": "L424"
+    },
+    {
+      "id": "frontend_lib_suggestions_findbesttransferplan",
+      "label": "findBestTransferPlan()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "norm_label": "findbesttransferplan()",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L498"
     },
     {
       "id": "frontend_lib_suggestions_findreplacements",
@@ -336,18 +325,7 @@
       "file_type": "code",
       "norm_label": "listtransferoptions()",
       "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L502"
-    },
-    {
-      "id": "frontend_lib_suggestions_optimizedream15",
-      "label": "optimizeDream15()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "file_type": "code",
-      "norm_label": "optimizedream15()",
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L267"
+      "source_location": "L581"
     },
     {
       "id": "frontend_lib_suggestions_optimizestartingeleven",
@@ -405,11 +383,22 @@
       "source_location": "L3"
     },
     {
+      "id": "frontend_app_dream15_page_dream15page",
+      "label": "Dream15Page()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "dream15page()",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L21"
+    },
+    {
       "id": "frontend_app_dream15_page_dreampitch",
       "label": "DreamPitch()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dreampitch()",
       "source_file": "frontend/app/dream15/page.tsx",
@@ -420,7 +409,7 @@
       "label": "DreamPlayerCard()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dreamplayercard()",
       "source_file": "frontend/app/dream15/page.tsx",
@@ -431,7 +420,7 @@
       "label": "DreamView()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "dreamview()",
       "source_file": "frontend/app/dream15/page.tsx",
@@ -442,7 +431,7 @@
       "label": "Stat()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "stat()",
       "source_file": "frontend/app/dream15/page.tsx",
@@ -453,7 +442,7 @@
       "label": "PlayersPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "playerspage()",
       "source_file": "frontend/app/players/page.tsx",
@@ -464,11 +453,33 @@
       "label": "PosBadge()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
+      "community": 2,
       "file_type": "code",
       "norm_label": "posbadge()",
       "source_file": "frontend/app/players/page.tsx",
       "source_location": "L15"
+    },
+    {
+      "id": "frontend_lib_suggestions_dreamplayers",
+      "label": "dreamPlayers()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "dreamplayers()",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L243"
+    },
+    {
+      "id": "frontend_lib_suggestions_optimizedream15",
+      "label": "optimizeDream15()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "optimizedream15()",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L267"
     },
     {
       "id": "frontend_app_api_bootstrap_route_get",
@@ -563,7 +574,7 @@
       "file_type": "code",
       "norm_label": "fetchplayers()",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L67"
+      "source_location": "L72"
     },
     {
       "id": "frontend_lib_db_fetchpredictions",
@@ -593,7 +604,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "build_team_rows()",
       "source_file": "research/fpl_team_manager.py",
@@ -605,7 +615,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "choose_gameweek()",
       "source_file": "research/fpl_team_manager.py",
@@ -617,7 +626,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "fetch_fpl_json()",
       "source_file": "research/fpl_team_manager.py",
@@ -629,7 +637,6 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "find_replacements()",
       "source_file": "research/fpl_team_manager.py",
@@ -707,7 +714,7 @@
       "file_type": "code",
       "norm_label": "row_bg",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L530"
+      "source_location": "L561"
     },
     {
       "id": "frontend_app_page_row_order",
@@ -717,7 +724,7 @@
       "file_type": "code",
       "norm_label": "row_order",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L529"
+      "source_location": "L560"
     },
     {
       "id": "frontend_lib_suggestions",
@@ -1148,10 +1155,80 @@
       "source_location": "L1"
     },
     {
+      "id": "frontend_app_dream15_page",
+      "label": "dream15/page.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "dream15/page.tsx",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_dream15_page_pos_colors",
+      "label": "POS_COLORS",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "pos_colors",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "frontend_app_dream15_page_row_bg",
+      "label": "ROW_BG",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "row_bg",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "frontend_app_dream15_page_row_order",
+      "label": "ROW_ORDER",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "row_order",
+      "source_file": "frontend/app/dream15/page.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "frontend_app_players_page",
+      "label": "players/page.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "players/page.tsx",
+      "source_file": "frontend/app/players/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "frontend_app_players_page_pos_colors",
+      "label": "POS_COLORS",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "norm_label": "pos_colors",
+      "source_file": "frontend/app/players/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "concept",
+      "norm_label": "react",
+      "source_file": "frontend/package.json",
+      "source_location": "L14"
+    },
+    {
       "id": "frontend_tsconfig",
       "label": "tsconfig.json",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "tsconfig.json",
@@ -1162,7 +1239,7 @@
       "id": "frontend_tsconfig_compileroptions",
       "label": "compilerOptions",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "compileroptions",
@@ -1173,7 +1250,7 @@
       "id": "frontend_tsconfig_compileroptions_allowjs",
       "label": "allowJs",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "allowjs",
@@ -1184,7 +1261,7 @@
       "id": "frontend_tsconfig_compileroptions_esmoduleinterop",
       "label": "esModuleInterop",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "esmoduleinterop",
@@ -1195,7 +1272,7 @@
       "id": "frontend_tsconfig_compileroptions_incremental",
       "label": "incremental",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "incremental",
@@ -1206,7 +1283,7 @@
       "id": "frontend_tsconfig_compileroptions_isolatedmodules",
       "label": "isolatedModules",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "isolatedmodules",
@@ -1217,7 +1294,7 @@
       "id": "frontend_tsconfig_compileroptions_jsx",
       "label": "jsx",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "jsx",
@@ -1228,7 +1305,7 @@
       "id": "frontend_tsconfig_compileroptions_lib",
       "label": "lib",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "lib",
@@ -1239,7 +1316,7 @@
       "id": "frontend_tsconfig_compileroptions_module",
       "label": "module",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "module",
@@ -1250,7 +1327,7 @@
       "id": "frontend_tsconfig_compileroptions_moduleresolution",
       "label": "moduleResolution",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "moduleresolution",
@@ -1261,7 +1338,7 @@
       "id": "frontend_tsconfig_compileroptions_noemit",
       "label": "noEmit",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "noemit",
@@ -1272,7 +1349,7 @@
       "id": "frontend_tsconfig_compileroptions_paths",
       "label": "paths",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "paths",
@@ -1283,7 +1360,7 @@
       "id": "frontend_tsconfig_compileroptions_plugins",
       "label": "plugins",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "plugins",
@@ -1294,7 +1371,7 @@
       "id": "frontend_tsconfig_compileroptions_resolvejsonmodule",
       "label": "resolveJsonModule",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "resolvejsonmodule",
@@ -1305,7 +1382,7 @@
       "id": "frontend_tsconfig_compileroptions_skiplibcheck",
       "label": "skipLibCheck",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "skiplibcheck",
@@ -1316,7 +1393,7 @@
       "id": "frontend_tsconfig_compileroptions_strict",
       "label": "strict",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "strict",
@@ -1327,7 +1404,7 @@
       "id": "frontend_tsconfig_compileroptions_target",
       "label": "target",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "target",
@@ -1338,7 +1415,7 @@
       "id": "frontend_tsconfig_exclude",
       "label": "exclude",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "exclude",
@@ -1349,82 +1426,12 @@
       "id": "frontend_tsconfig_include",
       "label": "include",
       "_origin": "ast",
-      "community": 2,
+      "community": 3,
       "community_name": "TypeScript Config",
       "file_type": "code",
       "norm_label": "include",
       "source_file": "frontend/tsconfig.json",
       "source_location": "L31"
-    },
-    {
-      "id": "frontend_app_dream15_page",
-      "label": "dream15/page.tsx",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "code",
-      "norm_label": "dream15/page.tsx",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_app_dream15_page_pos_colors",
-      "label": "POS_COLORS",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "code",
-      "norm_label": "pos_colors",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "frontend_app_dream15_page_row_bg",
-      "label": "ROW_BG",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "code",
-      "norm_label": "row_bg",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "frontend_app_dream15_page_row_order",
-      "label": "ROW_ORDER",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "code",
-      "norm_label": "row_order",
-      "source_file": "frontend/app/dream15/page.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "frontend_app_players_page",
-      "label": "players/page.tsx",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "code",
-      "norm_label": "players/page.tsx",
-      "source_file": "frontend/app/players/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "frontend_app_players_page_pos_colors",
-      "label": "POS_COLORS",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "code",
-      "norm_label": "pos_colors",
-      "source_file": "frontend/app/players/page.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "ref_react",
-      "label": "react",
-      "_origin": "ast",
-      "community": 3,
-      "file_type": "concept",
-      "norm_label": "react",
-      "source_file": "frontend/package.json",
-      "source_location": "L14"
     },
     {
       "id": "frontend_app_api_bootstrap_route",
@@ -1561,7 +1568,6 @@
       "label": "fpl_team_manager.py",
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "code",
       "norm_label": "fpl_team_manager.py",
       "source_file": "research/fpl_team_manager.py",
@@ -1572,7 +1578,6 @@
       "label": "Fetch and decode one FPL API endpoint.",
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "fetch and decode one fpl api endpoint.",
       "source_file": "research/fpl_team_manager.py",
@@ -1583,7 +1588,6 @@
       "label": "Find replacement candidates, optionally preferring ones that reinvest budget.",
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "find replacement candidates, optionally preferring ones that reinvest budget.",
       "source_file": "research/fpl_team_manager.py",
@@ -1594,7 +1598,6 @@
       "label": "Use the requested GW, otherwise current GW, then most recently finished GW.",
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "use the requested gw, otherwise current gw, then most recently finished gw.",
       "source_file": "research/fpl_team_manager.py",
@@ -1605,7 +1608,6 @@
       "label": "Join pick records to readable player, club, and position information.",
       "_origin": "ast",
       "community": 6,
-      "community_name": "Research Team Manager",
       "file_type": "rationale",
       "norm_label": "join pick records to readable player, club, and position information.",
       "source_file": "research/fpl_team_manager.py",
@@ -1856,7 +1858,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L145",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -1868,19 +1870,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
       "source": "frontend_app_page_home",
-      "target": "frontend_lib_suggestions_findbesttransfer",
+      "target": "frontend_lib_suggestions_findbesttransferplan",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L74",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -1892,7 +1894,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L68",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -1929,6 +1931,30 @@
       "context": "call",
       "source_file": "frontend/lib/suggestions.ts",
       "source_location": "L449",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions_findbesttransferplan",
+      "target": "frontend_lib_suggestions_optimizestartingeleven",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L520",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions_findbesttransferplan",
+      "target": "frontend_lib_suggestions_findreplacements",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L532",
       "weight": 1.0
     },
     {
@@ -2209,7 +2235,7 @@
     },
     {
       "source": "frontend_app_page",
-      "target": "frontend_lib_suggestions_findbesttransfer",
+      "target": "frontend_lib_suggestions_findbesttransferplan",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2923,7 +2949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L519",
+      "source_location": "L550",
       "weight": 1.0
     },
     {
@@ -2934,7 +2960,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L529",
+      "source_location": "L560",
       "weight": 1.0
     },
     {
@@ -2945,7 +2971,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L530",
+      "source_location": "L561",
       "weight": 1.0
     },
     {
@@ -2956,7 +2982,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L537",
+      "source_location": "L568",
       "weight": 1.0
     },
     {
@@ -2967,7 +2993,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L620",
+      "source_location": "L651",
       "weight": 1.0
     },
     {
@@ -2978,7 +3004,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/app/page.tsx",
-      "source_location": "L685",
+      "source_location": "L716",
       "weight": 1.0
     },
     {
@@ -3110,7 +3136,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "frontend/lib/db.ts",
-      "source_location": "L67",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -3324,6 +3350,17 @@
     },
     {
       "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_findbesttransferplan",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L498",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
       "target": "frontend_lib_suggestions_statsrow",
       "relation": "contains",
       "_origin": "ast",
@@ -3335,17 +3372,6 @@
     },
     {
       "source": "frontend_lib_suggestions",
-      "target": "frontend_lib_suggestions_listtransferoptions",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "frontend/lib/suggestions.ts",
-      "source_location": "L502",
-      "weight": 1.0
-    },
-    {
-      "source": "frontend_lib_suggestions",
       "target": "frontend_lib_suggestions_computesellprices",
       "relation": "contains",
       "_origin": "ast",
@@ -3353,6 +3379,17 @@
       "confidence_score": 1.0,
       "source_file": "frontend/lib/suggestions.ts",
       "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_lib_suggestions",
+      "target": "frontend_lib_suggestions_listtransferoptions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/lib/suggestions.ts",
+      "source_location": "L581",
       "weight": 1.0
     },
     {
@@ -4061,5 +4098,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "97ebbeebe525005344c792ea114f3490d31bae22"
+  "built_at_commit": "80aee558bfc4970beb7afad59396c1e01850fa9d"
 }

@@ -42,6 +42,7 @@ export type TeamRow = {
   position: string;
   price: number;
   selected_by_percent: number;
+  chance_of_playing_next_round: number | null;
   total_points: number;
   form: number;
   gameweek_points: number;
@@ -70,6 +71,7 @@ export function buildTeamRows(picks: any[], players: any[], teams: any[], positi
         position: posById.get(player.element_type) ?? "Unknown",
         price: player.now_cost / 10,
         selected_by_percent: parseFloat(player.selected_by_percent),
+        chance_of_playing_next_round: player.chance_of_playing_next_round ?? null,
         total_points: player.total_points,
         form: parseFloat(player.form),
         gameweek_points: pick.points ?? 0,

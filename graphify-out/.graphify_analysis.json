@@ -1,37 +1,9 @@
 {
   "communities": {
     "0": [
-      "frontend_app_page",
-      "frontend_app_page_bootstrap",
-      "frontend_app_page_home",
-      "frontend_app_page_manager",
-      "frontend_app_page_pitch",
-      "frontend_app_page_playercard",
-      "frontend_app_page_pos_colors",
-      "frontend_app_page_posbadge",
-      "frontend_app_page_row_bg",
-      "frontend_app_page_row_order",
-      "frontend_app_page_stat",
-      "frontend_app_page_transfermodal",
-      "frontend_lib_suggestions",
-      "frontend_lib_suggestions_buildsquadwithpred",
-      "frontend_lib_suggestions_computesellprices",
-      "frontend_lib_suggestions_findbesttransfer",
-      "frontend_lib_suggestions_findbesttransferplan",
-      "frontend_lib_suggestions_findreplacements",
-      "frontend_lib_suggestions_generatesuggestions",
-      "frontend_lib_suggestions_listtransferoptions",
-      "frontend_lib_suggestions_optimizeresult",
-      "frontend_lib_suggestions_optimizestartingeleven",
-      "frontend_lib_suggestions_pos_by_element",
-      "frontend_lib_suggestions_replacement",
-      "frontend_lib_suggestions_resolvestatsbyid",
-      "frontend_lib_suggestions_statsbyplayerid",
-      "frontend_lib_suggestions_statsrow",
-      "frontend_lib_suggestions_suggestion",
-      "frontend_lib_suggestions_transferrecord"
-    ],
-    "1": [
+      "frontend_dbtest",
+      "frontend_dbtest_fs",
+      "frontend_dbtest_pool",
       "frontend_package",
       "frontend_package_dependencies",
       "frontend_package_dependencies_javascript_lp_solver",
@@ -51,6 +23,7 @@
       "package_dependencies_javascript_lp_solver",
       "package_json_ref_javascript_lp_solver",
       "ref_autoprefixer",
+      "ref_pg",
       "ref_postcss",
       "ref_react_dom",
       "ref_tailwindcss",
@@ -59,7 +32,7 @@
       "ref_types_react",
       "ref_typescript"
     ],
-    "2": [
+    "1": [
       "frontend_app_dream15_page",
       "frontend_app_dream15_page_dream15page",
       "frontend_app_dream15_page_dreampitch",
@@ -69,20 +42,26 @@
       "frontend_app_dream15_page_row_bg",
       "frontend_app_dream15_page_row_order",
       "frontend_app_dream15_page_stat",
-      "frontend_app_players_page",
-      "frontend_app_players_page_playerspage",
-      "frontend_app_players_page_pos_colors",
-      "frontend_app_players_page_posbadge",
-      "frontend_app_players_page_sortkey",
-      "frontend_lib_db_playerrow",
-      "frontend_lib_db_predictionrow",
+      "frontend_app_page_home",
+      "frontend_lib_suggestions",
+      "frontend_lib_suggestions_buildsquadwithpred",
+      "frontend_lib_suggestions_computesellprices",
       "frontend_lib_suggestions_dream15result",
       "frontend_lib_suggestions_dreamplayers",
+      "frontend_lib_suggestions_findbesttransfer",
+      "frontend_lib_suggestions_findbesttransferplan",
+      "frontend_lib_suggestions_findreplacements",
+      "frontend_lib_suggestions_generatesuggestions",
+      "frontend_lib_suggestions_listtransferoptions",
       "frontend_lib_suggestions_optimizedream15",
+      "frontend_lib_suggestions_optimizestartingeleven",
+      "frontend_lib_suggestions_pos_by_element",
+      "frontend_lib_suggestions_resolvestatsbyid",
       "frontend_lib_suggestions_squadplayer",
-      "ref_react"
+      "frontend_lib_suggestions_statsbyplayerid",
+      "frontend_lib_suggestions_transferrecord"
     ],
-    "3": [
+    "2": [
       "frontend_tsconfig",
       "frontend_tsconfig_compileroptions",
       "frontend_tsconfig_compileroptions_allowjs",
@@ -103,7 +82,43 @@
       "frontend_tsconfig_exclude",
       "frontend_tsconfig_include"
     ],
+    "3": [
+      "frontend_app_page",
+      "frontend_app_page_bootstrap",
+      "frontend_app_page_injurycardclass",
+      "frontend_app_page_islegalfplsubstitution",
+      "frontend_app_page_manager",
+      "frontend_app_page_pitch",
+      "frontend_app_page_playercard",
+      "frontend_app_page_pos_colors",
+      "frontend_app_page_posbadge",
+      "frontend_app_page_row_bg",
+      "frontend_app_page_row_order",
+      "frontend_app_page_stat",
+      "frontend_app_page_transfermodal",
+      "frontend_lib_suggestions_optimizeresult",
+      "frontend_lib_suggestions_replacement",
+      "frontend_lib_suggestions_statsrow",
+      "frontend_lib_suggestions_suggestion"
+    ],
     "4": [
+      "frontend_app_api_data_route",
+      "frontend_app_api_data_route_get",
+      "frontend_app_players_page",
+      "frontend_app_players_page_playerspage",
+      "frontend_app_players_page_pos_colors",
+      "frontend_app_players_page_posbadge",
+      "frontend_app_players_page_sortkey",
+      "frontend_lib_db",
+      "frontend_lib_db_fetchplayers",
+      "frontend_lib_db_fetchpredictions",
+      "frontend_lib_db_getpool",
+      "frontend_lib_db_gwprediction",
+      "frontend_lib_db_playerrow",
+      "frontend_lib_db_predictionrow",
+      "ref_react"
+    ],
+    "5": [
       "frontend_app_api_bootstrap_route",
       "frontend_app_api_bootstrap_route_get",
       "frontend_app_api_manager_route",
@@ -117,19 +132,6 @@
       "frontend_lib_fpl_fetchfpljson",
       "frontend_lib_fpl_headers",
       "frontend_lib_fpl_teamrow"
-    ],
-    "5": [
-      "frontend_app_api_data_route",
-      "frontend_app_api_data_route_get",
-      "frontend_dbtest",
-      "frontend_dbtest_fs",
-      "frontend_dbtest_pool",
-      "frontend_lib_db",
-      "frontend_lib_db_fetchplayers",
-      "frontend_lib_db_fetchpredictions",
-      "frontend_lib_db_getpool",
-      "frontend_lib_db_gwprediction",
-      "ref_pg"
     ],
     "6": [
       "research_fpl_team_manager",
@@ -204,12 +206,12 @@
     ]
   },
   "cohesion": {
-    "0": 0.10591133004926108,
-    "1": 0.07692307692307693,
-    "2": 0.10952380952380952,
-    "3": 0.10526315789473684,
-    "4": 0.2564102564102564,
-    "5": 0.2909090909090909,
+    "0": 0.06666666666666667,
+    "1": 0.1111111111111111,
+    "2": 0.10526315789473684,
+    "3": 0.1323529411764706,
+    "4": 0.20952380952380953,
+    "5": 0.2564102564102564,
     "6": 0.2222222222222222,
     "7": 0.25,
     "8": 0.4,
@@ -233,7 +235,7 @@
     {
       "id": "frontend_lib_fpl_fetchfpljson",
       "label": "fetchFplJson()",
-      "degree": 7
+      "degree": 9
     },
     {
       "id": "frontend_lib_suggestions_optimizestartingeleven",
@@ -266,13 +268,13 @@
       "degree": 4
     },
     {
-      "id": "frontend_app_page_home",
-      "label": "Home()",
+      "id": "frontend_app_api_data_route_get",
+      "label": "GET()",
       "degree": 4
     },
     {
-      "id": "frontend_lib_db_playerrow",
-      "label": "PlayerRow",
+      "id": "frontend_app_page_home",
+      "label": "Home()",
       "degree": 4
     }
   ],
@@ -312,18 +314,18 @@
     },
     {
       "source": "GET()",
-      "target": "chooseGameweek()",
+      "target": "fetchFplJson()",
       "source_files": [
-        "frontend/app/api/bootstrap/route.ts",
+        "frontend/app/api/data/route.ts",
         "frontend/lib/fpl.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "cross-file semantic connection"
+      "why": "bridges separate communities"
     },
     {
       "source": "GET()",
-      "target": "fetchFplJson()",
+      "target": "chooseGameweek()",
       "source_files": [
         "frontend/app/api/bootstrap/route.ts",
         "frontend/lib/fpl.ts"
