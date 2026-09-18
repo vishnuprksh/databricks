@@ -14,7 +14,7 @@ import type {
   OptimizeResult,
   Replacement,
 } from "@/lib/suggestions";
-import type { PredictionRow } from "@/lib/db";
+import type { PredictionRow, PlayerMatchRow } from "@/lib/db";
 
 type Manager = any;
 type Bootstrap = any;
@@ -53,8 +53,10 @@ export default function Home() {
   const [transferLimit, setTransferLimit] = useState<1 | 2 | 3>(1);
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
   const [transferModal, setTransferModal] = useState<{ out: SquadPlayer; options: Replacement[] } | null>(null);
+  const [fixturesModal, setFixturesModal] = useState<{ playerId: number; playerName: string } | null>(null);
   const [skipped, setSkipped] = useState<Suggestion[]>([]);
   const [pinnedIds, setPinnedIds] = useState<number[]>([]);
+  const [photoById, setPhotoById] = useState<Record<number, string>>({});
 
   const optimize = async () => {
     if (squad.length !== 15) {
@@ -214,6 +216,11 @@ export default function Home() {
       const playerById = new Map<number, any>(bootstrap.elements.map((p: any) => [p.id, p]));
       const teamById = new Map<number, string>(bootstrap.teams.map((t: any) => [t.id, t.name]));
       const posById = new Map<number, string>(bootstrap.element_types.map((p: any) => [p.id, p.singular_name_short]));
+      const photos: Record<number, string> = {};
+      for (const p of bootstrap.elements as any[]) {
+        photos[p.id] = (p.photo ?? "").replace(/\.jpg$/, "");
+      }
+      setPhotoById(photos);
       const rows = [...pk.picks.picks]
         .sort((a: any, b: any) => a.position - b.position)
         .map((pick: any) => {
@@ -418,6 +425,7 @@ export default function Home() {
               onPlayerTransfer={openTransferModal}
               onTogglePin={togglePin}
               onSubstitute={substitutePlayer}
+              onShowFixtures={(playerId, playerName) => setFixturesModal({ playerId, playerName })}
             />
             {noPred.length > 0 && (
               <p className="mt-3 text-xs text-[var(--muted)]">
@@ -484,24 +492,36 @@ export default function Home() {
                       </span>
                       <span className="text-xs text-[var(--muted)]">Prediction gain: <strong className={s.improvement >= 0 ? "text-[var(--accent)]" : "text-rose-400"}>{s.improvement >= 0 ? "+" : ""}{s.improvement.toFixed(3)}</strong></span>
                     </div>
-                    <div className="grid md:grid-cols-[minmax(0,2fr)_auto_minmax(0,3fr)] gap-3 items-stretch">
-                      <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3 flex flex-col justify-center">
-                        <div className="text-xs uppercase text-rose-300 font-bold mb-1">Out</div>
-                        <div className="font-semibold">{s.out.name} <PosBadge pos={s.out.pos} /></div>
-                        <div className="text-xs text-[var(--muted)] mt-1">
-                          £{s.out.nowPrice.toFixed(1)}m{s.out.sellPrice !== s.out.nowPrice ? ` (sell £${s.out.sellPrice.toFixed(1)}m)` : ""} · pred {s.out.pred != null ? s.out.pred.toFixed(3) : "N/A"}
-                        </div>
+                    <div className="grid md:grid-cols-[auto_auto_auto] gap-3 items-stretch justify-center">
+                      <div className="border border-rose-500/30 bg-rose-500/5 rounded-lg p-3 flex flex-col items-center justify-center gap-2">
+                        <div className="self-stretch text-xs uppercase text-rose-300 font-bold mb-1">Out</div>
+                        <MiniPlayerCard
+                          name={s.out.name}
+                          pos={s.out.pos}
+                          club={s.out.club}
+                          price={s.out.nowPrice}
+                          priceSuffix={s.out.sellPrice !== s.out.nowPrice ? ` (sell £${s.out.sellPrice.toFixed(1)}m)` : ""}
+                          pred={s.out.pred}
+                          photo={s.out.player_id != null ? photoById[s.out.player_id] : undefined}
+                          tone="rose"
+                        />
                       </div>
                       <div className="flex items-center text-2xl text-[var(--muted)]">➜</div>
-                      <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-lg p-3">
-                        <div className="flex items-center justify-between gap-2 mb-1">
+                      <div className="border border-emerald-500/30 bg-emerald-500/5 rounded-lg p-3 flex flex-col items-center gap-2">
+                        <div className="self-stretch flex items-center justify-between gap-2">
                           <div className="text-xs uppercase text-emerald-300 font-bold">In</div>
-                          <div className="text-xs text-[var(--muted)]">{s.in.club} · cost {s.in.costDiff >= 0 ? "+" : ""}£{s.in.costDiff.toFixed(1)}m</div>
+                          <div className="text-xs text-[var(--muted)]">cost {s.in.costDiff >= 0 ? "+" : ""}£{s.in.costDiff.toFixed(1)}m</div>
                         </div>
-                        <div className="font-semibold">{s.in.name} <PosBadge pos={s.out.pos} /></div>
-                        <div className="text-xs text-[var(--muted)] mt-1">
-                          £{s.in.price.toFixed(1)}m · pred {s.in.pred.toFixed(3)} · form {s.in.form.toFixed(1)} · ppg {s.in.ppg.toFixed(1)}
-                        </div>
+                        <MiniPlayerCard
+                          name={s.in.name}
+                          pos={s.out.pos}
+                          club={s.in.club}
+                          price={s.in.price}
+                          pred={s.in.pred}
+                          extra={`form ${s.in.form.toFixed(1)} · ppg ${s.in.ppg.toFixed(1)}`}
+                          photo={photoById[s.in.player_id]}
+                          tone="emerald"
+                        />
                       </div>
                     </div>
                     <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
@@ -563,6 +583,15 @@ export default function Home() {
               </div>
             )}
           </section>
+
+          {/* Player fixtures modal (last/next 4) */}
+          {fixturesModal && (
+            <FixturesModal
+              playerId={fixturesModal.playerId}
+              playerName={fixturesModal.playerName}
+              onClose={() => setFixturesModal(null)}
+            />
+          )}
 
           {/* Player transfer options modal */}
           {transferModal && (
@@ -641,7 +670,7 @@ function isLegalFplSubstitution(
   );
 }
 
-function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransfer, onTogglePin, onSubstitute }: {
+function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransfer, onTogglePin, onSubstitute, onShowFixtures }: {
   teamRows: TeamRow[];
   optResult: OptimizeResult | null;
   gameweek: number | null;
@@ -650,6 +679,7 @@ function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransf
   onPlayerTransfer: (name: string) => void;
   onTogglePin: (playerId: number | undefined) => void;
   onSubstitute: (starterName: string, benchName: string) => void;
+  onShowFixtures: (playerId: number, playerName: string) => void;
 }) {
   // When an optimization result exists, rearrange the pitch to show the
   // optimal XI grouped by position (per the new formation), with subbed-out
@@ -698,6 +728,7 @@ function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransf
                 players.map((r) => (
                   <PlayerCard
                     key={r.player_id}
+                    onShowFixtures={onShowFixtures}
                     row={r}
                     squad={squad}
                     onBench={false}
@@ -725,6 +756,7 @@ function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransf
             {bench.map((r) => (
               <PlayerCard
                 key={r.player_id}
+                onShowFixtures={onShowFixtures}
                 row={r}
                 squad={squad}
                 onBench
@@ -764,6 +796,7 @@ function PlayerCard({
   onTransfer,
   onTogglePin,
   onSubstitute,
+  onShowFixtures,
 }: {
   row: TeamRow;
   squad: SquadPlayer[];
@@ -778,6 +811,7 @@ function PlayerCard({
   onTransfer?: (name: string) => void;
   onTogglePin?: (playerId: number | undefined) => void;
   onSubstitute?: (starterName: string, benchName: string) => void;
+  onShowFixtures?: (playerId: number, playerName: string) => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [substituteOpen, setSubstituteOpen] = useState(false);
@@ -805,7 +839,8 @@ function PlayerCard({
         setMenuOpen(true);
         setSubstituteOpen(false);
       }}
-      title="Right-click for player actions"
+      onClick={() => onShowFixtures?.(row.player_id, row.player_name)}
+      title="Click for last/next 4 matches · right-click for player actions"
       className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition cursor-context-menu hover:ring-2 hover:ring-[var(--accent)]
         ${injuryCardClass(row.chance_of_playing_next_round)}
         ${isOptXI ? "ring-2 ring-emerald-400" : ""}
@@ -891,6 +926,187 @@ function PlayerCard({
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+const MINI_CARD_TONE: Record<string, string> = {
+  rose: "bg-rose-500/10 ring-1 ring-rose-300/40",
+  emerald: "bg-emerald-500/10 ring-1 ring-emerald-300/40",
+};
+
+/** Compact photo card used in transfer suggestion Out/In panels. */
+function MiniPlayerCard({
+  name,
+  pos,
+  club,
+  price,
+  priceSuffix,
+  pred,
+  extra,
+  photo,
+  tone,
+}: {
+  name: string;
+  pos: string;
+  club: string;
+  price: number;
+  priceSuffix?: string;
+  pred: number | null;
+  extra?: string;
+  photo?: string;
+  tone: "rose" | "emerald";
+}) {
+  return (
+    <div
+      className={`flex flex-col items-center w-[92px] rounded-lg p-1.5 ${MINI_CARD_TONE[tone]}`}
+      title={`${name} · ${club} · £${price.toFixed(1)}m · pred ${pred != null ? pred.toFixed(3) : "N/A"}${extra ? ` · ${extra}` : ""}`}
+    >
+      {photo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`${PHOTO_BASE}/p${photo}.png`}
+          alt={name}
+          className="w-12 h-[60px] object-contain drop-shadow"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }}
+        />
+      ) : (
+        <div className="w-12 h-[60px] flex items-center justify-center text-2xl">👕</div>
+      )}
+      <div className="text-[11px] font-bold leading-tight text-center truncate w-full">{name}</div>
+      <div className="text-[9px] text-[var(--muted)] text-center truncate w-full">{club}</div>
+      <div className="flex items-center gap-1 mt-0.5">
+        <span className={`badge ${POS_COLORS[pos]} !text-[8px] !px-1 !py-0`}>{pos}</span>
+        <span className="text-[9px] font-semibold">£{price.toFixed(1)}m{priceSuffix ?? ""}</span>
+      </div>
+      <div className="text-[9px] text-[var(--muted)]">
+        pred <span className="text-[var(--accent)]">{pred != null ? pred.toFixed(2) : "N/A"}</span>
+      </div>
+      {extra && <div className="text-[9px] text-[var(--muted)] text-center truncate w-full">{extra}</div>}
+    </div>
+  );
+}
+
+function FixturesModal({
+  playerId,
+  playerName,
+  onClose,
+}: {
+  playerId: number;
+  playerName: string;
+  onClose: () => void;
+}) {
+  const [data, setData] = useState<{
+    last4: PlayerMatchRow[];
+    next4: PlayerMatchRow[];
+  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/fixtures?playerId=${playerId}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`API ${res.status}`);
+        return res.json();
+      })
+      .then((json) => { if (!cancelled) setData({ last4: json.last4 ?? [], next4: json.next4 ?? [] }); })
+      .catch((e) => { if (!cancelled) setError(e.message ?? "Failed to load"); });
+    return () => { cancelled = true; };
+  }, [playerId]);
+
+  const totalLast = data?.last4.reduce((s, m) => s + (m.total_points ?? 0), 0) ?? null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="card p-5 w-full max-w-2xl max-h-[85vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-lg font-bold">{playerName} — Last & Next 4 Matches</h3>
+            {data && (
+              <p className="text-xs text-[var(--muted)] mt-1">
+                Points in last 4: <span className="text-[var(--accent)] font-bold">{totalLast}</span>
+              </p>
+            )}
+          </div>
+          <button
+            onClick={onClose}
+            className="text-[var(--muted)] hover:text-[var(--text)] text-xl leading-none px-2"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        {error && <p className="text-sm text-red-400">Failed to load fixtures: {error}</p>}
+        {!data && !error && <p className="text-sm text-[var(--muted)]">Loading…</p>}
+        {data && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <section>
+              <h4 className="text-xs font-bold uppercase tracking-wide text-[var(--muted)] mb-2">
+                Last 4 — points scored
+              </h4>
+              {data.last4.length === 0 ? (
+                <p className="text-sm text-[var(--muted)]">No played matches found.</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {data.last4.map((m) => (
+                    <div key={m.fixture_id} className="flex items-center justify-between rounded-lg border border-[var(--border)] px-3 py-2 text-xs">
+                      <div>
+                        <div className="font-semibold">
+                          {m.was_home ? "vs" : "@"} {m.opponent_name ?? `Team ${m.opponent_team}`}
+                        </div>
+                        <div className="text-[10px] text-[var(--muted)]">
+                          GW {m.gameweek ?? "?"} · {m.minutes ?? 0}′{m.goals_scored ? ` · ⚽${m.goals_scored}` : ""}
+                          {m.assists ? ` · 🅰${m.assists}` : ""}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-base font-extrabold text-[var(--accent)]">{m.total_points ?? 0}</div>
+                        <div className="text-[10px] text-[var(--muted)]">{m.fixture_difficulty != null ? `D${m.fixture_difficulty}` : ""}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+            <section>
+              <h4 className="text-xs font-bold uppercase tracking-wide text-[var(--muted)] mb-2">
+                Next 4 — win probability
+              </h4>
+              {data.next4.length === 0 ? (
+                <p className="text-sm text-[var(--muted)]">No upcoming matches found.</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {data.next4.map((m) => (
+                    <div key={m.fixture_id} className="flex items-center justify-between rounded-lg border border-[var(--border)] px-3 py-2 text-xs">
+                      <div>
+                        <div className="font-semibold">
+                          {m.was_home ? "vs" : "@"} {m.opponent_name ?? `Team ${m.opponent_team}`}
+                        </div>
+                        <div className="text-[10px] text-[var(--muted)]">
+                          GW {m.gameweek ?? "?"}
+                          {m.kickoff_time ? ` · ${new Date(m.kickoff_time).toLocaleDateString(undefined, { month: "short", day: "numeric" })}` : ""}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-base font-extrabold text-[var(--accent)]">
+                          {m.prob_win != null ? `${Math.round(m.prob_win * 100)}%` : "—"}
+                        </div>
+                        <div className="text-[10px] text-[var(--muted)]">win · {m.fixture_difficulty != null ? `D${m.fixture_difficulty}` : ""}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
