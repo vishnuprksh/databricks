@@ -14,7 +14,7 @@ import type {
   OptimizeResult,
   Replacement,
 } from "@/lib/suggestions";
-import type { PredictionRow } from "@/lib/db";
+import type { PredictionRow, PlayerMatchRow } from "@/lib/db";
 
 type Manager = any;
 type Bootstrap = any;
@@ -53,6 +53,7 @@ export default function Home() {
   const [transferLimit, setTransferLimit] = useState<1 | 2 | 3>(1);
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
   const [transferModal, setTransferModal] = useState<{ out: SquadPlayer; options: Replacement[] } | null>(null);
+  const [fixturesModal, setFixturesModal] = useState<{ playerId: number; playerName: string } | null>(null);
   const [skipped, setSkipped] = useState<Suggestion[]>([]);
   const [pinnedIds, setPinnedIds] = useState<number[]>([]);
 
@@ -418,6 +419,7 @@ export default function Home() {
               onPlayerTransfer={openTransferModal}
               onTogglePin={togglePin}
               onSubstitute={substitutePlayer}
+              onShowFixtures={(playerId, playerName) => setFixturesModal({ playerId, playerName })}
             />
             {noPred.length > 0 && (
               <p className="mt-3 text-xs text-[var(--muted)]">
@@ -564,6 +566,15 @@ export default function Home() {
             )}
           </section>
 
+          {/* Player fixtures modal (last/next 4) */}
+          {fixturesModal && (
+            <FixturesModal
+              playerId={fixturesModal.playerId}
+              playerName={fixturesModal.playerName}
+              onClose={() => setFixturesModal(null)}
+            />
+          )}
+
           {/* Player transfer options modal */}
           {transferModal && (
             <TransferModal
@@ -641,7 +652,7 @@ function isLegalFplSubstitution(
   );
 }
 
-function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransfer, onTogglePin, onSubstitute }: {
+function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransfer, onTogglePin, onSubstitute, onShowFixtures }: {
   teamRows: TeamRow[];
   optResult: OptimizeResult | null;
   gameweek: number | null;
@@ -650,6 +661,7 @@ function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransf
   onPlayerTransfer: (name: string) => void;
   onTogglePin: (playerId: number | undefined) => void;
   onSubstitute: (starterName: string, benchName: string) => void;
+  onShowFixtures: (playerId: number, playerName: string) => void;
 }) {
   // When an optimization result exists, rearrange the pitch to show the
   // optimal XI grouped by position (per the new formation), with subbed-out
@@ -698,6 +710,7 @@ function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransf
                 players.map((r) => (
                   <PlayerCard
                     key={r.player_id}
+                    onShowFixtures={onShowFixtures}
                     row={r}
                     squad={squad}
                     onBench={false}
@@ -725,6 +738,7 @@ function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransf
             {bench.map((r) => (
               <PlayerCard
                 key={r.player_id}
+                onShowFixtures={onShowFixtures}
                 row={r}
                 squad={squad}
                 onBench
@@ -764,6 +778,7 @@ function PlayerCard({
   onTransfer,
   onTogglePin,
   onSubstitute,
+  onShowFixtures,
 }: {
   row: TeamRow;
   squad: SquadPlayer[];
@@ -778,6 +793,7 @@ function PlayerCard({
   onTransfer?: (name: string) => void;
   onTogglePin?: (playerId: number | undefined) => void;
   onSubstitute?: (starterName: string, benchName: string) => void;
+  onShowFixtures?: (playerId: number, playerName: string) => void;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [substituteOpen, setSubstituteOpen] = useState(false);
@@ -805,7 +821,8 @@ function PlayerCard({
         setMenuOpen(true);
         setSubstituteOpen(false);
       }}
-      title="Right-click for player actions"
+      onClick={() => onShowFixtures?.(row.player_id, row.player_name)}
+      title="Click for last/next 4 matches · right-click for player actions"
       className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition cursor-context-menu hover:ring-2 hover:ring-[var(--accent)]
         ${injuryCardClass(row.chance_of_playing_next_round)}
         ${isOptXI ? "ring-2 ring-emerald-400" : ""}
@@ -891,6 +908,130 @@ function PlayerCard({
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function FixturesModal({
+  playerId,
+  playerName,
+  onClose,
+}: {
+  playerId: number;
+  playerName: string;
+  onClose: () => void;
+}) {
+  const [data, setData] = useState<{
+    last4: PlayerMatchRow[];
+    next4: PlayerMatchRow[];
+  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/fixtures?playerId=${playerId}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`API ${res.status}`);
+        return res.json();
+      })
+      .then((json) => { if (!cancelled) setData({ last4: json.last4 ?? [], next4: json.next4 ?? [] }); })
+      .catch((e) => { if (!cancelled) setError(e.message ?? "Failed to load"); });
+    return () => { cancelled = true; };
+  }, [playerId]);
+
+  const totalLast = data?.last4.reduce((s, m) => s + (m.total_points ?? 0), 0) ?? null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="card p-5 w-full max-w-2xl max-h-[85vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-lg font-bold">{playerName} — Last & Next 4 Matches</h3>
+            {data && (
+              <p className="text-xs text-[var(--muted)] mt-1">
+                Points in last 4: <span className="text-[var(--accent)] font-bold">{totalLast}</span>
+              </p>
+            )}
+          </div>
+          <button
+            onClick={onClose}
+            className="text-[var(--muted)] hover:text-[var(--text)] text-xl leading-none px-2"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+        {error && <p className="text-sm text-red-400">Failed to load fixtures: {error}</p>}
+        {!data && !error && <p className="text-sm text-[var(--muted)]">Loading…</p>}
+        {data && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <section>
+              <h4 className="text-xs font-bold uppercase tracking-wide text-[var(--muted)] mb-2">
+                Last 4 — points scored
+              </h4>
+              {data.last4.length === 0 ? (
+                <p className="text-sm text-[var(--muted)]">No played matches found.</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {data.last4.map((m) => (
+                    <div key={m.fixture_id} className="flex items-center justify-between rounded-lg border border-[var(--border)] px-3 py-2 text-xs">
+                      <div>
+                        <div className="font-semibold">
+                          {m.was_home ? "vs" : "@"} {m.opponent_name ?? `Team ${m.opponent_team}`}
+                        </div>
+                        <div className="text-[10px] text-[var(--muted)]">
+                          GW {m.gameweek ?? "?"} · {m.minutes ?? 0}′{m.goals_scored ? ` · ⚽${m.goals_scored}` : ""}
+                          {m.assists ? ` · 🅰${m.assists}` : ""}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-base font-extrabold text-[var(--accent)]">{m.total_points ?? 0}</div>
+                        <div className="text-[10px] text-[var(--muted)]">{m.fixture_difficulty != null ? `D${m.fixture_difficulty}` : ""}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+            <section>
+              <h4 className="text-xs font-bold uppercase tracking-wide text-[var(--muted)] mb-2">
+                Next 4 — win probability
+              </h4>
+              {data.next4.length === 0 ? (
+                <p className="text-sm text-[var(--muted)]">No upcoming matches found.</p>
+              ) : (
+                <div className="space-y-1.5">
+                  {data.next4.map((m) => (
+                    <div key={m.fixture_id} className="flex items-center justify-between rounded-lg border border-[var(--border)] px-3 py-2 text-xs">
+                      <div>
+                        <div className="font-semibold">
+                          {m.was_home ? "vs" : "@"} {m.opponent_name ?? `Team ${m.opponent_team}`}
+                        </div>
+                        <div className="text-[10px] text-[var(--muted)]">
+                          GW {m.gameweek ?? "?"}
+                          {m.kickoff_time ? ` · ${new Date(m.kickoff_time).toLocaleDateString(undefined, { month: "short", day: "numeric" })}` : ""}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-base font-extrabold text-[var(--accent)]">
+                          {m.prob_win != null ? `${Math.round(m.prob_win * 100)}%` : "—"}
+                        </div>
+                        <div className="text-[10px] text-[var(--muted)]">win · {m.fixture_difficulty != null ? `D${m.fixture_difficulty}` : ""}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

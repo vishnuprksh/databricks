@@ -4,7 +4,9 @@
       "app_dream15_page_dream15page",
       "app_page",
       "app_page_bootstrap",
+      "app_page_fixturesmodal",
       "app_page_home",
+      "app_page_injurycardclass",
       "app_page_islegalfplsubstitution",
       "app_page_manager",
       "app_page_pitch",
@@ -15,6 +17,7 @@
       "app_page_row_order",
       "app_page_stat",
       "app_page_transfermodal",
+      "lib_db_playermatchrow",
       "lib_suggestions",
       "lib_suggestions_buildsquadwithpred",
       "lib_suggestions_computesellprices",
@@ -36,6 +39,29 @@
       "lib_suggestions_transferrecord"
     ],
     "1": [
+      "dbtest",
+      "dbtest_fs",
+      "dbtest_pool",
+      "package",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_start",
+      "package_version",
+      "ref_autoprefixer",
+      "ref_javascript_lp_solver",
+      "ref_pg",
+      "ref_postcss",
+      "ref_react_dom",
+      "ref_tailwindcss",
+      "ref_types_node",
+      "ref_types_pg",
+      "ref_types_react",
+      "ref_typescript"
+    ],
+    "2": [
       "tsconfig",
       "tsconfig_compileroptions",
       "tsconfig_compileroptions_allowjs",
@@ -56,7 +82,7 @@
       "tsconfig_exclude",
       "tsconfig_include"
     ],
-    "2": [
+    "3": [
       "app_dream15_page",
       "app_dream15_page_dreampitch",
       "app_dream15_page_dreamplayercard",
@@ -76,25 +102,6 @@
       "lib_suggestions_squadplayer",
       "ref_react"
     ],
-    "3": [
-      "package",
-      "package_name",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_start",
-      "package_version",
-      "ref_autoprefixer",
-      "ref_javascript_lp_solver",
-      "ref_postcss",
-      "ref_react_dom",
-      "ref_tailwindcss",
-      "ref_types_node",
-      "ref_types_pg",
-      "ref_types_react",
-      "ref_typescript"
-    ],
     "4": [
       "app_api_bootstrap_route",
       "app_api_bootstrap_route_get",
@@ -113,15 +120,17 @@
     "5": [
       "app_api_data_route",
       "app_api_data_route_get",
-      "dbtest",
-      "dbtest_fs",
-      "dbtest_pool",
+      "app_api_fixtures_route",
+      "app_api_fixtures_route_dynamic",
+      "app_api_fixtures_route_get",
       "lib_db",
+      "lib_db_fetchplayermatchdetails",
       "lib_db_fetchplayers",
       "lib_db_fetchpredictions",
+      "lib_db_fixturedifficultyrow",
       "lib_db_getpool",
       "lib_db_gwprediction",
-      "ref_pg"
+      "lib_db_numornull"
     ],
     "6": [
       "package_devdependencies",
@@ -183,12 +192,12 @@
     ]
   },
   "cohesion": {
-    "0": 0.0946969696969697,
-    "1": 0.10526315789473684,
-    "2": 0.12418300653594772,
-    "3": 0.11764705882352941,
+    "0": 0.08571428571428572,
+    "1": 0.09523809523809523,
+    "2": 0.10526315789473684,
+    "3": 0.12418300653594772,
     "4": 0.2564102564102564,
-    "5": 0.2909090909090909,
+    "5": 0.28205128205128205,
     "6": 0.25,
     "7": 0.2857142857142857,
     "8": 0.4,
@@ -209,7 +218,7 @@
     {
       "id": "lib_fpl_fetchfpljson",
       "label": "fetchFplJson()",
-      "degree": 7
+      "degree": 9
     },
     {
       "id": "lib_suggestions_optimizestartingeleven",
@@ -222,11 +231,6 @@
       "degree": 6
     },
     {
-      "id": "lib_db_predictionrow",
-      "label": "PredictionRow",
-      "degree": 5
-    },
-    {
       "id": "lib_suggestions_findbesttransferplan",
       "label": "findBestTransferPlan()",
       "degree": 5
@@ -237,9 +241,14 @@
       "degree": 5
     },
     {
-      "id": "lib_db_playerrow",
-      "label": "PlayerRow",
-      "degree": 4
+      "id": "lib_db_predictionrow",
+      "label": "PredictionRow",
+      "degree": 5
+    },
+    {
+      "id": "lib_db_fetchplayermatchdetails",
+      "label": "fetchPlayerMatchDetails()",
+      "degree": 5
     },
     {
       "id": "lib_suggestions_findreplacements",
@@ -247,8 +256,8 @@
       "degree": 4
     },
     {
-      "id": "lib_db_fetchplayers",
-      "label": "fetchPlayers()",
+      "id": "ref_react",
+      "label": "react",
       "degree": 4
     }
   ],
@@ -287,26 +296,26 @@
       "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
     },
     {
-      "source": "Home()",
-      "target": "findBestTransferPlan()",
+      "source": "GET()",
+      "target": "fetchFplJson()",
       "source_files": [
-        "app/page.tsx",
-        "lib/suggestions.ts"
+        "app/api/data/route.ts",
+        "lib/fpl.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "connects across different repos/directories"
+      "why": "connects across different repos/directories; bridges separate communities"
     },
     {
-      "source": "Home()",
-      "target": "listTransferOptions()",
+      "source": "GET()",
+      "target": "fetchPlayerMatchDetails()",
       "source_files": [
-        "app/page.tsx",
-        "lib/suggestions.ts"
+        "app/api/fixtures/route.ts",
+        "lib/db.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "connects across different repos/directories"
+      "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchPlayerMatchDetails()`"
     }
   ],
   "tokens": {
