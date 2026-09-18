@@ -17,6 +17,7 @@
       "lib_suggestions_buildsquadwithpred",
       "lib_suggestions_computesellprices",
       "lib_suggestions_findbesttransfer",
+      "lib_suggestions_findbesttransferplan",
       "lib_suggestions_findreplacements",
       "lib_suggestions_generatesuggestions",
       "lib_suggestions_listtransferoptions",
@@ -31,27 +32,27 @@
       "lib_suggestions_transferrecord"
     ],
     "1": [
-      "dbtest",
-      "dbtest_fs",
-      "dbtest_pool",
-      "package",
-      "package_name",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_start",
-      "package_version",
-      "ref_autoprefixer",
-      "ref_javascript_lp_solver",
-      "ref_pg",
-      "ref_postcss",
-      "ref_react_dom",
-      "ref_tailwindcss",
-      "ref_types_node",
-      "ref_types_pg",
-      "ref_types_react",
-      "ref_typescript"
+      "app_dream15_page",
+      "app_dream15_page_dream15page",
+      "app_dream15_page_dreampitch",
+      "app_dream15_page_dreamplayercard",
+      "app_dream15_page_dreamview",
+      "app_dream15_page_pos_colors",
+      "app_dream15_page_row_bg",
+      "app_dream15_page_row_order",
+      "app_dream15_page_stat",
+      "app_players_page",
+      "app_players_page_playerspage",
+      "app_players_page_pos_colors",
+      "app_players_page_posbadge",
+      "app_players_page_sortkey",
+      "lib_db_playerrow",
+      "lib_db_predictionrow",
+      "lib_suggestions_dream15result",
+      "lib_suggestions_dreamplayers",
+      "lib_suggestions_optimizedream15",
+      "lib_suggestions_squadplayer",
+      "ref_react"
     ],
     "2": [
       "tsconfig",
@@ -75,21 +76,23 @@
       "tsconfig_include"
     ],
     "3": [
-      "app_api_data_route",
-      "app_api_data_route_get",
-      "app_players_page",
-      "app_players_page_playerspage",
-      "app_players_page_pos_colors",
-      "app_players_page_posbadge",
-      "app_players_page_sortkey",
-      "lib_db",
-      "lib_db_fetchplayers",
-      "lib_db_fetchpredictions",
-      "lib_db_getpool",
-      "lib_db_gwprediction",
-      "lib_db_playerrow",
-      "lib_db_predictionrow",
-      "ref_react"
+      "package",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_start",
+      "package_version",
+      "ref_autoprefixer",
+      "ref_javascript_lp_solver",
+      "ref_postcss",
+      "ref_react_dom",
+      "ref_tailwindcss",
+      "ref_types_node",
+      "ref_types_pg",
+      "ref_types_react",
+      "ref_typescript"
     ],
     "4": [
       "app_api_bootstrap_route",
@@ -107,19 +110,17 @@
       "lib_fpl_teamrow"
     ],
     "5": [
-      "app_dream15_page",
-      "app_dream15_page_dream15page",
-      "app_dream15_page_dreampitch",
-      "app_dream15_page_dreamplayercard",
-      "app_dream15_page_dreamview",
-      "app_dream15_page_pos_colors",
-      "app_dream15_page_row_bg",
-      "app_dream15_page_row_order",
-      "app_dream15_page_stat",
-      "lib_suggestions_dream15result",
-      "lib_suggestions_dreamplayers",
-      "lib_suggestions_optimizedream15",
-      "lib_suggestions_squadplayer"
+      "app_api_data_route",
+      "app_api_data_route_get",
+      "dbtest",
+      "dbtest_fs",
+      "dbtest_pool",
+      "lib_db",
+      "lib_db_fetchplayers",
+      "lib_db_fetchpredictions",
+      "lib_db_getpool",
+      "lib_db_gwprediction",
+      "ref_pg"
     ],
     "6": [
       "package_devdependencies",
@@ -181,12 +182,12 @@
     ]
   },
   "cohesion": {
-    "0": 0.10582010582010581,
-    "1": 0.09523809523809523,
+    "0": 0.10591133004926108,
+    "1": 0.10952380952380952,
     "2": 0.10526315789473684,
-    "3": 0.20952380952380953,
+    "3": 0.11764705882352941,
     "4": 0.2564102564102564,
-    "5": 0.16666666666666666,
+    "5": 0.2909090909090909,
     "6": 0.25,
     "7": 0.2857142857142857,
     "8": 0.4,
@@ -210,6 +211,11 @@
       "degree": 7
     },
     {
+      "id": "lib_suggestions_optimizestartingeleven",
+      "label": "optimizeStartingEleven()",
+      "degree": 6
+    },
+    {
       "id": "readme_fpl_team_manager_vercel_frontend",
       "label": "FPL Team Manager \u2014 Vercel Frontend",
       "degree": 6
@@ -220,18 +226,13 @@
       "degree": 5
     },
     {
+      "id": "lib_suggestions_findbesttransferplan",
+      "label": "findBestTransferPlan()",
+      "degree": 5
+    },
+    {
       "id": "lib_suggestions_optimizedream15",
       "label": "optimizeDream15()",
-      "degree": 5
-    },
-    {
-      "id": "lib_suggestions_optimizestartingeleven",
-      "label": "optimizeStartingEleven()",
-      "degree": 5
-    },
-    {
-      "id": "lib_suggestions_findbesttransfer",
-      "label": "findBestTransfer()",
       "degree": 5
     },
     {
@@ -240,17 +241,28 @@
       "degree": 4
     },
     {
-      "id": "lib_db_fetchplayers",
-      "label": "fetchPlayers()",
+      "id": "lib_suggestions_findreplacements",
+      "label": "findReplacements()",
       "degree": 4
     },
     {
-      "id": "lib_db_fetchpredictions",
-      "label": "fetchPredictions()",
+      "id": "lib_db_fetchplayers",
+      "label": "fetchPlayers()",
       "degree": 4
     }
   ],
   "surprises": [
+    {
+      "source": "Dream15Page()",
+      "target": "optimizeDream15()",
+      "source_files": [
+        "app/dream15/page.tsx",
+        "lib/suggestions.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `Dream15Page()` unexpectedly reaches hub `optimizeDream15()`"
+    },
     {
       "source": "GET()",
       "target": "fetchFplJson()",
@@ -274,33 +286,22 @@
       "why": "connects across different repos/directories; peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
     },
     {
-      "source": "Dream15Page()",
-      "target": "optimizeDream15()",
+      "source": "Home()",
+      "target": "findBestTransferPlan()",
       "source_files": [
-        "app/dream15/page.tsx",
+        "app/page.tsx",
         "lib/suggestions.ts"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "connects across different repos/directories; peripheral node `Dream15Page()` unexpectedly reaches hub `optimizeDream15()`"
-    },
-    {
-      "source": "GET()",
-      "target": "fetchPlayers()",
-      "source_files": [
-        "app/api/data/route.ts",
-        "lib/db.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories"
     },
     {
-      "source": "GET()",
-      "target": "fetchPredictions()",
+      "source": "Home()",
+      "target": "listTransferOptions()",
       "source_files": [
-        "app/api/data/route.ts",
-        "lib/db.ts"
+        "app/page.tsx",
+        "lib/suggestions.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",

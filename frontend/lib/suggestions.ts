@@ -343,9 +343,11 @@ export function optimizeDream15(players: PlayerRow[], predictions: PredictionRow
  * Max 3 players per club is automatically respected — the squad already
  * satisfies it and we never add external players.
  */
-export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | null {
+export function optimizeStartingEleven(squad: SquadPlayer[], pinnedIds: number[] = []): OptimizeResult | null {
   if (squad.length !== 15) return null;
   const pred = (p: SquadPlayer) => p.pred ?? 0;
+  const pinned = new Set(pinnedIds);
+  const pinnedStarterCount = squad.filter((p) => p.player_id != null && pinned.has(p.player_id) && p.starter).length;
 
   const clubCount: Record<string, number> = {};
   for (const p of squad) clubCount[p.club] = (clubCount[p.club] ?? 0) + 1;
@@ -361,6 +363,9 @@ export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | n
       [`sp_${p.pos}`]: 1,
       [`ub_${key}`]: 1,
     };
+    if (p.player_id != null && pinned.has(p.player_id)) {
+      variables[key].pinned = p.starter ? 1 : 0;
+    }
     // Explicit x <= 1 + integrality = binary (library's `ints` alone is unbounded).
     upperBounds[`ub_${key}`] = { max: 1 };
   });
@@ -374,6 +379,7 @@ export function optimizeStartingEleven(squad: SquadPlayer[]): OptimizeResult | n
       sp_DEF: { min: 3, max: 5 },
       sp_MID: { min: 3, max: 5 },
       sp_FWD: { min: 1, max: 3 },
+      pinned: { equal: pinnedStarterCount },
       ...upperBounds,
     },
     variables,
@@ -501,11 +507,13 @@ export function findBestTransferPlan(
   stats: Record<number, StatsRow>,
   bank: number,
   limit: 1 | 2 | 3,
-  declinedIds: number[] = []
+  declinedIds: number[] = [],
+  pinnedIds: number[] = []
 ): Suggestion[] {
   const bestByDepth: Suggestion[][] = [];
   const scoreByDepth: number[] = [];
   const declined = new Set(declinedIds);
+  const pinned = new Set(pinnedIds);
 
   const search = (currentSquad: SquadPlayer[], currentBank: number, plan: Suggestion[]) => {
     if (plan.length > 0) {
@@ -517,13 +525,14 @@ export function findBestTransferPlan(
     }
     if (plan.length >= limit) return;
 
-    const current = optimizeStartingEleven(currentSquad);
+    const current = optimizeStartingEleven(currentSquad, pinnedIds);
     if (!current) return;
     const clubCount: Record<string, number> = {};
     for (const player of currentSquad) clubCount[player.club] = (clubCount[player.club] ?? 0) + 1;
     const squadIds = new Set(currentSquad.map((player) => player.player_id).filter((id): id is number => id != null));
     const weakestXiByPos: Record<string, SquadPlayer> = {};
     for (const player of current.xi) {
+      if (player.player_id != null && pinned.has(player.player_id)) continue;
       const weakest = weakestXiByPos[player.pos];
       if (!weakest || (player.pred ?? 0) < (weakest.pred ?? 0)) weakestXiByPos[player.pos] = player;
     }
@@ -554,7 +563,7 @@ export function findBestTransferPlan(
           club: incoming.club,
         };
         const nextSquad = currentSquad.map((player) => player.name === outgoing.name ? incomingPlayer : player);
-        const nextResult = optimizeStartingEleven(nextSquad);
+        const nextResult = optimizeStartingEleven(nextSquad, pinnedIds);
         if (!nextResult) continue;
         const suggestion: Suggestion = {
           out: outgoing,

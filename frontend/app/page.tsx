@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { TeamRow } from "@/lib/fpl";
 import {
   findBestTransferPlan,
@@ -54,6 +54,7 @@ export default function Home() {
   const [optResult, setOptResult] = useState<OptimizeResult | null>(null);
   const [transferModal, setTransferModal] = useState<{ out: SquadPlayer; options: Replacement[] } | null>(null);
   const [skipped, setSkipped] = useState<Suggestion[]>([]);
+  const [pinnedIds, setPinnedIds] = useState<number[]>([]);
 
   const optimize = async () => {
     if (squad.length !== 15) {
@@ -62,7 +63,7 @@ export default function Home() {
     }
     setOptimizing(true);
     try {
-      setOptResult(optimizeStartingEleven(squad));
+      setOptResult(optimizeStartingEleven(squad, pinnedIds));
     } finally {
       setOptimizing(false);
     }
@@ -72,7 +73,8 @@ export default function Home() {
     startingSquad: SquadPlayer[],
     startingBank: number,
     limit: 1 | 2 | 3,
-    skippedSuggestions: Suggestion[]
+    skippedSuggestions: Suggestion[],
+    pinnedOverride = pinnedIds
   ) => {
     return findBestTransferPlan(
       startingSquad,
@@ -80,7 +82,8 @@ export default function Home() {
       stats,
       startingBank,
       limit,
-      skippedSuggestions.map((suggestion) => suggestion.in.player_id)
+      skippedSuggestions.map((suggestion) => suggestion.in.player_id),
+      pinnedOverride
     );
   };
 
@@ -147,7 +150,7 @@ export default function Home() {
     for (const player of nextSquad) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
     setClubCount(nextClubCount);
     setNoPred(nextSquad.filter((p) => p.pred === null).map((p) => p.name));
-    setOptResult(optimizeStartingEleven(nextSquad));
+    setOptResult(optimizeStartingEleven(nextSquad, pinnedIds));
   };
 
   const openTransferModal = (playerName: string) => {
@@ -155,6 +158,30 @@ export default function Home() {
     if (!out || !predictions.length) return;
     const options = listTransferOptions(out, squad, predictions, stats, bank);
     setTransferModal({ out, options });
+  };
+
+  const togglePin = (playerId: number | undefined) => {
+    if (playerId == null) return;
+    const nextPinned = pinnedIds.includes(playerId) ? pinnedIds.filter((id) => id !== playerId) : [...pinnedIds, playerId];
+    setPinnedIds(nextPinned);
+    setSuggestions(buildTransferPlan(squad, bank, transferLimit, skipped, nextPinned));
+    setOptResult(null);
+  };
+
+  const substitutePlayer = (starterName: string, benchName: string) => {
+    const nextSquad = squad.map((player) => {
+      if (player.name === starterName) return { ...player, starter: false };
+      if (player.name === benchName) return { ...player, starter: true };
+      return player;
+    });
+    setSquad(nextSquad);
+    setTeamRows((current) => current.map((row) => {
+      if (row.player_name === starterName) return { ...row, is_starter: false };
+      if (row.player_name === benchName) return { ...row, is_starter: true };
+      return row;
+    }));
+    setSuggestions(buildTransferPlan(nextSquad, bank, transferLimit, skipped));
+    setOptResult(null);
   };
 
   const load = useCallback(async () => {
@@ -264,12 +291,13 @@ export default function Home() {
       setBank(bankVal);
 
       // 5. Transfer suggestions (declines reset on fresh load)
-      setSuggestions(buildTransferPlan(squadPlayers, bankVal, transferLimit, []));
+      setSuggestions(findBestTransferPlan(squadPlayers, data.predictions, statsMap, bankVal, transferLimit, [], []));
       setSkipped([]);
       const nextClubCount: Record<string, number> = {};
       for (const player of squadPlayers) nextClubCount[player.club] = (nextClubCount[player.club] ?? 0) + 1;
       setClubCount(nextClubCount);
       setOptResult(null);
+      setPinnedIds([]);
     } catch (e: any) {
       setError(e.message);
     } finally {
@@ -380,7 +408,16 @@ export default function Home() {
                 {optimizing ? "Optimizing…" : optResult ? "Re-optimize" : "⚡ Optimize Team"}
               </button>
             </div>
-            <Pitch teamRows={teamRows} optResult={optResult} gameweek={gameweek} squad={squad} onPlayerClick={openTransferModal} />
+            <Pitch
+              teamRows={teamRows}
+              optResult={optResult}
+              gameweek={gameweek}
+              squad={squad}
+              pinnedIds={pinnedIds}
+              onPlayerTransfer={openTransferModal}
+              onTogglePin={togglePin}
+              onSubstitute={substitutePlayer}
+            />
             {noPred.length > 0 && (
               <p className="mt-3 text-xs text-[var(--muted)]">
                 No model prediction (inactive/unavailable): {noPred.join(", ")}
@@ -565,12 +602,37 @@ const ROW_BG: Record<string, string> = {
   FWD: "bg-[#1f0a14]/70 border-rose-900/40",
 };
 
-function Pitch({ teamRows, optResult, gameweek, squad, onPlayerClick }: {
+function isLegalFplSubstitution(
+  startingPlayer: SquadPlayer,
+  benchPlayer: SquadPlayer,
+  startingPlayers: SquadPlayer[]
+) {
+  if (startingPlayer.pos === "GKP" || benchPlayer.pos === "GKP") {
+    return startingPlayer.pos === "GKP" && benchPlayer.pos === "GKP";
+  }
+  if (startingPlayer.pos === benchPlayer.pos) return true;
+
+  const nextCounts = startingPlayers.reduce<Record<string, number>>((counts, player) => {
+    const nextPosition = player.player_id === startingPlayer.player_id ? benchPlayer.pos : player.pos;
+    counts[nextPosition] = (counts[nextPosition] ?? 0) + 1;
+    return counts;
+  }, {});
+  return (
+    nextCounts.DEF >= 3 && nextCounts.DEF <= 5 &&
+    nextCounts.MID >= 3 && nextCounts.MID <= 5 &&
+    nextCounts.FWD >= 1 && nextCounts.FWD <= 3
+  );
+}
+
+function Pitch({ teamRows, optResult, gameweek, squad, pinnedIds, onPlayerTransfer, onTogglePin, onSubstitute }: {
   teamRows: TeamRow[];
   optResult: OptimizeResult | null;
   gameweek: number | null;
   squad: SquadPlayer[];
-  onPlayerClick: (name: string) => void;
+  pinnedIds: number[];
+  onPlayerTransfer: (name: string) => void;
+  onTogglePin: (playerId: number | undefined) => void;
+  onSubstitute: (starterName: string, benchName: string) => void;
 }) {
   // When an optimization result exists, rearrange the pitch to show the
   // optimal XI grouped by position (per the new formation), with subbed-out
@@ -590,10 +652,17 @@ function Pitch({ teamRows, optResult, gameweek, squad, onPlayerClick }: {
         .map((p) => teamRows.find((r) => r.player_name === p.name))
         .filter((r): r is TeamRow => !!r)
     : teamRows.filter((r) => !r.is_starter);
+  const benchPlayers = bench
+    .map((row) => squad.find((player) => player.player_id === row.player_id))
+    .filter((player): player is SquadPlayer => !!player);
+  const startingPlayers = displayRows
+    .flatMap(({ players }) => players)
+    .map((row) => squad.find((player) => player.player_id === row.player_id))
+    .filter((player): player is SquadPlayer => !!player);
 
   return (
     <div
-      className="rounded-xl overflow-hidden border border-[var(--border)]"
+      className="relative rounded-xl overflow-visible border border-[var(--border)]"
       style={{
         background:
           "repeating-linear-gradient(0deg, #0c2a18 0px, #0c2a18 44px, #0e3120 44px, #0e3120 88px)",
@@ -618,7 +687,15 @@ function Pitch({ teamRows, optResult, gameweek, squad, onPlayerClick }: {
                     isOptXI={true}
                     isCaptain={optResult ? optResult.captain === r.player_name : r.is_captain}
                     isVice={optResult ? optResult.viceCaptain === r.player_name : r.is_vice_captain}
-                    onClick={onPlayerClick}
+                    isPinned={pinnedIds.includes(r.player_id)}
+                    substitutePlayers={benchPlayers.filter((benchPlayer) => {
+                      const startingPlayer = squad.find((player) => player.player_id === r.player_id);
+                      return startingPlayer && isLegalFplSubstitution(startingPlayer, benchPlayer, startingPlayers);
+                    })}
+                    substituteLabel="Sub"
+                    onTransfer={onPlayerTransfer}
+                    onTogglePin={onTogglePin}
+                    onSubstitute={onSubstitute}
                   />
                 ))
               )}
@@ -638,7 +715,15 @@ function Pitch({ teamRows, optResult, gameweek, squad, onPlayerClick }: {
                 dimmed={!!optResult}
                 isCaptain={false}
                 isVice={false}
-                onClick={onPlayerClick}
+                isPinned={pinnedIds.includes(r.player_id)}
+                substitutePlayers={startingPlayers.filter((startingPlayer) => {
+                  const benchPlayer = squad.find((player) => player.player_id === r.player_id);
+                  return benchPlayer && isLegalFplSubstitution(startingPlayer, benchPlayer, startingPlayers);
+                })}
+                substituteLabel="Sub out"
+                onTransfer={onPlayerTransfer}
+                onTogglePin={onTogglePin}
+                onSubstitute={onSubstitute}
               />
             ))}
           </div>
@@ -656,7 +741,12 @@ function PlayerCard({
   isCaptain,
   isVice,
   dimmed,
-  onClick,
+  isPinned,
+  substitutePlayers = [],
+  substituteLabel,
+  onTransfer,
+  onTogglePin,
+  onSubstitute,
 }: {
   row: TeamRow;
   squad: SquadPlayer[];
@@ -665,16 +755,43 @@ function PlayerCard({
   isCaptain: boolean;
   isVice: boolean;
   dimmed?: boolean;
-  onClick?: (name: string) => void;
+  isPinned?: boolean;
+  substitutePlayers?: SquadPlayer[];
+  substituteLabel: string;
+  onTransfer?: (name: string) => void;
+  onTogglePin?: (playerId: number | undefined) => void;
+  onSubstitute?: (starterName: string, benchName: string) => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [substituteOpen, setSubstituteOpen] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const photo = (row as any).photo as string | undefined;
   const sp = squad.find((s) => s.name === row.player_name);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!cardRef.current?.contains(event.target as Node)) {
+        setMenuOpen(false);
+        setSubstituteOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePointer);
+  }, [menuOpen]);
+
   return (
     <div
-      onClick={() => onClick?.(row.player_name)}
-      title="Click to see possible transfers"
-      className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition cursor-pointer hover:ring-2 hover:ring-[var(--accent)]
+      ref={cardRef}
+      onContextMenu={(event) => {
+        event.preventDefault();
+        setMenuOpen(true);
+        setSubstituteOpen(false);
+      }}
+      title="Right-click for player actions"
+      className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition cursor-context-menu hover:ring-2 hover:ring-[var(--accent)]
         ${isOptXI ? "bg-emerald-500/20 ring-2 ring-emerald-400" : "bg-black/40 ring-1 ring-white/10"}
+        ${isPinned ? "ring-2 ring-amber-300" : ""}
         ${dimmed ? "opacity-60" : ""}`}
     >
       {isCaptain && (
@@ -709,6 +826,50 @@ function PlayerCard({
         GW {row.gameweek_points} · <span className="text-[var(--accent)]">{sp?.pred != null ? sp.pred.toFixed(2) : "N/A"}</span>
         {onBench && <span className="ml-1">🪑</span>}
       </div>
+      {isPinned && <span className="absolute bottom-1 right-1 text-[10px]" aria-label="Pinned">📌</span>}
+      {menuOpen && (
+        <div
+          className="absolute left-1/2 top-full z-[100] mt-1 min-w-[150px] -translate-x-1/2 rounded-lg border border-[var(--border)] bg-[#111a2e] p-1 text-left shadow-xl"
+          onContextMenu={(event) => event.preventDefault()}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <button
+            className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+            onClick={() => { onTransfer?.(row.player_name); setMenuOpen(false); }}
+          >
+            ↔ Transfer
+          </button>
+          <button
+            className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+            onClick={() => { onTogglePin?.(row.player_id); setMenuOpen(false); }}
+          >
+            📌 {isPinned ? "Unpin" : "Pin"}
+          </button>
+          {substitutePlayers.length > 0 && (
+            <div className="relative">
+              <button
+                className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+                onClick={() => setSubstituteOpen((open) => !open)}
+              >
+                ⇄ {substituteLabel}
+              </button>
+              {substituteOpen && (
+                <div className="absolute left-full top-0 ml-1 min-w-[150px] rounded-lg border border-[var(--border)] bg-[#111a2e] p-1 shadow-xl">
+                  {substitutePlayers.map((substitutePlayer) => (
+                    <button
+                      key={substitutePlayer.player_id ?? substitutePlayer.name}
+                      className="block w-full rounded px-3 py-2 text-left text-xs hover:bg-emerald-500/15"
+                      onClick={() => { onSubstitute?.(onBench ? substitutePlayer.name : row.player_name, onBench ? row.player_name : substitutePlayer.name); setMenuOpen(false); }}
+                    >
+                      {substitutePlayer.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
