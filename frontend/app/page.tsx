@@ -228,6 +228,7 @@ export default function Home() {
             position: posById.get(player.element_type) ?? "Unknown",
             price: player.now_cost / 10,
             selected_by_percent: parseFloat(player.selected_by_percent),
+            chance_of_playing_next_round: player.chance_of_playing_next_round ?? null,
             total_points: player.total_points,
             form: parseFloat(player.form),
             gameweek_points: pick.points ?? 0,
@@ -611,6 +612,13 @@ const ROW_BG: Record<string, string> = {
   FWD: "bg-[#1f0a14]/70 border-rose-900/40",
 };
 
+function injuryCardClass(chanceOfPlaying: number | null) {
+  if (chanceOfPlaying == null || chanceOfPlaying >= 100) return "bg-black/40 ring-1 ring-white/10";
+  if (chanceOfPlaying >= 75) return "bg-amber-500/20 ring-1 ring-amber-300/50";
+  if (chanceOfPlaying >= 50) return "bg-orange-500/25 ring-1 ring-orange-300/60";
+  return "bg-rose-500/25 ring-1 ring-rose-300/60";
+}
+
 function isLegalFplSubstitution(
   startingPlayer: SquadPlayer,
   benchPlayer: SquadPlayer,
@@ -799,7 +807,8 @@ function PlayerCard({
       }}
       title="Right-click for player actions"
       className={`relative flex flex-col items-center w-[92px] rounded-lg p-1.5 transition cursor-context-menu hover:ring-2 hover:ring-[var(--accent)]
-        ${isOptXI ? "bg-emerald-500/20 ring-2 ring-emerald-400" : "bg-black/40 ring-1 ring-white/10"}
+        ${injuryCardClass(row.chance_of_playing_next_round)}
+        ${isOptXI ? "ring-2 ring-emerald-400" : ""}
         ${isPinned ? "ring-2 ring-amber-300" : ""}
         ${dimmed ? "opacity-60" : ""}`}
     >
@@ -833,6 +842,9 @@ function PlayerCard({
       </div>
       <div className="text-[9px] text-[var(--muted)]">
         GW {row.gameweek_points} · <span className="text-[var(--accent)]">{sp?.pred != null ? sp.pred.toFixed(2) : "N/A"}</span>
+        {row.chance_of_playing_next_round != null && row.chance_of_playing_next_round < 100 && (
+          <span className="ml-1 text-amber-200">· Risk {100 - row.chance_of_playing_next_round}%</span>
+        )}
         {onBench && <span className="ml-1">🪑</span>}
       </div>
       {isPinned && <span className="absolute bottom-1 right-1 text-[10px]" aria-label="Pinned">📌</span>}

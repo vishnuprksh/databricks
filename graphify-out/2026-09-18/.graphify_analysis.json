@@ -1,7 +1,6 @@
 {
   "communities": {
     "0": [
-      "frontend_app_dream15_page_dream15page",
       "frontend_app_page",
       "frontend_app_page_bootstrap",
       "frontend_app_page_home",
@@ -17,12 +16,11 @@
       "frontend_lib_suggestions",
       "frontend_lib_suggestions_buildsquadwithpred",
       "frontend_lib_suggestions_computesellprices",
-      "frontend_lib_suggestions_dreamplayers",
       "frontend_lib_suggestions_findbesttransfer",
+      "frontend_lib_suggestions_findbesttransferplan",
       "frontend_lib_suggestions_findreplacements",
       "frontend_lib_suggestions_generatesuggestions",
       "frontend_lib_suggestions_listtransferoptions",
-      "frontend_lib_suggestions_optimizedream15",
       "frontend_lib_suggestions_optimizeresult",
       "frontend_lib_suggestions_optimizestartingeleven",
       "frontend_lib_suggestions_pos_by_element",
@@ -62,6 +60,29 @@
       "ref_typescript"
     ],
     "2": [
+      "frontend_app_dream15_page",
+      "frontend_app_dream15_page_dream15page",
+      "frontend_app_dream15_page_dreampitch",
+      "frontend_app_dream15_page_dreamplayercard",
+      "frontend_app_dream15_page_dreamview",
+      "frontend_app_dream15_page_pos_colors",
+      "frontend_app_dream15_page_row_bg",
+      "frontend_app_dream15_page_row_order",
+      "frontend_app_dream15_page_stat",
+      "frontend_app_players_page",
+      "frontend_app_players_page_playerspage",
+      "frontend_app_players_page_pos_colors",
+      "frontend_app_players_page_posbadge",
+      "frontend_app_players_page_sortkey",
+      "frontend_lib_db_playerrow",
+      "frontend_lib_db_predictionrow",
+      "frontend_lib_suggestions_dream15result",
+      "frontend_lib_suggestions_dreamplayers",
+      "frontend_lib_suggestions_optimizedream15",
+      "frontend_lib_suggestions_squadplayer",
+      "ref_react"
+    ],
+    "3": [
       "frontend_tsconfig",
       "frontend_tsconfig_compileroptions",
       "frontend_tsconfig_compileroptions_allowjs",
@@ -81,26 +102,6 @@
       "frontend_tsconfig_compileroptions_target",
       "frontend_tsconfig_exclude",
       "frontend_tsconfig_include"
-    ],
-    "3": [
-      "frontend_app_dream15_page",
-      "frontend_app_dream15_page_dreampitch",
-      "frontend_app_dream15_page_dreamplayercard",
-      "frontend_app_dream15_page_dreamview",
-      "frontend_app_dream15_page_pos_colors",
-      "frontend_app_dream15_page_row_bg",
-      "frontend_app_dream15_page_row_order",
-      "frontend_app_dream15_page_stat",
-      "frontend_app_players_page",
-      "frontend_app_players_page_playerspage",
-      "frontend_app_players_page_pos_colors",
-      "frontend_app_players_page_posbadge",
-      "frontend_app_players_page_sortkey",
-      "frontend_lib_db_playerrow",
-      "frontend_lib_db_predictionrow",
-      "frontend_lib_suggestions_dream15result",
-      "frontend_lib_suggestions_squadplayer",
-      "ref_react"
     ],
     "4": [
       "frontend_app_api_bootstrap_route",
@@ -203,10 +204,10 @@
     ]
   },
   "cohesion": {
-    "0": 0.0967741935483871,
+    "0": 0.10591133004926108,
     "1": 0.07692307692307693,
-    "2": 0.10526315789473684,
-    "3": 0.12418300653594772,
+    "2": 0.10952380952380952,
+    "3": 0.10526315789473684,
     "4": 0.2564102564102564,
     "5": 0.2909090909090909,
     "6": 0.2222222222222222,
@@ -235,6 +236,11 @@
       "degree": 7
     },
     {
+      "id": "frontend_lib_suggestions_optimizestartingeleven",
+      "label": "optimizeStartingEleven()",
+      "degree": 6
+    },
+    {
       "id": "frontend_lib_db_predictionrow",
       "label": "PredictionRow",
       "degree": 5
@@ -245,37 +251,43 @@
       "degree": 5
     },
     {
-      "id": "frontend_lib_suggestions_optimizestartingeleven",
-      "label": "optimizeStartingEleven()",
+      "id": "frontend_lib_suggestions_findbesttransferplan",
+      "label": "findBestTransferPlan()",
       "degree": 5
     },
     {
-      "id": "frontend_lib_suggestions_findbesttransfer",
-      "label": "findBestTransfer()",
-      "degree": 5
-    },
-    {
-      "id": "frontend_lib_db_playerrow",
-      "label": "PlayerRow",
+      "id": "frontend_package_scripts",
+      "label": "scripts",
       "degree": 4
     },
     {
-      "id": "frontend_lib_db_fetchplayers",
-      "label": "fetchPlayers()",
-      "degree": 4
-    },
-    {
-      "id": "frontend_lib_db_fetchpredictions",
-      "label": "fetchPredictions()",
+      "id": "ref_react",
+      "label": "react",
       "degree": 4
     },
     {
       "id": "frontend_app_page_home",
       "label": "Home()",
       "degree": 4
+    },
+    {
+      "id": "frontend_lib_db_playerrow",
+      "label": "PlayerRow",
+      "degree": 4
     }
   ],
   "surprises": [
+    {
+      "source": "Dream15Page()",
+      "target": "optimizeDream15()",
+      "source_files": [
+        "frontend/app/dream15/page.tsx",
+        "frontend/lib/suggestions.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `Dream15Page()` unexpectedly reaches hub `optimizeDream15()`"
+    },
     {
       "source": "GET()",
       "target": "fetchFplJson()",
@@ -299,22 +311,11 @@
       "why": "peripheral node `GET()` unexpectedly reaches hub `fetchFplJson()`"
     },
     {
-      "source": "Dream15Page()",
-      "target": "optimizeDream15()",
-      "source_files": [
-        "frontend/app/dream15/page.tsx",
-        "frontend/lib/suggestions.ts"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "peripheral node `Dream15Page()` unexpectedly reaches hub `optimizeDream15()`"
-    },
-    {
       "source": "GET()",
-      "target": "fetchPlayers()",
+      "target": "chooseGameweek()",
       "source_files": [
-        "frontend/app/api/data/route.ts",
-        "frontend/lib/db.ts"
+        "frontend/app/api/bootstrap/route.ts",
+        "frontend/lib/fpl.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
@@ -322,10 +323,10 @@
     },
     {
       "source": "GET()",
-      "target": "fetchPredictions()",
+      "target": "fetchFplJson()",
       "source_files": [
-        "frontend/app/api/data/route.ts",
-        "frontend/lib/db.ts"
+        "frontend/app/api/bootstrap/route.ts",
+        "frontend/lib/fpl.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",

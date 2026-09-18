@@ -124,7 +124,7 @@ export default function PlayersPage() {
             <table className="data">
               <thead>
                 <tr>
-                  <th>Player</th><th>Pos</th><th>Club</th><th>Status</th>
+                  <th>Player</th><th>Pos</th><th>Club</th><th>Status</th><th>Injury risk</th>
                   <th><button onClick={() => changeSort("price")} className="hover:text-[var(--accent)]">Price</button></th>
                   <th><button onClick={() => changeSort("total_points")} className="hover:text-[var(--accent)]">Total</button></th>
                   <th><button onClick={() => changeSort("form")} className="hover:text-[var(--accent)]">Form</button></th>
@@ -144,6 +144,9 @@ export default function PlayersPage() {
                       <td><PosBadge pos={player.position} /></td>
                       <td className="text-[var(--muted)]">{player.team_name}</td>
                       <td><span className={player.status === "a" ? "text-emerald-400" : "text-rose-400"}>{player.status === "a" ? "Available" : player.status}</span></td>
+                      <td className={player.injury_percent == null ? "text-[var(--muted)]" : player.injury_percent >= 50 ? "text-rose-400" : player.injury_percent > 0 ? "text-amber-300" : "text-emerald-400"}>
+                        {player.injury_percent == null ? "—" : `${player.injury_percent}%`}
+                      </td>
                       <td>£{player.price.toFixed(1)}m</td>
                       <td>{player.total_points}</td>
                       <td>{player.form.toFixed(1)}</td>

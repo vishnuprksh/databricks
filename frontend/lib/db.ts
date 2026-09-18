@@ -29,6 +29,8 @@ export type PlayerRow = {
   team_id: number;
   status: string;
   news: string;
+  chance_of_playing_next_round: number | null;
+  injury_percent: number | null;
   total_points: number;
   form: number;
   points_per_game: number;
@@ -82,6 +84,8 @@ export async function fetchPlayers(): Promise<PlayerRow[]> {
     team_id: Number(r.team_id),
     status: r.status,
     news: r.news ?? "",
+    chance_of_playing_next_round: null,
+    injury_percent: null,
     total_points: Number(r.total_points),
     form: Number(r.form),
     points_per_game: Number(r.points_per_game),
